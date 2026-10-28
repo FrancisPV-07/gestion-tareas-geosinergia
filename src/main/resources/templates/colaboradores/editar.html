@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar colaborador | Geosinergia</title>
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/colaboradores.css}">
+</head>
+
+<body>
+    <div class="app-layout">
+        <!-- SIDEBAR -->
+        <div th:replace="~{fragments/sidebar :: sidebar('colaboradores')}">
+        </div>
+
+        <!-- ÁREA PRINCIPAL -->
+        <div class="main-area">
+            <!-- HEADER -->
+            <div th:replace="~{fragments/header :: header}">
+            </div>
+
+            <!-- CONTENIDO -->
+            <main class="page-content collaborators-page">
+                <!-- BREADCRUMB -->
+                <nav class="breadcrumb" aria-label="Navegación">
+                    <a th:href="@{/}">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M3 11.5 12 4l9 7.5" />
+
+                            <path d="M5 10v10h14V10" />
+                        </svg>
+
+                        <span>Inicio</span>
+                    </a>
+
+                    <span class="breadcrumb-separator">
+                        ›
+                    </span>
+
+                    <a th:href="@{/colaboradores}">
+                        Colaboradores
+                    </a>
+
+                    <span class="breadcrumb-separator">
+                        ›
+                    </span>
+
+                    <strong>
+                        Editar colaborador
+                    </strong>
+                </nav>
+
+                <!-- ENCABEZADO -->
+                <section class="page-heading form-page-heading">
+                    <div class="page-heading-text">
+                        <span class="page-label">
+                            COLABORADORES
+                        </span>
+
+                        <h1>
+                            Editar colaborador
+                        </h1>
+
+                        <p>
+                            Actualiza la información del colaborador
+                            seleccionado y su estado de acceso.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- ÁREA DE EDICIÓN -->
+                <div class="registration-layout">
+                    <!-- FORMULARIO -->
+                    <section class="content-card registration-card">
+                        <!-- CABECERA -->
+                        <div class="registration-heading">
+                            <div class="registration-heading-main">
+                                <div class="registration-heading-icon">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <circle cx="9" cy="8" r="3" />
+
+                                        <path d="M3 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+
+                                        <path d="m16 16 4-4 2 2-4 4-3 1z" />
+                                    </svg>
+                                </div>
+
+                                <div>
+                                    <h2>
+                                        Información del colaborador
+                                    </h2>
+
+                                    <p>
+                                        Modifica los datos personales
+                                        y de acceso registrados.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- BADGE -->
+                            <div class="form-step-badge">
+                                <span class="form-step-dot"></span>
+                                Edición
+                            </div>
+                        </div>
+
+                        <!-- FORMULARIO -->
+                        <form th:action="@{/colaboradores/{id}/editar(id=${idUsuario})}"
+                            th:object="${colaboradorEditForm}" method="post" class="collaborator-form"
+                            id="collaboratorEditForm">
+                            <div class="form-grid">
+                                <!-- NOMBRES -->
+                                <div class="form-group">
+                                    <label for="nombres">
+                                        Nombres
+                                        <span class="required-mark">
+                                            *
+                                        </span>
+                                    </label>
+
+                                    <div class="field-with-icon">
+                                        <span class="field-icon">
+                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                <circle cx="12" cy="8" r="3" />
+
+                                                <path d="M5 20a7 7 0 0 1 14 0" />
+                                            </svg>
+                                        </span>
+
+                                        <input type="text" id="nombres" th:field="*{nombres}" maxlength="80"
+                                            placeholder="Ej. María Alejandra" th:classappend="${#fields.hasErrors('nombres')}
+                                        ? ' input-invalid'
+                                        : ''">
+                                    </div>
+
+                                    <span class="field-error" th:if="${#fields.hasErrors('nombres')}"
+                                        th:errors="*{nombres}">
+                                    </span>
+                                </div>
+
+                                <!-- APELLIDOS -->
+                                <div class="form-group">
+                                    <label for="apellidos">
+                                        Apellidos
+                                        <span class="required-mark">
+                                            *
+                                        </span>
+                                    </label>
+
+                                    <div class="field-with-icon">
+                                        <span class="field-icon">
+                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                <circle cx="12" cy="8" r="3" />
+
+                                                <path d="M5 20a7 7 0 0 1 14 0" />
+                                            </svg>
+                                        </span>
+
+                                        <input type="text" id="apellidos" th:field="*{apellidos}" maxlength="100"
+                                            placeholder="Ej. Torres García" th:classappend="${#fields.hasErrors('apellidos')}
+                                        ? ' input-invalid'
+                                        : ''">
+                                    </div>
+
+                                    <span class="field-error" th:if="${#fields.hasErrors('apellidos')}"
+                                        th:errors="*{apellidos}">
+                                    </span>
+                                </div>
+
+                                <!-- CORREO -->
+                                <div class="form-group">
+                                    <label for="correoLocal">
+                                        Correo electrónico
+                                        <span class="required-mark">
+                                            *
+                                        </span>
+                                    </label>
+
+                                    <!-- Campo real enviado al backend -->
+                                    <input type="hidden" id="correo" th:field="*{correo}">
+
+                                    <div class="corporate-email" th:classappend="${#fields.hasErrors('correo')}
+                                    ? ' input-invalid'
+                                    : ''">
+                                        <span class="field-icon email-icon">
+                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                <rect x="3" y="5" width="18" height="14" rx="2" />
+
+                                                <path d="m3 7 9 6 9-6" />
+                                            </svg>
+                                        </span>
+
+                                        <input type="text" id="correoLocal" class="email-local-input"
+                                            placeholder="m.torres" maxlength="64" pattern="[A-Za-z0-9._%+\-]+"
+                                            title="Utiliza letras, números, puntos, guiones o guion bajo"
+                                            autocomplete="off" required>
+
+                                        <span class="email-domain">
+                                            @geosinergia.com.pe
+                                        </span>
+                                    </div>
+
+                                    <span class="field-error" th:if="${#fields.hasErrors('correo')}"
+                                        th:errors="*{correo}">
+                                    </span>
+                                </div>
+
+                                <!-- CARGO -->
+                                <div class="form-group">
+                                    <label for="cargo">
+                                        Cargo
+                                    </label>
+
+                                    <div class="field-with-icon">
+                                        <span class="field-icon">
+                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                <rect x="4" y="7" width="16" height="12" rx="2" />
+
+                                                <path d="M9 7V5h6v2" />
+
+                                                <path d="M4 11h16" />
+                                            </svg>
+                                        </span>
+
+                                        <input type="text" id="cargo" th:field="*{cargo}" maxlength="100"
+                                            placeholder="Ej. Ingeniera Geotécnica" th:classappend="${#fields.hasErrors('cargo')}
+                                        ? ' input-invalid'
+                                        : ''">
+                                    </div>
+
+                                    <span class="field-error" th:if="${#fields.hasErrors('cargo')}"
+                                        th:errors="*{cargo}">
+                                    </span>
+                                </div>
+
+                                <!-- ROL -->
+                                <div class="form-group">
+                                    <label>
+                                        Rol
+                                    </label>
+
+                                    <div class="fixed-field">
+                                        <span class="fixed-field-icon">
+                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                <circle cx="9" cy="8" r="3" />
+
+                                                <path d="M3 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+
+                                                <circle cx="17" cy="9" r="2.5" />
+                                            </svg>
+                                        </span>
+
+                                        <strong>
+                                            COLABORADOR
+                                        </strong>
+                                    </div>
+
+                                    <span class="field-help">
+                                        El rol no puede modificarse.
+                                    </span>
+                                </div>
+
+                                <!-- ESTADO -->
+                                <div class="form-group">
+                                    <label>
+                                        Estado
+                                    </label>
+
+                                    <div class="status-selector">
+                                        <!-- ACTIVO -->
+                                        <label class="status-option">
+                                            <input type="radio" th:field="*{activo}" th:value="true">
+
+                                            <span class="status-option-content status-option-active">
+                                                <span class="status-selector-dot"></span>
+
+                                                <span>
+                                                    Activo
+                                                </span>
+                                            </span>
+                                        </label>
+
+                                        <!-- INACTIVO -->
+                                        <label class="status-option">
+                                            <input type="radio" th:field="*{activo}" th:value="false">
+
+                                            <span class="status-option-content status-option-inactive">
+                                                <span class="status-selector-dot"></span>
+
+                                                <span>
+                                                    Inactivo
+                                                </span>
+                                            </span>
+                                        </label>
+                                    </div>
+
+                                    <span class="field-help">
+                                        Define si el colaborador puede acceder al sistema.
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- ACCIONES -->
+                            <div class="form-actions">
+                                <a th:href="@{/colaboradores}" class="button-secondary">
+                                    Cancelar
+                                </a>
+
+                                <button type="submit" class="button-primary submit-button">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M5 4h12l2 2v14H5z" />
+
+                                        <path d="M8 4v6h8V4" />
+
+                                        <path d="M8 20v-6h8v6" />
+                                    </svg>
+
+                                    <span>
+                                        Guardar cambios
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <!-- PANEL DERECHO -->
+                    <aside class="registration-info">
+                        <!-- ILUSTRACIÓN -->
+                        <div class="registration-info-hero">
+                            <div class="registration-info-illustration">
+                                <svg viewBox="0 0 64 64" aria-hidden="true">
+                                    <circle cx="27" cy="21" r="10" />
+
+                                    <path d="M9 49c0-11 8-18 18-18s18 7 18 18" />
+
+                                    <path d="m43 41 10-10 5 5-10 10-7 2z" />
+                                </svg>
+
+                                <span class="registration-plus edit-symbol">
+                                    ✎
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- INFORMACIÓN -->
+                        <div class="registration-info-content">
+                            <h2>
+                                Editar colaborador
+                            </h2>
+
+                            <p class="registration-info-description">
+                                Los cambios realizados actualizarán
+                                la información registrada del colaborador.
+                            </p>
+
+                            <div class="registration-info-divider"></div>
+
+                            <!-- DATOS -->
+                            <div class="info-feature">
+                                <div class="info-feature-icon">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <circle cx="12" cy="8" r="3" />
+
+                                        <path d="M5 20a7 7 0 0 1 14 0" />
+                                    </svg>
+                                </div>
+
+                                <div>
+                                    <strong>
+                                        Datos actualizables
+                                    </strong>
+
+                                    <p>
+                                        Puedes modificar nombres,
+                                        apellidos y cargo.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- CORREO -->
+                            <div class="info-feature">
+                                <div class="info-feature-icon">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <rect x="3" y="5" width="18" height="14" rx="2" />
+
+                                        <path d="m3 7 9 6 9-6" />
+                                    </svg>
+                                </div>
+
+                                <div>
+                                    <strong>
+                                        Correo corporativo
+                                    </strong>
+
+                                    <p>
+                                        El acceso utiliza el dominio
+                                        @geosinergia.com.pe.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- ESTADO -->
+                            <div class="info-feature">
+                                <div class="info-feature-icon">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M12 3 5 6v5c0 5 3 8 7 10 4-2 7-5 7-10V6Z" />
+
+                                        <path d="m9 12 2 2 4-4" />
+                                    </svg>
+                                </div>
+
+                                <div>
+                                    <strong>
+                                        Control de acceso
+                                    </strong>
+
+                                    <p>
+                                        Puedes activar o desactivar
+                                        el acceso del colaborador.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script th:src="@{/js/layout.js}"></script>
+    <script th:src="@{/js/colaboradores.js}"></script>
+</body>
+
+</html>

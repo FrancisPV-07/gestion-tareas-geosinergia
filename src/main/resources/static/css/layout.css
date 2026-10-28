@@ -1,0 +1,925 @@
+/* =========================================================
+   CONFIGURACIÓN GENERAL
+   ========================================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+    background: #f5f8fc;
+    color: #10264b;
+}
+
+button,
+a,
+summary {
+    font-family: inherit;
+}
+
+/* =========================================================
+   ESTRUCTURA PRINCIPAL
+   ========================================================= */
+.app-layout {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns:
+        300px minmax(0, 1fr);
+    transition:
+        grid-template-columns 0.25s ease;
+}
+
+/* =========================================================
+   SIDEBAR CONTRAÍDO
+   ========================================================= */
+.app-layout.sidebar-collapsed {
+    grid-template-columns:
+        86px minmax(0, 1fr);
+}
+
+/* Sidebar más compacto */
+.sidebar-collapsed .sidebar {
+    padding:
+        28px 10px 24px;
+}
+
+/* Logo cuando el sidebar está contraído */
+.sidebar-collapsed .sidebar-brand {
+    justify-content: center;
+    padding:
+        0;
+    margin-bottom: 18px;
+}
+
+.sidebar-collapsed .sidebar-logo-full {
+    display: none;
+}
+
+.sidebar-collapsed .sidebar-logo-mini {
+    display: flex;
+    justify-content: center;
+}
+
+/* Línea pequeña debajo de la G */
+.sidebar-collapsed .sidebar-line {
+    display: block;
+    width: 30px;
+    margin:
+        0 auto 25px;
+}
+
+/* Dejamos un pequeño espacio superior */
+.sidebar-collapsed .sidebar-nav {
+    margin-top: 0;
+}
+
+/* Centrar cada opción */
+.sidebar-collapsed .nav-item {
+    min-height: 58px;
+    justify-content: center;
+    padding: 0;
+    gap: 0;
+}
+
+/* Ocultar nombres de las opciones */
+.sidebar-collapsed .nav-item>span:not(.nav-icon) {
+    display: none;
+}
+
+/* Ocultar "Próximamente" */
+.sidebar-collapsed .nav-item small {
+    display: none;
+}
+
+/* Iconos centrados */
+.sidebar-collapsed .nav-icon {
+    flex:
+        0 0 28px;
+    width: 28px;
+    height: 28px;
+}
+
+.sidebar-collapsed .nav-icon svg {
+    width: 26px;
+    height: 26px;
+}
+
+/* Logout compacto */
+.sidebar-collapsed .sidebar-footer {
+    padding:
+        12px 4px 4px;
+}
+
+.sidebar-collapsed .sidebar-logout {
+    justify-content: center;
+    padding: 0;
+    gap: 0;
+}
+
+.sidebar-collapsed .sidebar-logout>span:last-child {
+    display: none;
+}
+
+.sidebar-collapsed .sidebar-logout-icon {
+    flex:
+        0 0 28px;
+}
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+.sidebar {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 28px 15px 24px;
+    color: #ffffff;
+    background-color: #062a59;
+    background-image: url("/img/layout/sidebar-bg.png");
+    background-size: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+}
+
+/*
+   Capa sutil para que la imagen inferior
+   no compita con los elementos del menú.
+*/
+.sidebar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            rgba(6, 24, 54, 0.30),
+            rgba(6, 24, 54, 0.45),
+            rgba(6, 24, 54, 0.58));
+    z-index: 0;
+}
+
+/*
+   Líneas topográficas decorativas.
+*/
+.sidebar::after {
+    display: none;
+}
+
+/* =========================================================
+   LOGO DEL SIDEBAR
+   ========================================================= */
+.sidebar-brand {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    padding:
+        0 15px;
+    margin-bottom: 20px;
+}
+
+/* Logo completo */
+.sidebar-logo-full {
+    width: 100%;
+}
+
+.sidebar-logo-full img {
+    display: block;
+    width: 235px;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: left center;
+    mix-blend-mode: screen;
+    margin-left: -5px;
+}
+
+/* Logo pequeño */
+.sidebar-logo-mini {
+    display: none;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-logo-mini img {
+    display: block;
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+/* Línea azul bajo el logo */
+.sidebar-line {
+    position: relative;
+    z-index: 2;
+    width: 48px;
+    height: 3px;
+    margin:
+        0 0 26px 20px;
+    border-radius: 999px;
+    background: #188ce3;
+}
+
+/* =========================================================
+   NAVEGACIÓN
+   ========================================================= */
+.sidebar-nav {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Elemento base */
+.nav-item {
+    position: relative;
+    min-height: 59px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding:
+        0 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #e1edf9;
+    font-size: 16px;
+    font-weight: 500;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* Icono */
+.nav-icon {
+    flex:
+        0 0 26px;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b9d8f4;
+}
+
+.nav-icon svg {
+    width: 25px;
+    height: 25px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Hover */
+a.nav-item:hover {
+    background:
+        rgba(22, 112, 205, 0.22);
+    color: #ffffff;
+}
+
+
+/* Activo */
+.nav-item.active {
+    color: #ffffff;
+    background:
+        linear-gradient(90deg,
+            #1167c6 0%,
+            #0877e1 100%);
+    box-shadow:
+        0 8px 18px rgba(0, 88, 190, 0.20);
+}
+
+.nav-item.active .nav-icon {
+    color: #ffffff;
+}
+
+/* Deshabilitados */
+.nav-disabled {
+    cursor: default;
+    color: rgba(221, 234, 247, 0.78);
+}
+
+.nav-disabled .nav-icon {
+    color: rgba(185, 216, 244, 0.76);
+}
+
+.nav-disabled small {
+    margin-left: auto;
+    padding:
+        4px 7px;
+    border-radius: 5px;
+    background:
+        rgba(255, 255, 255, 0.08);
+    color:
+        rgba(228, 237, 247, 0.62);
+    font-size: 9px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* =========================================================
+   PARTE INFERIOR DEL SIDEBAR
+   ========================================================= */
+.sidebar-footer {
+    position: relative;
+    z-index: 2;
+    margin-top: auto;
+    padding:
+        12px 5px 4px;
+}
+
+.sidebar-logout-form {
+    width: 100%;
+}
+
+.sidebar-logout {
+    width: 100%;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding:
+        0 17px;
+    border: none;
+    border-radius: 9px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.90);
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.sidebar-logout:hover {
+    background:
+        rgba(255, 255, 255, 0.10);
+    color: #ffffff;
+}
+
+.sidebar-logout-icon {
+    flex:
+        0 0 27px;
+    width: 27px;
+    height: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-logout-icon svg {
+    width: 25px;
+    height: 25px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* =========================================================
+   ÁREA PRINCIPAL
+   ========================================================= */
+.main-area {
+    min-width: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background:
+        linear-gradient(135deg,
+            #f9fbfe 0%,
+            #f4f8fc 100%);
+}
+
+/* =========================================================
+   ENCABEZADO SUPERIOR
+   ========================================================= */
+.topbar {
+    position: relative;
+    z-index: 20;
+    min-height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    padding:
+        0 32px;
+    border-bottom:
+        1px solid #dfe7f0;
+    background:
+        rgba(255, 255, 255, 0.97);
+    box-shadow:
+        0 2px 8px rgba(30, 65, 105, 0.025);
+}
+
+/* =========================================================
+   PARTE IZQUIERDA DEL HEADER
+   ========================================================= */
+.topbar-left {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.menu-button {
+    flex:
+        0 0 35px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 7px;
+    background: transparent;
+    color: #075ebf;
+    cursor: pointer;
+    transition:
+        background 0.2s ease;
+}
+
+.menu-button:hover {
+    background: #eef5fc;
+}
+
+.menu-button svg {
+    width: 29px;
+    height: 29px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+}
+
+/* Separadores */
+.topbar-divider {
+    width: 1px;
+    height: 37px;
+    background: #d8e0e9;
+}
+
+/* Nombre del sistema */
+.system-title {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.system-title strong {
+    font-size: 17px;
+    line-height: 1.25;
+    color: #092454;
+}
+
+.system-title span {
+    font-size: 12px;
+    color: #7386a4;
+}
+
+/* =========================================================
+   PARTE DERECHA DEL HEADER
+   ========================================================= */
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* =========================================================
+   NOTIFICACIONES
+   ========================================================= */
+.notification-button {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: #054da5;
+    cursor: pointer;
+    transition:
+        background 0.2s ease;
+}
+
+.notification-button:hover {
+    background: #eef5fc;
+}
+
+.notification-button svg {
+    width: 27px;
+    height: 27px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.notification-dot {
+    position: absolute;
+    top: 6px;
+    right: 5px;
+    width: 9px;
+    height: 9px;
+    border:
+        2px solid #ffffff;
+    border-radius: 50%;
+    background: #f23a3a;
+}
+
+/* =========================================================
+   USUARIO
+   ========================================================= */
+.user-menu {
+    position: relative;
+}
+
+.user-menu summary {
+    min-width: 215px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    list-style: none;
+    cursor: pointer;
+    user-select: none;
+}
+
+.user-menu summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Avatar */
+.user-avatar {
+    flex:
+        0 0 48px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border:
+        5px solid #edf4fb;
+
+    border-radius: 50%;
+    background:
+        linear-gradient(145deg,
+            #075ebf,
+            #06448f);
+
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    box-shadow:
+        0 2px 6px rgba(18, 76, 139, 0.12);
+}
+
+/* Nombre y rol */
+.user-info {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.user-info strong {
+    max-width: 155px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+    color: #071e50;
+}
+
+.user-info span {
+    font-size: 12px;
+    color: #798aa6;
+}
+
+/* Flecha */
+.user-arrow {
+    margin-left: auto;
+    color: #244976;
+    display: flex;
+    align-items: center;
+}
+
+.user-arrow svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition:
+        transform 0.2s ease;
+}
+
+.user-menu[open] .user-arrow svg {
+    transform: rotate(180deg);
+}
+
+/* =========================================================
+   DROPDOWN DE USUARIO
+   ========================================================= */
+.user-dropdown {
+    position: absolute;
+    top: calc(100% + 15px);
+    right: 0;
+    width: 255px;
+    padding: 14px;
+    border:
+        1px solid #e0e7ef;
+    border-radius: 11px;
+    background: #ffffff;
+    box-shadow:
+        0 15px 38px rgba(24, 57, 94, 0.14);
+}
+
+.dropdown-user {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding:
+        3px 4px 12px;
+}
+
+.dropdown-user strong {
+    font-size: 13px;
+    color: #10274a;
+}
+
+.dropdown-user span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 11px;
+    color: #7a899d;
+}
+
+.dropdown-divider {
+    height: 1px;
+    margin-bottom: 10px;
+    background: #e7edf3;
+}
+
+/* Logout */
+.logout-button {
+    width: 100%;
+    padding:
+        10px 12px;
+    border: none;
+    border-radius: 7px;
+    background: #f5f8fb;
+    color: #28435f;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.logout-button:hover {
+    background: #fff0f0;
+    color: #c63d3d;
+}
+
+/* =========================================================
+   CONTENIDO DE LA PÁGINA
+   ========================================================= */
+.page-content {
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+    padding:
+        58px 60px;
+    background:
+        linear-gradient(135deg,
+            rgba(250, 252, 255, 0.96),
+            rgba(244, 248, 252, 0.96));
+}
+
+/*
+   Líneas topográficas en el área blanca,
+   similares a los prototipos.
+*/
+.page-content::before {
+    content: "";
+    position: absolute;
+    top: -230px;
+    right: -160px;
+    width: 620px;
+    height: 620px;
+    border-radius: 50%;
+    opacity: 0.16;
+    background:
+        repeating-radial-gradient(ellipse,
+            transparent 0,
+            transparent 20px,
+            #cddbe9 21px,
+            transparent 22px);
+    pointer-events: none;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 1100px) {
+    .app-layout {
+        grid-template-columns:
+            250px minmax(0, 1fr);
+    }
+
+    .sidebar-logo img {
+        width: 200px;
+    }
+
+    .nav-item {
+        padding:
+            0 15px;
+        font-size: 14px;
+    }
+
+    .topbar {
+        padding:
+            0 22px;
+    }
+
+    .page-content {
+        padding:
+            50px 45px;
+    }
+
+    .user-menu summary {
+        min-width: 180px;
+    }
+}
+
+@media (max-width: 850px) {
+    .app-layout {
+        grid-template-columns: 84px minmax(0, 1fr);
+    }
+
+    .sidebar {
+        padding:
+            25px 10px;
+    }
+
+    .sidebar-brand {
+        padding: 0;
+        justify-content: center;
+    }
+
+    .sidebar-logo-full {
+        display: none;
+    }
+
+    .sidebar-logo-mini {
+        display: flex;
+        justify-content: center;
+    }
+
+    .sidebar-logo-mini img {
+        width: 46px;
+        height: 46px;
+    }
+
+    .sidebar-line {
+        width: 30px;
+        margin:
+            0 auto 25px;
+    }
+
+    .sidebar-line {
+        margin:
+            0 auto 25px;
+    }
+
+    .nav-item {
+        justify-content: center;
+        min-height: 58px;
+        padding: 0;
+    }
+
+    .nav-item>span:not(.nav-icon),
+    .nav-item small {
+        display: none;
+    }
+
+    .nav-icon {
+        flex-basis: 28px;
+    }
+
+    .sidebar-footer {
+        justify-content: center;
+        padding: 10px;
+    }
+
+    .sidebar-footer div:last-child {
+        display: none;
+    }
+
+    .topbar {
+        min-height: 72px;
+    }
+
+    .system-title span {
+        display: none;
+    }
+
+    .user-info {
+        display: none;
+    }
+
+    .user-menu summary {
+        min-width: auto;
+    }
+
+    .page-content {
+        padding:
+            45px 32px;
+    }
+}
+
+@media (max-width: 600px) {
+    .app-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .topbar {
+        padding:
+            0 16px;
+        gap: 12px;
+    }
+
+    .topbar-left {
+        gap: 12px;
+    }
+
+    .system-title strong {
+        font-size: 14px;
+    }
+
+    .topbar-right {
+        gap: 10px;
+    }
+
+    .topbar-divider {
+        display: none;
+    }
+
+    .notification-button {
+        display: none;
+    }
+
+    .user-avatar {
+        width: 42px;
+        height: 42px;
+        flex-basis: 42px;
+    }
+
+    .user-arrow {
+        display: none;
+    }
+
+    .user-dropdown {
+        right: -5px;
+    }
+
+    .page-content {
+        padding:
+            35px 22px;
+    }
+}
