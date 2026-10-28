@@ -42,11 +42,12 @@
              MENÚ DEL COORDINADOR
              ================================================== -->
         <!-- TAREAS -->
-        <div th:if="${rolUsuario == 'COORDINADOR'}" class="nav-item nav-disabled">
+        <a th:if="${rolUsuario == 'COORDINADOR'}" th:href="@{/tareas/nueva}" class="nav-item"
+            th:classappend="${activeSection == 'tareas'} ? ' active' : ''">
+
             <span class="nav-icon">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                     <rect x="4" y="3" width="16" height="18" rx="2" />
-
                     <path d="m8 12 2 2 5-5" />
                 </svg>
             </span>
@@ -54,11 +55,7 @@
             <span>
                 Tareas
             </span>
-
-            <small>
-                Próximamente
-            </small>
-        </div>
+        </a>
 
         <!-- COLABORADORES -->
         <a th:if="${rolUsuario == 'COORDINADOR'}" th:href="@{/colaboradores}" class="nav-item"

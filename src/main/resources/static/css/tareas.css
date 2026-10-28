@@ -1,0 +1,593 @@
+/* Página de tareas */
+.tareas-page {
+    padding: 34px 42px 50px;
+}
+
+.tareas-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+    font-size: 12px;
+    color: #8493a7;
+}
+
+.tareas-breadcrumb a {
+    color: #73869d;
+    text-decoration: none;
+}
+
+.tareas-breadcrumb strong {
+    color: #36536f;
+}
+
+.tareas-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #7186a0;
+}
+
+.tareas-heading {
+    margin-bottom: 26px;
+}
+
+.tareas-heading h1 {
+    font-size: 32px;
+    color: #092454;
+}
+
+.tareas-heading p {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #71839a;
+    line-height: 1.5;
+}
+
+/* Distribución principal */
+.tareas-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 2.1fr) minmax(270px, 1fr);
+    align-items: start;
+    gap: 20px;
+}
+
+.tareas-card,
+.tareas-info {
+    background: #fff;
+    border: 1px solid #e1e8f0;
+    border-radius: 13px;
+    overflow: hidden;
+    box-shadow: 0 10px 28px rgba(31, 64, 99, 0.06);
+}
+
+/* Encabezado del formulario */
+.tareas-card-heading {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 23px 26px;
+    border-bottom: 1px solid #e6ecf2;
+}
+
+.tareas-card-icon,
+.tareas-info-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #e7f2ff;
+    color: #0872db;
+}
+
+.tareas-card-icon svg,
+.tareas-info-icon svg {
+    width: 27px;
+    height: 27px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.tareas-card-heading h2,
+.tareas-info h2 {
+    font-size: 17px;
+    color: #112d57;
+}
+
+.tareas-card-heading p {
+    margin-top: 5px;
+    color: #7b8da3;
+    font-size: 12px;
+}
+
+/* Campos del formulario */
+.tareas-form {
+    padding: 27px 26px;
+}
+
+.tareas-field {
+    margin-bottom: 24px;
+}
+
+.tareas-field label {
+    display: block;
+    margin-bottom: 9px;
+    color: #17355c;
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.required-mark {
+    color: #dc5757;
+}
+
+.tareas-field input,
+.tareas-field textarea {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid #d1dce8;
+    border-radius: 8px;
+    outline: none;
+    background: #fff;
+    color: #3b536d;
+    font: inherit;
+    font-size: 13px;
+}
+
+.tareas-field textarea {
+    min-height: 175px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.tareas-field input:focus,
+.tareas-field textarea:focus {
+    border-color: #3285d6;
+    box-shadow: 0 0 0 3px rgba(50, 133, 214, 0.09);
+}
+
+.tareas-field .input-invalid {
+    border-color: #dc5757;
+}
+
+.tareas-help {
+    display: block;
+    margin-top: 8px;
+    font-size: 11px;
+    color: #8393a7;
+}
+
+.tareas-error {
+    display: block;
+    margin-top: 6px;
+    font-size: 11px;
+    color: #d24e4e;
+}
+
+.tareas-error-summary {
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    background: #fff0f0;
+    color: #b43d3d;
+    font-size: 12px;
+}
+
+/* Botones */
+.tareas-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 24px;
+    border-top: 1px solid #e6ecf2;
+}
+
+.tareas-cancel,
+.tareas-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 43px;
+    padding: 0 22px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 650;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.tareas-cancel {
+    border: 1px solid #cbd7e4;
+    background: #fff;
+    color: #344f6d;
+}
+
+.tareas-submit {
+    border: none;
+    background: linear-gradient(90deg, #0874d8, #075ebf);
+    color: white;
+}
+
+/* Panel informativo */
+.tareas-info-top {
+    padding: 30px 22px 24px;
+    text-align: center;
+    background: #f2f8ff;
+}
+
+.tareas-info-icon {
+    margin: 0 auto 15px;
+    width: 65px;
+    height: 65px;
+}
+
+.tareas-info-top p {
+    margin-top: 9px;
+    color: #71839b;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.tareas-info-content {
+    padding: 23px 22px;
+}
+
+.tareas-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 22px;
+}
+
+.tareas-info-item>span {
+    color: #8190a3;
+    font-size: 11px;
+}
+
+.tareas-info-item strong {
+    font-size: 13px;
+    color: #17355c;
+}
+
+.tareas-pending {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.tareas-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #e8a23a;
+}
+
+.tareas-info-divider {
+    height: 1px;
+    margin-bottom: 22px;
+    background: #e5ebf1;
+}
+
+.tareas-info-note {
+    padding: 15px;
+    border-radius: 9px;
+    background: #f4f8fd;
+}
+
+.tareas-info-note strong {
+    font-size: 12px;
+    color: #194d83;
+}
+
+.tareas-info-note p {
+    margin-top: 7px;
+    font-size: 11px;
+    line-height: 1.7;
+    color: #71839b;
+}
+
+/* Mensaje de registro exitoso */
+.tareas-success {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 16px;
+    margin-bottom: 20px;
+    border: 1px solid #c4e6d2;
+    border-radius: 8px;
+    background: #effaf4;
+    color: #287648;
+    font-size: 13px;
+}
+
+.tareas-success-icon {
+    font-weight: 700;
+}
+
+/* Adaptación a pantallas pequeñas */
+@media (max-width: 1100px) {
+    .tareas-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    .tareas-page {
+        padding: 24px 18px;
+    }
+
+    .tareas-actions {
+        flex-direction: column-reverse;
+    }
+
+    .tareas-cancel,
+    .tareas-submit {
+        width: 100%;
+    }
+
+    .tareas-card-heading,
+    .tareas-form {
+        padding: 22px 18px;
+    }
+}
+
+/* ==========================================
+   AJUSTES VISUALES HU-04
+   ========================================== */
+
+/* Icono del breadcrumb */
+.tareas-breadcrumb a {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.tareas-breadcrumb a svg {
+    width: 15px;
+    height: 15px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Icono del botón de registro */
+.tareas-submit {
+    gap: 9px;
+}
+
+.tareas-submit svg {
+    width: 17px;
+    height: 17px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Ilustración superior derecha */
+.tareas-info-hero {
+    padding: 12px 12px 0;
+}
+
+.tareas-hero-art {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 135px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #e8f3ff;
+}
+
+.tareas-hero-art::before {
+    content: "";
+    position: absolute;
+    top: -135px;
+    right: -115px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: repeating-radial-gradient(circle,
+            transparent 0,
+            transparent 15px,
+            rgba(65, 133, 206, 0.11) 16px,
+            transparent 17px);
+}
+
+.tareas-hero-art>svg {
+    position: relative;
+    width: 85px;
+    height: 90px;
+    fill: none;
+    stroke: #075ebf;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.tareas-hero-plus {
+    position: absolute;
+    left: calc(50% + 25px);
+    top: calc(50% + 14px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border: 3px solid #e8f3ff;
+    border-radius: 50%;
+    background: #0874d8;
+    color: white;
+    font-size: 23px;
+    box-shadow: 0 5px 12px rgba(7, 94, 191, 0.25);
+}
+
+/* Introducción de la tarjeta */
+.tareas-info-intro {
+    margin: 0 22px;
+    padding: 18px 0 18px;
+    border-bottom: 1px solid #e5ebf1;
+}
+
+
+.tareas-info-intro h2 {
+    font-size: 17px;
+    color: #102d58;
+}
+
+.tareas-info-intro p {
+    margin-top: 8px;
+    color: #71839b;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* Características automáticas */
+.tareas-info-content {
+    padding: 20px 22px 24px;
+}
+
+.tareas-info-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.tareas-feature-icon {
+    flex: 0 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.tareas-feature-icon svg {
+    width: 21px;
+    height: 21px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.tareas-feature-icon.icon-green {
+    background: #e4f8ed;
+    color: #1da765;
+}
+
+.tareas-feature-icon.icon-blue {
+    background: #e8f3ff;
+    color: #0874d8;
+}
+
+.tareas-info-feature strong {
+    display: block;
+    margin: 2px 0 5px;
+    color: #17355c;
+    font-size: 12px;
+}
+
+.tareas-info-feature p {
+    color: #71839b;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.tareas-info-feature p b {
+    color: #17355c;
+    font-weight: 650;
+}
+
+.tareas-info-divider {
+    margin: 2px 0 17px;
+}
+
+.tareas-assignment-hint {
+    color: #71839b;
+    font-size: 11px;
+    line-height: 1.65;
+}
+
+
+/* Indicador de nuevo registro */
+.tareas-new-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin-left: auto;
+    padding: 7px 12px;
+    border: 1px solid #d3e7fc;
+    border-radius: 20px;
+    background: #eef6ff;
+    color: #0872db;
+    font-size: 11px;
+    font-weight: 650;
+    white-space: nowrap;
+}
+
+.tareas-new-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #0872db;
+}
+
+@media (max-width: 600px) {
+    .tareas-card-heading {
+        flex-wrap: wrap;
+    }
+
+    .tareas-new-badge {
+        margin-left: 63px;
+    }
+}
+
+/* ==========================================
+   EFECTOS HOVER - BOTONES REGISTRAR TAREA
+   ========================================== */
+
+/* Botón Registrar tarea */
+.tareas-submit {
+    box-shadow: 0 7px 17px rgba(7, 94, 191, 0.18);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+.tareas-submit:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.04);
+    box-shadow: 0 10px 22px rgba(7, 94, 191, 0.23);
+}
+
+/* Botón Cancelar */
+.tareas-cancel {
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.tareas-cancel:hover {
+    border-color: #acbfd1;
+    background: #f7f9fc;
+}
