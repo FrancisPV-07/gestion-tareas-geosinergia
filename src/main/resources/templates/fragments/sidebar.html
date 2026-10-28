@@ -1,0 +1,150 @@
+<aside class="sidebar" xmlns:th="http://www.thymeleaf.org" th:fragment="sidebar(activeSection)">
+
+    <!-- ==================================================
+         LOGO
+         ================================================== -->
+    <div class="sidebar-brand">
+        <!-- Logo completo -->
+        <div class="sidebar-logo-full">
+            <img th:src="@{/img/login/geosinergia-logo.png}" alt="Geosinergia">
+        </div>
+
+        <!-- Logo para sidebar contraído -->
+        <div class="sidebar-logo-mini">
+            <img th:src="@{/img/layout/geosinergia-g.png}" alt="Geosinergia">
+        </div>
+    </div>
+
+    <div class="sidebar-line"></div>
+
+    <!-- ==================================================
+         NAVEGACIÓN
+         ================================================== -->
+    <nav class="sidebar-nav">
+        <!-- INICIO -->
+        <a th:href="@{/}" class="nav-item" th:classappend="${activeSection == 'inicio'} ? ' active' : ''">
+            <span class="nav-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M3 11.5 12 4l9 7.5" />
+
+                    <path d="M5 10v10h14V10" />
+
+                    <path d="M9 20v-6h6v6" />
+                </svg>
+            </span>
+
+            <span>
+                Inicio
+            </span>
+        </a>
+
+        <!-- ==================================================
+             MENÚ DEL COORDINADOR
+             ================================================== -->
+        <!-- TAREAS -->
+        <div th:if="${rolUsuario == 'COORDINADOR'}" class="nav-item nav-disabled">
+            <span class="nav-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="4" y="3" width="16" height="18" rx="2" />
+
+                    <path d="m8 12 2 2 5-5" />
+                </svg>
+            </span>
+
+            <span>
+                Tareas
+            </span>
+
+            <small>
+                Próximamente
+            </small>
+        </div>
+
+        <!-- COLABORADORES -->
+        <a th:if="${rolUsuario == 'COORDINADOR'}" th:href="@{/colaboradores}" class="nav-item"
+            th:classappend="${activeSection == 'colaboradores'} ? ' active' : ''">
+            <span class="nav-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="9" cy="8" r="3" />
+
+                    <path d="M3 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+
+                    <circle cx="17" cy="9" r="2.5" />
+
+                    <path d="M16 14h2a4 4 0 0 1 4 4v2" />
+                </svg>
+            </span>
+
+            <span>
+                Colaboradores
+            </span>
+        </a>
+
+        <!-- DASHBOARD -->
+        <div th:if="${rolUsuario == 'COORDINADOR'}" class="nav-item nav-disabled">
+            <span class="nav-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 20v-6" />
+
+                    <path d="M12 20V9" />
+
+                    <path d="M19 20V4" />
+                </svg>
+            </span>
+
+            <span>
+                Dashboard
+            </span>
+
+            <small>
+                Próximamente
+            </small>
+        </div>
+
+        <!-- ==================================================
+             MENÚ DEL COLABORADOR
+             ================================================== -->
+        <div th:if="${rolUsuario == 'COLABORADOR'}" class="nav-item nav-disabled">
+            <span class="nav-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+
+                    <rect x="4" y="3" width="16" height="18" rx="2" />
+
+                    <path d="m8 12 2 2 5-5" />
+                </svg>
+            </span>
+
+            <span>
+                Mis tareas
+            </span>
+
+            <small>
+                Próximamente
+            </small>
+        </div>
+    </nav>
+
+    <!-- ==================================================
+         CERRAR SESIÓN
+         ================================================== -->
+    <div class="sidebar-footer">
+        <form th:action="@{/logout}" method="post" class="sidebar-logout-form">
+            <button type="submit" class="sidebar-logout">
+                <span class="sidebar-logout-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M10 17l5-5-5-5" />
+
+                        <path d="M15 12H3" />
+
+                        <path d="M14 4h5a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-5" />
+                    </svg>
+                </span>
+
+                <span>
+                    Cerrar sesión
+                </span>
+
+            </button>
+        </form>
+    </div>
+</aside>

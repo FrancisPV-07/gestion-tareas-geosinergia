@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar colaborador | Geosinergia</title>
+    <!-- Layout general del sistema -->
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <!-- Estilos propios del módulo colaboradores -->
+    <link rel="stylesheet" th:href="@{/css/colaboradores.css}">
+</head>
+
+<body>
+    <div class="app-layout">
+        <!-- ==================================================
+         SIDEBAR REUTILIZABLE
+         ================================================== -->
+        <div th:replace="~{fragments/sidebar :: sidebar('colaboradores')}">
+        </div>
+
+        <!-- ==================================================
+         ÁREA PRINCIPAL
+         ================================================== -->
+        <div class="main-area">
+            <!-- HEADER REUTILIZABLE -->
+            <div th:replace="~{fragments/header :: header}">
+            </div>
+
+            <!-- ==================================================
+             CONTENIDO
+             ================================================== -->
+            <main class="page-content collaborators-page">
+
+                <!-- ==================================================
+                 BREADCRUMB
+                 ================================================== -->
+                <nav class="breadcrumb" aria-label="Navegación">
+                    <a th:href="@{/}">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M3 11.5 12 4l9 7.5" />
+
+                            <path d="M5 10v10h14V10" />
+                        </svg>
+
+                        <span>
+                            Inicio
+                        </span>
+                    </a>
+
+                    <span class="breadcrumb-separator">
+                        ›
+                    </span>
+
+                    <a th:href="@{/colaboradores}">
+                        Colaboradores
+                    </a>
+
+                    <span class="breadcrumb-separator">
+                        ›
+                    </span>
+
+                    <strong>
+                        Registrar colaborador
+                    </strong>
+                </nav>
+
+                <!-- ==================================================
+                 ENCABEZADO DE LA PÁGINA
+                 ================================================== -->
+                <section class="page-heading form-page-heading">
+                    <div class="page-heading-text">
+                        <span class="page-label">
+                            COLABORADORES
+                        </span>
+
+                        <h1>
+                            Registrar colaborador
+                        </h1>
+
+                        <p>
+                            Añade un nuevo integrante al sistema
+                            y configura sus datos de acceso.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- ==================================================
+                 CONTENIDO DEL REGISTRO
+                 ================================================== -->
+                <div class="registration-layout">
+                    <!-- ==================================================
+                     FORMULARIO
+                     ================================================== -->
+                    <section class="content-card registration-card">
+                        <!-- CABECERA -->
+                        <div class="registration-heading">
+                            <div class="registration-heading-main">
+                                <div class="registration-heading-icon">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <circle cx="9" cy="8" r="3" />
+
+                                        <path d="M3 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+
+                                        <path d="M18 8v6" />
+
+                                        <path d="M15 11h6" />
+                                    </svg>
+                                </div>
+
+                                <div>
+                                    <h2>
+                                        Información del colaborador
+                                    </h2>
+
+                                    <p>
+                                        Ingresa los datos personales
+                                        y de acceso del nuevo colaborador.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- NUEVO REGISTRO -->
+                            <div class="form-step-badge">
+                                <span class="form-step-dot"></span>
+                                Nuevo registro
+                            </div>
+                        </div>
+
+                        <!-- ==================================================
+                         FORM
+                         ================================================== -->
+                        <form th:action="@{/colaboradores/nuevo}" th:object="${colaboradorForm}" method="post"
+                            class="collaborator-form" id="collaboratorForm">
+                            <div class="form-grid">
+                                <!-- ==================================================
+                                 NOMBRES
+                                 ================================================== -->
+                                <div class="form-group">
+                                    <label for="nombres">
+                                        Nombres
+                                        <span class="required-mark">
+                                            *
+                                        </span>
+                                    </label>
+
+                                    <div class="field-with-icon">
+                                        <span class="field-icon">
+                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                <circle cx="12" cy="8" r="3" />
+
+                                                <path d="M5 20a7 7 0 0 1 14 0" />
+                                            </svg>
+                                        </span>
+
+                                        <input type="text" id="nombres" th:field="*{nombres}" maxlength="80"
+                                            placeholder="Ej. María Alejandra" th:classappend="${#fields.hasErrors('nombres')}
+                                        ? ' input-invalid'
+                                        : ''">
+                                    </div>
+
+                                    <span class="field-error" th:if="${#fields.hasErrors('nombres')}"
+                                        th:errors="*{nombres}">
+                                    </span>
+                                </div>
+
+                                <!-- ==================================================
+                                 APELLIDOS
+                                 ================================================== -->
+                                <div class="form-group">
+                                    <label for="apellidos">
+                                        Apellidos
+                                        <span class="required-mark">
+                                            *
+                                        </span>
+                                    </label>
+
+                                    <div class="field-with-icon">
+                                        <span class="field-icon">
+                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                <circle cx="12" cy="8" r="3" />
+
+                                                <path d="M5 20a7 7 0 0 1 14 0" />
+                                            </svg>
+                                        </span>
+
+                                        <input type="text" id="apellidos" th:field="*{apellidos}" maxlength="100"
+                                            placeholder="Ej. Torres García" th:classappend="${#fields.hasErrors('apellidos')}
+                                        ? ' input-invalid'
+                                        : ''">
+                                    </div>
+
+                                    <span class="field-error" th:if="${#fields.hasErrors('apellidos')}"
+                                        th:errors="*{apellidos}">
+                                    </span>
+                                </div>
+
+                                <!-- ==================================================
+                                 CORREO CORPORATIVO
+                                 ================================================== -->
+                                <div class="form-group">
+                                    <label for="correoLocal">
+                                        Correo electrónico
+                                        <span class="required-mark">
+                                            *
+                                        </span>
+                                    </label>
+
+                                    <!--
+                                    Este campo oculto es el que recibe
+                                    ColaboradorForm.correo en el backend.
+                                    -->
+                                    <input type="hidden" id="correo" th:field="*{correo}">
+                                    <div class="corporate-email" th:classappend="${#fields.hasErrors('correo')}
+                                    ? ' input-invalid'
+                                    : ''">
+                                        <span class="field-icon email-icon">
+                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                <rect x="3" y="5" width="18" height="14" rx="2" />
+
+                                                <path d="m3 7 9 6 9-6" />
+                                            </svg>
+                                        </span>
+
+                                        <input type="text" id="correoLocal" class="email-local-input"
+                                            placeholder="m.torres" maxlength="64" pattern="[A-Za-z0-9._%+\-]+"
+                                            title="Utiliza letras, números, puntos, guiones o guion bajo"
+                                            autocomplete="off" required>
+
+                                        <span class="email-domain">
+                                            @geosinergia.com.pe
+                                        </span>
+                                    </div>
+
+                                    <span class="field-error" th:if="${#fields.hasErrors('correo')}"
+                                        th:errors="*{correo}">
+                                    </span>
+                                </div>
+
+                                <!-- ==================================================
+                                 CARGO
+                                 ================================================== -->
+                                <div class="form-group">
+                                    <label for="cargo">
+                                        Cargo
+                                    </label>
+                                    <div class="field-with-icon">
+                                        <span class="field-icon">
+                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                <rect x="4" y="7" width="16" height="12" rx="2" />
+
+                                                <path d="M9 7V5h6v2" />
+
+                                                <path d="M4 11h16" />
+                                            </svg>
+                                        </span>
+
+                                        <input type="text" id="cargo" th:field="*{cargo}" maxlength="100"
+                                            placeholder="Ej. Ingeniera Geotécnica" th:classappend="${#fields.hasErrors('cargo')}
+                                        ? ' input-invalid'
+                                        : ''">
+                                    </div>
+
+                                    <span class="field-error" th:if="${#fields.hasErrors('cargo')}"
+                                        th:errors="*{cargo}">
+                                    </span>
+                                </div>
+
+                                <!-- ==================================================
+                                 CONTRASEÑA
+                                 ================================================== -->
+                                <div class="form-group">
+                                    <label for="password">
+                                        Contraseña
+                                        <span class="required-mark">
+                                            *
+                                        </span>
+                                    </label>
+
+                                    <div class="field-with-icon password-field">
+                                        <span class="field-icon">
+                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                <rect x="4" y="10" width="16" height="10" rx="2" />
+
+                                                <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+                                            </svg>
+                                        </span>
+
+                                        <input type="password" id="password" th:field="*{password}"
+                                            placeholder="••••••••" autocomplete="new-password" th:classappend="${#fields.hasErrors('password')}
+                                        ? ' input-invalid'
+                                        : ''">
+
+                                        <button type="button" class="field-password-toggle"
+                                            data-password-toggle="password" aria-label="Mostrar contraseña">
+                                            <!-- Ojo normal -->
+                                            <svg class="eye-open" viewBox="0 0 24 24" aria-hidden="true">
+                                                <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" />
+
+                                                <circle cx="12" cy="12" r="3" />
+                                            </svg>
+
+                                            <!-- Ojo tachado -->
+                                            <svg class="eye-closed hidden" viewBox="0 0 24 24" aria-hidden="true">
+                                                <path d="M3 3l18 18" />
+
+                                                <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8" />
+
+                                                <path
+                                                    d="M9.9 4.2A10.5 10.5 0 0 1 12 4c6.5 0 10 8 10 8a16 16 0 0 1-2.1 3.2" />
+
+                                                <path d="M6.6 6.6C3.7 8.5 2 12 2 12s3.5 8 10 8a9.8 9.8 0 0 0 5.4-1.6" />
+                                            </svg>
+                                        </button>
+                                    </div>
+
+                                    <span class="field-help">
+                                        Mínimo 8 caracteres.
+                                    </span>
+
+                                    <span class="field-error" th:if="${#fields.hasErrors('password')}"
+                                        th:errors="*{password}">
+                                    </span>
+                                </div>
+
+                                <!-- ==================================================
+                                 CONFIRMAR CONTRASEÑA
+                                 ================================================== -->
+                                <div class="form-group">
+                                    <label for="confirmarPassword">
+                                        Confirmar contraseña
+                                        <span class="required-mark">
+                                            *
+                                        </span>
+                                    </label>
+
+                                    <div class="field-with-icon password-field">
+                                        <span class="field-icon">
+                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                <rect x="4" y="10" width="16" height="10" rx="2" />
+
+                                                <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+                                            </svg>
+                                        </span>
+
+                                        <input type="password" id="confirmarPassword" th:field="*{confirmarPassword}"
+                                            placeholder="••••••••" autocomplete="new-password" th:classappend="${#fields.hasErrors('confirmarPassword')}
+                                        ? ' input-invalid'
+                                        : ''">
+
+                                        <button type="button" class="field-password-toggle"
+                                            data-password-toggle="confirmarPassword" aria-label="Mostrar contraseña">
+                                            <!-- Ojo normal -->
+                                            <svg class="eye-open" viewBox="0 0 24 24" aria-hidden="true">
+                                                <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" />
+
+                                                <circle cx="12" cy="12" r="3" />
+                                            </svg>
+
+                                            <!-- Ojo tachado -->
+                                            <svg class="eye-closed hidden" viewBox="0 0 24 24" aria-hidden="true">
+                                                <path d="M3 3l18 18" />
+
+                                                <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8" />
+
+                                                <path
+                                                    d="M9.9 4.2A10.5 10.5 0 0 1 12 4c6.5 0 10 8 10 8a16 16 0 0 1-2.1 3.2" />
+
+                                                <path d="M6.6 6.6C3.7 8.5 2 12 2 12s3.5 8 10 8a9.8 9.8 0 0 0 5.4-1.6" />
+                                            </svg>
+                                        </button>
+                                    </div>
+
+                                    <span class="field-help">
+                                        Repite la contraseña para confirmar.
+                                    </span>
+
+                                    <span class="field-error" th:if="${#fields.hasErrors('confirmarPassword')}"
+                                        th:errors="*{confirmarPassword}">
+                                    </span>
+                                </div>
+
+                                <!-- ==================================================
+                                 ROL
+                                 ================================================== -->
+                                <div class="form-group">
+                                    <label>
+                                        Rol
+                                    </label>
+
+                                    <div class="fixed-field">
+                                        <span class="fixed-field-icon">
+                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                <circle cx="9" cy="8" r="3" />
+
+                                                <path d="M3 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+
+                                                <circle cx="17" cy="9" r="2.5" />
+                                            </svg>
+                                        </span>
+
+                                        <strong>
+                                            COLABORADOR
+                                        </strong>
+                                    </div>
+
+                                    <span class="field-help">
+                                        Rol con acceso estándar al sistema.
+                                    </span>
+                                </div>
+
+                                <!-- ==================================================
+                                 ESTADO
+                                 ================================================== -->
+                                <div class="form-group">
+                                    <label>
+                                        Estado
+                                    </label>
+                                    <div class="fixed-field fixed-state">
+                                        <span class="fixed-state-dot"></span>
+
+                                        <strong>
+                                            Activo
+                                        </strong>
+                                    </div>
+
+                                    <span class="field-help">
+                                        El colaborador podrá acceder al sistema.
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- ==================================================
+                             ACCIONES
+                             ================================================== -->
+                            <div class="form-actions">
+                                <a th:href="@{/colaboradores}" class="button-secondary">
+                                    Cancelar
+                                </a>
+
+                                <button type="submit" class="button-primary submit-button">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <circle cx="9" cy="8" r="3" />
+
+                                        <path d="M3 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+
+                                        <path d="M18 8v6" />
+
+                                        <path d="M15 11h6" />
+                                    </svg>
+
+                                    <span>
+                                        Registrar colaborador
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <!-- ==================================================
+                     PANEL INFORMATIVO DERECHO
+                     ================================================== -->
+                    <aside class="registration-info">
+                        <!-- ILUSTRACIÓN -->
+                        <div class="registration-info-hero">
+                            <div class="registration-info-illustration">
+                                <svg viewBox="0 0 64 64" aria-hidden="true">
+                                    <circle cx="31" cy="22" r="10" />
+
+                                    <path d="M13 49c0-11 8-18 18-18s18 7 18 18" />
+
+                                    <circle cx="51" cy="20" r="6" />
+
+                                    <path d="M48 32c8 0 12 6 12 13" />
+                                </svg>
+
+                                <span class="registration-plus">
+                                    +
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- CONTENIDO -->
+                        <div class="registration-info-content">
+                            <h2>
+                                Nuevo colaborador
+                            </h2>
+
+                            <p class="registration-info-description">
+
+                                La cuenta quedará habilitada para
+                                acceder al sistema y gestionar las
+                                tareas que le sean asignadas.
+
+                            </p>
+
+                            <div class="registration-info-divider"></div>
+
+                            <!-- ACCESO -->
+                            <div class="info-feature">
+                                <div class="info-feature-icon">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <rect x="3" y="5" width="18" height="14" rx="2" />
+
+                                        <path d="m3 7 9 6 9-6" />
+                                    </svg>
+                                </div>
+
+                                <div>
+                                    <strong>
+                                        Acceso al sistema
+                                    </strong>
+
+                                    <p>
+                                        Podrá iniciar sesión con
+                                        su correo corporativo.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- ROL -->
+                            <div class="info-feature">
+                                <div class="info-feature-icon">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <circle cx="9" cy="8" r="3" />
+
+                                        <path d="M3 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+
+                                        <circle cx="17" cy="9" r="2.5" />
+                                    </svg>
+                                </div>
+
+                                <div>
+                                    <strong>
+                                        Rol predefinido
+                                    </strong>
+
+                                    <p>
+                                        Se asigna automáticamente
+                                        el rol de COLABORADOR.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- ESTADO -->
+                            <div class="info-feature">
+                                <div class="info-feature-icon">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M12 3 5 6v5c0 5 3 8 7 10 4-2 7-5 7-10V6Z" />
+
+                                        <path d="m9 12 2 2 4-4" />
+                                    </svg>
+                                </div>
+
+                                <div>
+                                    <strong>
+                                        Estado activo
+                                    </strong>
+
+                                    <p>
+                                        Podrá acceder al sistema
+                                        de inmediato.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- ==================================================
+     SCRIPTS
+     ================================================== -->
+    <script th:src="@{/js/layout.js}"></script>
+    <script th:src="@{/js/colaboradores.js}"></script>
+</body>
+
+</html>

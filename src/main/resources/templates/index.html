@@ -1,17 +1,80 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geosinergia - Gestión de Tareas</title>
+    <title>Inicio | Geosinergia</title>
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/inicio.css}">
 </head>
+
 <body>
+    <div class="app-layout">
+        <!-- ==================================================
+         BARRA LATERAL
+         ================================================== -->
+        <div th:replace="~{fragments/sidebar :: sidebar('inicio')}"></div>
 
-    <h1>Sistema de Gestión de Tareas</h1>
+        <!-- ==================================================
+         ÁREA PRINCIPAL
+         ================================================== -->
+        <div class="main-area">
+            <!-- ==================================================
+             ENCABEZADO
+             ================================================== -->
+            <div th:replace="~{fragments/header :: header}"></div>
 
-    <p>Geosinergia Servicios de Ingeniería Perú S.A.C.</p>
+            <!-- ==================================================
+             CONTENIDO DE INICIO
+             ================================================== -->
+            <main class="page-content">
+                <section class="welcome-section">
+                    <span class="page-label">
+                        INICIO
+                    </span>
 
-    <p>Aplicación iniciada correctamente.</p>
+                    <h1>
+                        Bienvenido,<br>
+                        <span th:text="${nombreUsuario}">
+                            Usuario
+                        </span>
+                    </h1>
 
+                    <div class="welcome-role">
+                        <span class="welcome-role-text">
+                            Has iniciado sesión como
+                        </span>
+
+                        <div class="role-badge" th:classappend="${rolUsuario == 'COORDINADOR'} 
+                            ? ' role-coordinator' 
+                            : ' role-collaborator'">
+                            <span class="role-badge-icon">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path>
+                                    <path d="M4 20a8 8 0 0 1 16 0"></path>
+                                </svg>
+                            </span>
+
+                            <span class="role-badge-text"
+                                th:text="${rolUsuario == 'COORDINADOR' ? 'Coordinador' : 'Colaborador'}">
+                                Coordinador
+                            </span>
+                        </div>
+                    </div>
+
+                    <p class="welcome-description">
+                        Sistema de Gestión de Tareas de <br>
+                        Geosinergia Servicios de Ingeniería Perú S.A.C.
+                    </p>
+
+                    <div class="welcome-line"></div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script th:src="@{/js/layout.js}"></script>
 </body>
+
 </html>

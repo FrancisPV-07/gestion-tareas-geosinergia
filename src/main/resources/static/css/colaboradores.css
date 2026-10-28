@@ -1,0 +1,1958 @@
+/* =========================================================
+   PÁGINA COLABORADORES
+   ========================================================= */
+
+.collaborators-page {
+    padding:
+        34px 42px 50px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* =========================================================
+   BREADCRUMB
+   ========================================================= */
+
+.breadcrumb {
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 9px;
+
+    margin-bottom: 28px;
+
+    font-size: 12px;
+
+    color: #7c8da3;
+}
+
+
+.breadcrumb a {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    color: #73869d;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease;
+}
+
+
+.breadcrumb a:hover {
+    color: #0872db;
+}
+
+
+.breadcrumb a svg {
+    width: 15px;
+    height: 15px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+}
+
+
+.breadcrumb-separator {
+    color: #b2becb;
+}
+
+
+.breadcrumb strong {
+    color: #36536f;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   ENCABEZADO DE PÁGINA
+   ========================================================= */
+
+.page-heading {
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 27px;
+}
+
+
+.page-heading-text {
+    min-width: 0;
+}
+
+
+.page-label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    color: #7186a0;
+}
+
+
+.page-heading h1 {
+    margin: 0;
+
+    font-size:
+        clamp(26px, 2.5vw, 34px);
+
+    line-height: 1.15;
+
+    letter-spacing: -0.5px;
+
+    color: #092454;
+}
+
+
+.page-heading p {
+    margin-top: 8px;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    color: #71839a;
+}
+
+
+.form-page-heading {
+    margin-bottom: 25px;
+}
+
+
+/* =========================================================
+   BOTÓN PRINCIPAL
+   ========================================================= */
+
+.button-primary {
+    flex: 0 0 auto;
+
+    min-height: 43px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    padding:
+        0 18px;
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(90deg,
+            #0874d8,
+            #075ebf);
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 650;
+
+    box-shadow:
+        0 7px 17px rgba(7, 94, 191, 0.18);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+
+.button-primary:hover {
+    transform: translateY(-1px);
+
+    filter: brightness(1.04);
+
+    box-shadow:
+        0 10px 22px rgba(7, 94, 191, 0.23);
+}
+
+
+.button-primary svg {
+    width: 18px;
+    height: 18px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 2;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+}
+
+
+/* =========================================================
+   MENSAJE DE ÉXITO
+   ========================================================= */
+
+.success-message {
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+
+    padding:
+        12px 15px;
+
+    border:
+        1px solid #c4e6d2;
+
+    border-radius: 8px;
+
+    background: #effaf4;
+
+    color: #287648;
+
+    font-size: 13px;
+}
+
+
+.success-message-icon {
+    flex: 0 0 22px;
+
+    width: 22px;
+    height: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #2e9a60;
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   TARJETA GENERAL
+   ========================================================= */
+
+.content-card {
+    position: relative;
+
+    z-index: 2;
+
+    overflow: hidden;
+
+    border:
+        1px solid #e1e8f0;
+
+    border-radius: 13px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 10px 28px rgba(31, 64, 99, 0.06);
+}
+
+
+/* =========================================================
+   CABECERA TARJETA LISTA
+   ========================================================= */
+
+.card-heading {
+    min-height: 82px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding:
+        20px 24px;
+
+    border-bottom:
+        1px solid #e7edf3;
+}
+
+
+.card-heading h2 {
+    margin: 0;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    color: #142d50;
+}
+
+
+.card-heading p {
+    margin-top: 4px;
+
+    font-size: 11px;
+
+    color: #8190a2;
+}
+
+
+.total-records {
+    flex: 0 0 auto;
+
+    padding:
+        6px 10px;
+
+    border:
+        1px solid #d8e7f7;
+
+    border-radius: 999px;
+
+    background: #f2f7fd;
+
+    color: #3971a9;
+
+    font-size: 10px;
+
+    font-weight: 650;
+}
+
+
+/* =========================================================
+   TABLA
+   ========================================================= */
+
+.table-container {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+
+.data-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    table-layout: auto;
+}
+
+
+.data-table thead {
+    background: #f7f9fc;
+}
+
+
+.data-table th {
+    padding:
+        13px 22px;
+
+    border-bottom:
+        1px solid #e4eaf1;
+
+    color: #6f8197;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.4px;
+
+    text-align: left;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+}
+
+
+.data-table td {
+    padding:
+        16px 22px;
+
+    border-bottom:
+        1px solid #eef2f6;
+
+    color: #53677f;
+
+    font-size: 12px;
+
+    vertical-align: middle;
+}
+
+
+.data-table tbody tr {
+    transition:
+        background 0.18s ease;
+}
+
+
+.data-table tbody tr:hover {
+    background: #fafcff;
+}
+
+
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   COLABORADOR EN TABLA
+   ========================================================= */
+
+.collaborator-cell {
+    min-width: 190px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.collaborator-avatar {
+    flex: 0 0 38px;
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(145deg,
+            #0a72d4,
+            #0755a7);
+
+    color: #ffffff;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.3px;
+
+    box-shadow:
+        0 4px 10px rgba(7, 94, 191, 0.15);
+}
+
+
+.collaborator-cell strong {
+    color: #183656;
+
+    font-size: 12px;
+
+    font-weight: 650;
+}
+
+
+/* =========================================================
+   ESTADOS
+   ========================================================= */
+
+.status {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding:
+        6px 10px;
+
+    border-radius: 999px;
+
+    font-size: 10px;
+
+    font-weight: 650;
+}
+
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+}
+
+
+.status-active {
+    background: #ebf8f1;
+
+    color: #248355;
+}
+
+
+.status-active .status-dot {
+    background: #2eaa6b;
+}
+
+
+.status-inactive {
+    background: #fff0f0;
+
+    color: #bf5555;
+}
+
+
+.status-inactive .status-dot {
+    background: #dc6666;
+}
+
+
+/* =========================================================
+   ACCIONES DE TABLA
+   ========================================================= */
+
+.column-actions {
+    text-align: right !important;
+}
+
+
+.button-edit {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    min-height: 34px;
+
+    padding:
+        0 11px;
+
+    border:
+        1px solid #d7e4f1;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #356b9f;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.button-edit:hover {
+    border-color: #b9d4ed;
+
+    background: #f1f7fd;
+
+    color: #075ebf;
+}
+
+
+.button-edit svg {
+    width: 15px;
+    height: 15px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+}
+
+
+/* =========================================================
+   LISTA VACÍA
+   ========================================================= */
+
+.empty-state {
+    min-height: 290px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 40px;
+
+    text-align: center;
+}
+
+
+.empty-state-icon {
+    width: 62px;
+    height: 62px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 17px;
+
+    border-radius: 50%;
+
+    background: #edf5fd;
+
+    color: #4385c7;
+}
+
+
+.empty-state-icon svg {
+    width: 29px;
+    height: 29px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+}
+
+
+.empty-state strong {
+    font-size: 14px;
+
+    color: #264662;
+}
+
+
+.empty-state p {
+    max-width: 350px;
+
+    margin-top: 7px;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    color: #8292a5;
+}
+
+
+/* =========================================================
+   REGISTRO - ESTRUCTURA
+   ========================================================= */
+
+.registration-layout {
+    position: relative;
+
+    z-index: 2;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 2.25fr) minmax(270px, 0.95fr);
+
+    gap: 18px;
+
+    align-items: start;
+}
+
+
+.registration-card {
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   REGISTRO - CABECERA
+   ========================================================= */
+
+.registration-heading {
+    min-height: 93px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding:
+        20px 26px;
+
+    border-bottom:
+        1px solid #e6ecf2;
+}
+
+
+.registration-heading-main {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+
+.registration-heading-icon {
+    flex: 0 0 48px;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e7f2ff;
+
+    color: #0872db;
+}
+
+
+.registration-heading-icon svg {
+    width: 27px;
+    height: 27px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+}
+
+
+.registration-heading h2 {
+    margin: 0;
+
+    color: #112d57;
+
+    font-size: 17px;
+
+    font-weight: 700;
+}
+
+
+.registration-heading p {
+    margin-top: 4px;
+
+    color: #7b8da3;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   NUEVO REGISTRO
+   ========================================================= */
+
+.form-step-badge {
+    flex: 0 0 auto;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding:
+        7px 11px;
+
+    border:
+        1px solid #d7e7f8;
+
+    border-radius: 999px;
+
+    background: #edf6ff;
+
+    color: #3d76ae;
+
+    font-size: 10px;
+
+    font-weight: 650;
+}
+
+
+.form-step-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #0872db;
+}
+
+
+/* =========================================================
+   FORMULARIO
+   ========================================================= */
+
+.collaborator-form {
+    padding:
+        25px 26px 26px;
+}
+
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap:
+        21px 20px;
+}
+
+
+.form-group {
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.form-group label {
+    margin-bottom: 7px;
+
+    color: #17355c;
+
+    font-size: 11px;
+
+    font-weight: 650;
+}
+
+
+.required-mark {
+    color: #dc5757;
+}
+
+
+/* =========================================================
+   CAMPOS CON ICONO
+   ========================================================= */
+
+.field-with-icon {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+}
+
+
+.field-icon {
+    position: absolute;
+
+    left: 12px;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #758aa3;
+
+    pointer-events: none;
+}
+
+
+.field-icon svg {
+    width: 17px;
+    height: 17px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+}
+
+
+.field-with-icon input {
+    width: 100%;
+
+    height: 44px;
+
+    padding:
+        0 41px;
+
+    border:
+        1px solid #d1dce8;
+
+    border-radius: 7px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #3b536d;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.field-with-icon input::placeholder {
+    color: #9aa8b7;
+}
+
+
+.field-with-icon input:focus {
+    border-color: #3285d6;
+
+    box-shadow:
+        0 0 0 3px rgba(50, 133, 214, 0.09);
+}
+
+
+/* =========================================================
+   CORREO CORPORATIVO
+   ========================================================= */
+
+.corporate-email {
+    position: relative;
+
+    min-height: 44px;
+
+    display: flex;
+
+    align-items: stretch;
+
+    overflow: hidden;
+
+    border:
+        1px solid #d1dce8;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.corporate-email:focus-within {
+    border-color: #3285d6;
+
+    box-shadow:
+        0 0 0 3px rgba(50, 133, 214, 0.09);
+}
+
+
+.email-icon {
+    top: 50%;
+
+    transform: translateY(-50%);
+}
+
+
+.email-local-input {
+    min-width: 0;
+
+    flex: 1;
+
+    height: 42px;
+
+    padding:
+        0 10px 0 40px;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #3b536d;
+
+    font-family: inherit;
+
+    font-size: 12px;
+}
+
+
+.email-domain {
+    flex: 0 0 auto;
+
+    display: flex;
+
+    align-items: center;
+
+    padding:
+        0 11px;
+
+    border-left:
+        1px solid #dce4ed;
+
+    background: #f5f8fb;
+
+    color: #60778f;
+
+    font-size: 11px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   CONTRASEÑAS
+   ========================================================= */
+
+.password-field input {
+    padding-right: 43px;
+}
+
+
+.field-password-toggle {
+    position: absolute;
+
+    right: 7px;
+
+    width: 31px;
+    height: 31px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: transparent;
+
+    color: #7d8da0;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.field-password-toggle:hover {
+    background: #f1f5f9;
+
+    color: #376b9d;
+}
+
+
+.field-password-toggle svg {
+    width: 17px;
+    height: 17px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+}
+
+
+/* Ocultar ojo nativo */
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none;
+}
+
+
+input[type="password"]::-webkit-credentials-auto-fill-button {
+    visibility: hidden;
+
+    display: none !important;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   AYUDAS Y ERRORES
+   ========================================================= */
+
+.field-help {
+    display: block;
+
+    margin-top: 6px;
+
+    color: #8999ab;
+
+    font-size: 9px;
+
+    line-height: 1.35;
+}
+
+
+.field-error {
+    display: block;
+
+    margin-top: 6px;
+
+    color: #d24e4e;
+
+    font-size: 10px;
+
+    line-height: 1.3;
+}
+
+
+.field-with-icon input.input-invalid {
+    border-color: #e26969;
+
+    background: #fffafa;
+}
+
+
+.corporate-email.input-invalid {
+    border-color: #e26969;
+
+    background: #fffafa;
+}
+
+
+.field-with-icon input.input-invalid:focus {
+    border-color: #dd5d5d;
+
+    box-shadow:
+        0 0 0 3px rgba(221, 93, 93, 0.09);
+}
+
+
+/* =========================================================
+   CAMPOS FIJOS
+   ========================================================= */
+
+.fixed-field {
+    min-height: 44px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding:
+        0 13px;
+
+    border:
+        1px solid #d7e1eb;
+
+    border-radius: 7px;
+
+    background: #f5f7fa;
+
+    color: #62758d;
+}
+
+
+.fixed-field-icon {
+    display: flex;
+
+    align-items: center;
+
+    color: #6d8099;
+}
+
+
+.fixed-field-icon svg {
+    width: 19px;
+    height: 19px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+}
+
+
+.fixed-field strong {
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+.fixed-state {
+    background: #ffffff;
+}
+
+
+.fixed-state-dot {
+    width: 11px;
+    height: 11px;
+
+    border-radius: 50%;
+
+    background: #3bc879;
+
+    box-shadow:
+        0 0 0 4px rgba(59, 200, 121, 0.10);
+}
+
+
+.fixed-state strong {
+    color: #264762;
+}
+
+
+/* =========================================================
+   ACCIONES FORMULARIO
+   ========================================================= */
+
+.form-actions {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-top: 29px;
+
+    padding-top: 23px;
+
+    border-top:
+        1px solid #e6ecf2;
+}
+
+
+.button-secondary {
+    min-width: 125px;
+
+    min-height: 42px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        0 18px;
+
+    border:
+        1px solid #cbd7e4;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #344f6d;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: 650;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.button-secondary:hover {
+    border-color: #acbfd1;
+
+    background: #f7f9fc;
+}
+
+
+.submit-button {
+    min-width: 210px;
+
+    border: none;
+
+    cursor: pointer;
+
+    font-family: inherit;
+}
+
+
+/* =========================================================
+   PANEL INFORMATIVO DERECHO
+   ========================================================= */
+
+.registration-info {
+    overflow: hidden;
+
+    border:
+        1px solid #e1e8f0;
+
+    border-radius: 13px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 10px 28px rgba(31, 64, 99, 0.06);
+}
+
+
+.registration-info-hero {
+    padding:
+        14px 14px 0;
+}
+
+
+.registration-info-illustration {
+    position: relative;
+
+    height: 145px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    background:
+        radial-gradient(circle at 40% 50%,
+            #edf6ff,
+            #e4f1ff 55%,
+            #f1f7fd 100%);
+
+    color: #4c7fc7;
+}
+
+
+.registration-info-illustration::after {
+    content: "";
+
+    position: absolute;
+
+    top: -80px;
+    right: -80px;
+
+    width: 230px;
+    height: 230px;
+
+    border-radius: 50%;
+
+    opacity: 0.20;
+
+    background:
+        repeating-radial-gradient(ellipse,
+            transparent 0,
+            transparent 11px,
+            #7ca7d5 12px,
+            transparent 13px);
+}
+
+
+.registration-info-illustration>svg {
+    position: relative;
+
+    z-index: 2;
+
+    width: 83px;
+    height: 83px;
+
+    fill: currentColor;
+
+    stroke: none;
+
+    opacity: 0.95;
+}
+
+
+.registration-plus {
+    position: absolute;
+
+    z-index: 3;
+
+    right:
+        calc(50% - 55px);
+
+    bottom: 27px;
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border:
+        4px solid #e7f2ff;
+
+    border-radius: 50%;
+
+    background: #0872db;
+
+    color: #ffffff;
+
+    font-size: 23px;
+
+    line-height: 1;
+
+    box-shadow:
+        0 5px 12px rgba(8, 114, 219, 0.24);
+}
+
+
+/* =========================================================
+   PANEL DERECHO - CONTENIDO
+   ========================================================= */
+
+.registration-info-content {
+    padding:
+        20px 21px 23px;
+}
+
+
+.registration-info-content h2 {
+    margin: 0;
+
+    color: #102d58;
+
+    font-size: 17px;
+
+    font-weight: 700;
+}
+
+
+.registration-info-description {
+    margin-top: 8px;
+
+    color: #71839b;
+
+    font-size: 11px;
+
+    line-height: 1.55;
+}
+
+
+.registration-info-divider {
+    height: 1px;
+
+    margin:
+        19px 0;
+
+    background: #e5ebf1;
+}
+
+
+/* =========================================================
+   PANEL DERECHO - CARACTERÍSTICAS
+   ========================================================= */
+
+.info-feature {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    margin-bottom: 19px;
+}
+
+
+.info-feature:last-child {
+    margin-bottom: 0;
+}
+
+
+.info-feature-icon {
+    flex: 0 0 39px;
+
+    width: 39px;
+    height: 39px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #eaf4ff;
+
+    color: #0872db;
+}
+
+
+.info-feature-icon svg {
+    width: 19px;
+    height: 19px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+}
+
+
+.info-feature strong {
+    display: block;
+
+    margin-top: 1px;
+
+    color: #234367;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+.info-feature p {
+    margin-top: 4px;
+
+    color: #7b8da3;
+
+    font-size: 10px;
+
+    line-height: 1.45;
+}
+
+/* =========================================================
+   EDICIÓN - SELECTOR ACTIVO / INACTIVO
+   ========================================================= */
+
+.status-selector {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 8px;
+}
+
+
+/* =========================================================
+   OPCIÓN
+   ========================================================= */
+
+.status-option {
+    position: relative;
+
+    margin: 0 !important;
+
+    cursor: pointer;
+}
+
+
+/*
+ * Ocultamos visualmente el radio original,
+ * pero continúa existiendo para Thymeleaf
+ * y para el envío del formulario.
+ */
+
+.status-option input {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   CONTENIDO VISUAL
+   ========================================================= */
+
+.status-option-content {
+    min-height: 44px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    padding:
+        0
+        14px;
+
+    border:
+        1px solid #d5dfe9;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #6c7f94;
+
+    font-size: 11px;
+
+    font-weight: 650;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+/* =========================================================
+   PUNTO DE ESTADO
+   ========================================================= */
+
+.status-selector-dot {
+    width: 8px;
+    height: 8px;
+
+    flex: 0 0 8px;
+
+    border-radius: 50%;
+
+    background: #aeb9c5;
+
+    transition:
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.status-option:hover
+.status-option-content {
+
+    border-color: #b9c9d9;
+
+    background: #f8fafc;
+}
+
+
+/* =========================================================
+   ACTIVO SELECCIONADO
+   ========================================================= */
+
+.status-option input:checked
++ .status-option-active {
+
+    border-color: #8ed4ae;
+
+    background: #eef9f3;
+
+    color: #26794c;
+
+    box-shadow:
+        0
+        0
+        0
+        3px
+        rgba(46, 170, 107, 0.07);
+}
+
+
+.status-option input:checked
++ .status-option-active
+.status-selector-dot {
+
+    background: #35ad6d;
+
+    box-shadow:
+        0
+        0
+        0
+        3px
+        rgba(53, 173, 109, 0.12);
+}
+
+
+/* =========================================================
+   INACTIVO SELECCIONADO
+   ========================================================= */
+
+.status-option input:checked
++ .status-option-inactive {
+
+    border-color: #e1aaaa;
+
+    background: #fff3f3;
+
+    color: #b85151;
+
+    box-shadow:
+        0
+        0
+        0
+        3px
+        rgba(210, 85, 85, 0.06);
+}
+
+
+.status-option input:checked
++ .status-option-inactive
+.status-selector-dot {
+
+    background: #d66363;
+
+    box-shadow:
+        0
+        0
+        0
+        3px
+        rgba(214, 99, 99, 0.12);
+}
+
+
+/* =========================================================
+   ACCESIBILIDAD CON TECLADO
+   ========================================================= */
+
+.status-option input:focus-visible
++ .status-option-content {
+
+    outline:
+        2px solid #3487d5;
+
+    outline-offset: 2px;
+}
+
+/* Símbolo de edición del panel derecho */
+
+.edit-symbol {
+    font-size: 17px;
+
+    font-weight: 700;
+}
+
+/* =========================================================
+   RESPONSIVE GENERAL
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+    .registration-layout {
+        grid-template-columns: 1fr;
+    }
+
+
+    .registration-info {
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .collaborators-page {
+        padding:
+            30px 28px 45px;
+    }
+
+
+    .page-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .button-primary {
+        align-self: flex-start;
+    }
+
+
+    .card-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .registration-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .collaborator-form {
+        padding:
+            22px 18px 24px;
+    }
+
+
+    .form-actions {
+        align-items: stretch;
+
+        flex-direction: column-reverse;
+    }
+
+
+    .button-secondary,
+    .submit-button {
+        width: 100%;
+
+        min-width: 0;
+    }
+
+
+    .email-domain {
+        padding:
+            0 8px;
+
+        font-size: 9px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .collaborators-page {
+        padding:
+            25px 18px 40px;
+    }
+
+
+    .page-heading h1 {
+        font-size: 27px;
+    }
+
+
+    .breadcrumb {
+        margin-bottom: 22px;
+    }
+
+
+    .data-table th,
+    .data-table td {
+        padding:
+            14px 16px;
+    }
+
+}

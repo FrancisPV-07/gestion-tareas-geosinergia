@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colaboradores | Geosinergia</title>
+    <!-- Layout general -->
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <!-- Estilos propios de colaboradores -->
+    <link rel="stylesheet" th:href="@{/css/colaboradores.css}">
+</head>
+
+<body>
+    <div class="app-layout">
+        <!-- ==================================================
+         SIDEBAR
+         ================================================== -->
+        <div th:replace="~{fragments/sidebar :: sidebar('colaboradores')}">
+        </div>
+
+        <!-- ==================================================
+         ÁREA PRINCIPAL
+         ================================================== -->
+        <div class="main-area">
+            <!-- HEADER -->
+            <div th:replace="~{fragments/header :: header}">
+            </div>
+
+            <!-- ==================================================
+             CONTENIDO
+             ================================================== -->
+            <main class="page-content collaborators-page">
+                <!-- ==================================================
+                 BREADCRUMB
+                 ================================================== -->
+                <nav class="breadcrumb" aria-label="Navegación">
+                    <a th:href="@{/}">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M3 11.5 12 4l9 7.5" />
+
+                            <path d="M5 10v10h14V10" />
+                        </svg>
+
+                        <span>
+                            Inicio
+                        </span>
+                    </a>
+
+                    <span class="breadcrumb-separator">
+                        ›
+                    </span>
+
+                    <span>
+                        Colaboradores
+                    </span>
+
+                    <span class="breadcrumb-separator">
+                        ›
+                    </span>
+
+                    <strong>
+                        Consultar y editar
+                    </strong>
+                </nav>
+
+                <!-- ==================================================
+                 ENCABEZADO DE LA PÁGINA
+                 ================================================== -->
+                <section class="page-heading">
+                    <div class="page-heading-text">
+                        <span class="page-label">
+                            COLABORADORES
+                        </span>
+
+                        <h1>
+                            Gestión de colaboradores
+                        </h1>
+
+                        <p>
+                            Consulta y administra los colaboradores
+                            registrados en el sistema.
+                        </p>
+                    </div>
+
+                    <a th:href="@{/colaboradores/nuevo}" class="button-primary">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 5v14" />
+
+                            <path d="M5 12h14" />
+                        </svg>
+
+                        <span>
+                            Nuevo colaborador
+                        </span>
+                    </a>
+                </section>
+
+                <!-- ==================================================
+                 MENSAJE DE ÉXITO
+                 ================================================== -->
+                <div class="success-message" th:if="${exito}">
+                    <span class="success-message-icon">
+                        ✓
+                    </span>
+
+                    <span th:text="${exito}">
+                        Operación realizada correctamente.
+                    </span>
+                </div>
+
+                <!-- ==================================================
+                 TARJETA
+                 ================================================== -->
+                <section class="content-card">
+                    <!-- CABECERA -->
+                    <div class="card-heading">
+                        <div>
+                            <h2>
+                                Colaboradores registrados
+                            </h2>
+
+                            <p>
+                                Usuarios con rol de colaborador
+                                disponibles actualmente.
+                            </p>
+                        </div>
+
+                        <span class="total-records" th:text="${#lists.size(colaboradores)
+                        + ' registrados'}">
+                            0 registrados
+                        </span>
+                    </div>
+
+                    <!-- ==================================================
+                     SIN REGISTROS
+                     ================================================== -->
+                    <div class="empty-state" th:if="${#lists.isEmpty(colaboradores)}">
+                        <div class="empty-state-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="9" cy="8" r="3" />
+
+                                <path d="M3 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" />
+
+                                <circle cx="17" cy="9" r="2.5" />
+                            </svg>
+                        </div>
+
+                        <strong>
+                            No existen colaboradores registrados
+                        </strong>
+
+                        <p>
+                            Registra un colaborador para comenzar
+                            a gestionar el equipo.
+                        </p>
+                    </div>
+
+                    <!-- ==================================================
+                     TABLA
+                     ================================================== -->
+                    <div class="table-container" th:unless="${#lists.isEmpty(colaboradores)}">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Colaborador
+                                    </th>
+
+                                    <th>
+                                        Correo
+                                    </th>
+
+                                    <th>
+                                        Cargo
+                                    </th>
+
+                                    <th>
+                                        Estado
+                                    </th>
+
+                                    <th class="column-actions">
+                                        Acciones
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr th:each="colaborador : ${colaboradores}">
+                                    <!-- COLABORADOR -->
+                                    <td>
+                                        <div class="collaborator-cell">
+                                            <div class="collaborator-avatar">
+                                                <span th:text="${#strings.toUpperCase(
+                                            #strings.substring(
+                                            colaborador.nombres, 0, 1)
+                                            +
+                                            #strings.substring(
+                                            colaborador.apellidos, 0, 1)
+                                            )}">
+                                                    FP
+                                                </span>
+                                            </div>
+
+                                            <strong th:text="${colaborador.nombres
+                                        + ' '
+                                        + colaborador.apellidos}">
+                                                Nombre del colaborador
+                                            </strong>
+                                        </div>
+                                    </td>
+
+                                    <!-- CORREO -->
+                                    <td th:text="${colaborador.correo}">
+                                        correo@geosinergia.com
+                                    </td>
+
+                                    <!-- CARGO -->
+                                    <td th:text="${colaborador.cargo != null
+                                && !colaborador.cargo.isBlank()
+                                ? colaborador.cargo
+                                : '-'}">
+                                        Cargo
+                                    </td>
+
+                                    <!-- ESTADO -->
+                                    <td>
+                                        <span class="status" th:classappend="${colaborador.activo}
+                                    ? ' status-active'
+                                    : ' status-inactive'">
+                                            <span class="status-dot"></span>
+
+                                            <span th:text="${colaborador.activo}
+                                        ? 'Activo'
+                                        : 'Inactivo'">
+                                                Activo
+                                            </span>
+                                        </span>
+                                    </td>
+
+                                    <!-- ACCIONES -->
+                                    <td class="column-actions">
+                                        <a class="button-edit" th:href="@{/colaboradores/{id}/editar(
+                                    id=${colaborador.idUsuario})}">
+                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                <path d="M12 20h9" />
+
+                                                <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z" />
+                                            </svg>
+
+                                            <span>
+                                                Editar
+                                            </span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Layout reutilizable -->
+    <script th:src="@{/js/layout.js}"></script>
+</body>
+
+</html>
