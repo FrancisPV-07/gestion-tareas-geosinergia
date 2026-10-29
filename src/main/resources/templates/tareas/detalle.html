@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Detalle de tarea | Geosinergia</title>
+
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/tareas.css}">
+</head>
+
+<body>
+    <div class="app-layout">
+
+        <!-- Menú lateral -->
+        <div th:replace="~{fragments/sidebar :: sidebar('mis-tareas')}"></div>
+
+        <div class="main-area">
+
+            <!-- Encabezado general -->
+            <div th:replace="~{fragments/header :: header}"></div>
+
+            <main class="page-content tareas-page detalle-page">
+
+                <!-- =====================================
+                     NAVEGACION
+                     ===================================== -->
+
+                <nav class="tareas-breadcrumb" aria-label="Navegación">
+
+                    <a th:href="@{/}">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M3 11.5 12 4l9 7.5" />
+                            <path d="M5 10v10h14V10" />
+                        </svg>
+                        <span>Inicio</span>
+                    </a>
+
+                    <span>›</span>
+
+                    <a th:if="${rolUsuario == 'COLABORADOR'}" th:href="@{/tareas/mis-tareas}">
+                        Mis tareas
+                    </a>
+
+                    <span th:if="${rolUsuario == 'COLABORADOR'}">
+                        ›
+                    </span>
+
+                    <strong>Detalle de tarea</strong>
+                </nav>
+
+                <!-- =====================================
+                     TITULO DE PAGINA
+                     ===================================== -->
+
+                <section class="tareas-heading">
+
+                    <span class="tareas-label">
+                        GESTIÓN DE TAREAS
+                    </span>
+
+                    <h1>Detalle de tarea</h1>
+
+                    <p>
+                        Consulta la información de la
+                        actividad seleccionada.
+                    </p>
+
+                </section>
+
+                <!-- =====================================
+                     CONTENEDOR DE LAS DOS TARJETAS
+                     ===================================== -->
+
+                <div class="detalle-layout">
+
+                    <!-- =================================
+                         TARJETA IZQUIERDA
+                         ================================= -->
+
+                    <section class="tareas-card detalle-card">
+
+                        <!-- Encabezado -->
+                        <div class="tareas-card-heading">
+
+                            <div class="tareas-card-icon">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M6 3h9l4 4v13a1 1
+                                             0 0 1-1 1H6a1 1
+                                             0 0 1-1-1V4a1 1
+                                             0 0 1 1-1Z" />
+                                    <path d="M15 3v5h4" />
+                                    <path d="M9 13h6M9 17h4" />
+                                </svg>
+                            </div>
+
+                            <div>
+                                <h2>Información de la tarea</h2>
+                                <p>
+                                    Datos generales de la
+                                    actividad asignada.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <!-- Contenido -->
+                        <div class="detalle-info-content">
+
+                            <!-- Título -->
+                            <div class="detalle-field">
+
+                                <span class="detalle-label">
+                                    Título
+                                </span>
+
+                                <p th:text="${tarea.titulo}">
+                                    Título de la tarea
+                                </p>
+
+                            </div>
+
+                            <div class="detalle-divider"></div>
+
+                            <!-- Descripción -->
+                            <div class="detalle-field">
+
+                                <span class="detalle-label">
+                                    Descripción
+                                </span>
+
+                                <p class="detalle-descripcion" th:text="${tarea.descripcion}">
+                                    Descripción completa de la tarea.
+                                </p>
+
+                            </div>
+
+                            <div class="detalle-divider"></div>
+
+                            <!-- Datos inferiores -->
+                            <div class="detalle-metadata">
+
+                                <div class="detalle-field">
+
+                                    <span class="detalle-label">
+                                        Registrado por
+                                    </span>
+
+                                    <p th:text="${tarea.creador.nombres
+                                        + ' '
+                                        + tarea.creador.apellidos}">
+                                        Coordinador
+                                    </p>
+
+                                </div>
+
+                                <div class="detalle-field">
+
+                                    <span class="detalle-label">
+                                        Fecha de creación
+                                    </span>
+
+                                    <p th:text="${#temporals.format(
+                                            tarea.fechaCreacion,
+                                            'dd/MM/yyyy')}">
+                                        28/10/2026
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                    <!-- =================================
+                         TARJETA DERECHA
+                         ================================= -->
+
+                    <aside class="tareas-info detalle-card">
+
+                        <!-- Encabezado -->
+                        <div class="tareas-card-heading">
+
+                            <div class="tareas-card-icon">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <rect x="5" y="4" width="14" height="17" rx="2" />
+                                    <rect x="9" y="2" width="6" height="4" rx="1" />
+                                    <path d="M9 11h6M9 15h6" />
+                                </svg>
+                            </div>
+
+                            <div>
+                                <h2>Resumen de la tarea</h2>
+                                <p>
+                                    Información actual de la actividad.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <!-- Contenido del resumen -->
+                        <div class="detalle-resumen-content">
+
+                            <!-- Estado actual -->
+                            <div class="detalle-resumen-item">
+
+                                <div class="detalle-resumen-label">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="9" />
+                                        <path d="M12 7v5l3 2" />
+                                    </svg>
+
+                                    <span>Estado actual</span>
+                                </div>
+
+                                <span class="mis-tareas-estado" th:classappend="${tarea.estado.nombre == 'Pendiente'
+                                          ? ' estado-pendiente'
+                                          : (tarea.estado.nombre == 'En proceso'
+                                              ? ' estado-proceso'
+                                              : (tarea.estado.nombre == 'Completada'
+                                                  ? ' estado-completada'
+                                                  : ' estado-cancelada'))}" th:text="${tarea.estado.nombre}">
+                                    Pendiente
+                                </span>
+
+                            </div>
+
+                            <!-- Prioridad -->
+                            <div class="detalle-resumen-item">
+
+                                <div class="detalle-resumen-label">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M5 21V4" />
+                                        <path d="M5 5c5-3 9 3 14 0v11
+                                                 c-5 3-9-3-14 0" />
+                                    </svg>
+
+                                    <span>Prioridad</span>
+                                </div>
+
+                                <span class="mis-tareas-prioridad" th:classappend="${tarea.prioridad == null
+                                          ? ' prioridad-sin-definir'
+                                          : (tarea.prioridad.nombre == 'Alta'
+                                              ? ' prioridad-alta'
+                                              : (tarea.prioridad.nombre == 'Media'
+                                                  ? ' prioridad-media'
+                                                  : ' prioridad-baja'))}" th:text="${tarea.prioridad != null
+                                          ? tarea.prioridad.nombre
+                                          : 'Sin prioridad'}">
+                                    Alta
+                                </span>
+
+                            </div>
+
+                            <!-- Fecha límite -->
+                            <div class="detalle-resumen-item">
+
+                                <div class="detalle-resumen-label">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <rect x="3" y="5" width="18" height="16" rx="2" />
+                                        <path d="M7 3v4M17 3v4M3 10h18" />
+                                    </svg>
+
+                                    <span>Fecha límite</span>
+                                </div>
+
+                                <strong th:text="${tarea.fechaLimite != null
+                                        ? #temporals.format(
+                                            tarea.fechaLimite,
+                                            'dd/MM/yyyy')
+                                        : 'Sin fecha'}">
+                                    10/11/2026
+                                </strong>
+
+                            </div>
+
+                            <!-- Responsable -->
+                            <div class="detalle-resumen-item">
+
+                                <div class="detalle-resumen-label">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <circle cx="12" cy="8" r="4" />
+                                        <path d="M4 21v-2a8 8
+                                                 0 0 1 16 0v2" />
+                                    </svg>
+
+                                    <span>Responsable</span>
+                                </div>
+
+                                <strong th:text="${tarea.responsable != null
+                                        ? tarea.responsable.nombres
+                                          + ' '
+                                          + tarea.responsable.apellidos
+                                        : 'Sin asignar'}">
+                                    Colaborador
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </aside>
+
+                </div>
+
+                <!-- =====================================
+                     VOLVER
+                     ===================================== -->
+
+                <div class="detalle-acciones">
+
+                    <a th:if="${rolUsuario == 'COLABORADOR'}" th:href="@{/tareas/mis-tareas}" class="detalle-volver">
+
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        Volver a Mis tareas
+
+                    </a>
+
+                    <a th:if="${rolUsuario == 'COORDINADOR'}" th:href="@{/}" class="detalle-volver">
+
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        Volver al inicio
+
+                    </a>
+
+                </div>
+
+            </main>
+
+        </div>
+    </div>
+
+    <script th:src="@{/js/layout.js}"></script>
+
+</body>
+
+</html>

@@ -35,6 +35,17 @@ public class SecurityConfig {
                         .requestMatchers("/colaboradores/**")
                         .hasRole("COORDINADOR")
 
+                        .requestMatchers(
+                                "/tareas/nueva",
+                                "/tareas/asignar"
+                        ).hasRole("COORDINADOR")
+
+                        .requestMatchers("/tareas/mis-tareas")
+                        .hasRole("COLABORADOR")
+
+                        .requestMatchers("/tareas/*/detalle")
+                        .hasAnyRole("COORDINADOR", "COLABORADOR")
+
                         .anyRequest()
                         .authenticated()
                 )

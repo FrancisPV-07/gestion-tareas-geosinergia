@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mis tareas | Geosinergia</title>
+
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/tareas.css}">
+    <link rel="stylesheet" th:href="@{/css/colaboradores.css}">
+</head>
+
+<body>
+    <div class="app-layout">
+
+        <!-- Menú lateral -->
+        <div th:replace="~{fragments/sidebar :: sidebar('mis-tareas')}"></div>
+
+        <div class="main-area">
+
+            <!-- Encabezado general -->
+            <div th:replace="~{fragments/header :: header}"></div>
+
+            <main class="page-content tareas-page">
+
+                <!-- Navegación -->
+                <nav class="tareas-breadcrumb" aria-label="Navegación">
+
+                    <a th:href="@{/}">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M3 11.5 12 4l9 7.5" />
+                            <path d="M5 10v10h14V10" />
+                        </svg>
+
+                        <span>Inicio</span>
+                    </a>
+
+                    <span>›</span>
+
+                    <strong>Mis tareas</strong>
+                </nav>
+
+                <!-- Título -->
+                <section class="tareas-heading">
+
+                    <span class="tareas-label">
+                        GESTIÓN DE TAREAS
+                    </span>
+
+                    <h1>Mis tareas</h1>
+
+                    <p>
+                        Consulta las actividades que tienes
+                        asignadas y revisa sus fechas de cumplimiento.
+                    </p>
+                </section>
+
+                <!-- Listado -->
+                <section class="content-card">
+                    <!-- ENCABEZADO DE LA LISTA -->
+                    <div class="mis-tareas-card-heading">
+
+                        <!-- Icono -->
+                        <div class="mis-tareas-card-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <rect x="5" y="4" width="14" height="17" rx="2" />
+                                <rect x="9" y="2" width="6" height="4" rx="1" />
+                                <path d="M9 11h6M9 15h6M9 19h4" />
+                            </svg>
+                        </div>
+
+                        <!-- Título y descripción -->
+                        <div class="mis-tareas-card-heading-text">
+                            <h2>Lista de tareas asignadas</h2>
+
+                            <p>
+                                Visualiza las tareas que tienes asignadas
+                                y su estado actual.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <!-- HU-07: SIN TAREAS ASIGNADAS -->
+                    <div class="empty-state mis-tareas-empty"
+                        th:if="${#lists.isEmpty(tareasAsignadas)}">
+
+                        <div class="mis-tareas-empty-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <rect x="5" y="4" width="14" height="17" rx="2"/>
+                                <rect x="9" y="2" width="6" height="4" rx="1"/>
+                                <path d="M9 11h6M9 15h6"/>
+                                <path d="m9 18 2 2 4-4"/>
+                            </svg>
+                        </div>
+
+                        <strong>No tienes tareas asignadas</strong>
+
+                        <p>
+                            Cuando la coordinadora te asigne una tarea,
+                            podrás consultarla desde este apartado.
+                        </p>
+
+                    </div>
+
+                    <!-- Tabla de tareas -->
+                    <div class="table-container" th:unless="${#lists.isEmpty(tareasAsignadas)}">
+
+                        <table class="data-table mis-tareas-table">
+
+                            <thead>
+                                <tr>
+                                    <th>Tarea</th>
+                                    <th>Prioridad</th>
+                                    <th>Fecha límite</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr th:each="tarea : ${tareasAsignadas}">
+
+                                    <!-- Título -->
+                                    <td>
+                                        <strong th:text="${tarea.titulo}">
+                                            Título de la tarea
+                                        </strong>
+                                    </td>
+
+                                    <!-- Prioridad -->
+                                    <td>
+                                        <span class="mis-tareas-prioridad"
+                                            th:classappend="${tarea.prioridad == null
+                                                ? ' prioridad-sin-definir'
+                                                : (tarea.prioridad.nombre == 'Alta'
+                                                    ? ' prioridad-alta'
+                                                    : (tarea.prioridad.nombre == 'Media'
+                                                        ? ' prioridad-media'
+                                                        : ' prioridad-baja'))}"
+                                            th:text="${tarea.prioridad != null
+                                                ? tarea.prioridad.nombre
+                                                : 'Sin prioridad'}">
+                                            Alta
+                                        </span>
+                                    </td>
+
+                                    <!-- Fecha límite -->
+                                    <td th:text="${tarea.fechaLimite != null
+                                            ? #temporals.format(
+                                                tarea.fechaLimite,
+                                                'dd/MM/yyyy')
+                                            : 'Sin fecha'}">
+                                        10/11/2026
+                                    </td>
+
+                                    <!-- Estado -->
+                                    <td>
+                                        <span class="mis-tareas-estado"
+                                            th:classappend="${tarea.estado.nombre == 'Pendiente'
+                                                ? ' estado-pendiente'
+                                                : (tarea.estado.nombre == 'En proceso'
+                                                    ? ' estado-proceso'
+                                                    : (tarea.estado.nombre == 'Completada'
+                                                        ? ' estado-completada'
+                                                        : ' estado-cancelada'))}"
+                                            th:text="${tarea.estado.nombre}">
+                                            Pendiente
+                                        </span>
+                                    </td>
+
+                                    <!-- HU-08: VER DETALLE -->
+                                    <td>
+                                        <a class="mis-tareas-ver-detalle"
+                                        th:href="@{/tareas/{id}/detalle(id=${tarea.idTarea})}">
+
+                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                <path d="M2 12s4-7 10-7 10 7 10 7
+                                                        -4 7-10 7S2 12 2 12Z"/>
+                                                <circle cx="12" cy="12" r="3"/>
+                                            </svg>
+
+                                            <span>Ver detalle</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- HU-07: CONTADOR INFERIOR -->
+                    <div class="mis-tareas-footer"
+                        th:unless="${#lists.isEmpty(tareasAsignadas)}">
+
+                        <p th:text="${#lists.size(tareasAsignadas) == 1
+                            ? 'Mostrando 1 de 1 tarea asignada'
+                            : 'Mostrando ' + #lists.size(tareasAsignadas)
+                            + ' de ' + #lists.size(tareasAsignadas)
+                            + ' tareas asignadas'}">
+
+                            Mostrando 4 de 4 tareas asignadas
+                        </p>
+
+                    </div>
+
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script th:src="@{/js/layout.js}"></script>
+</body>
+
+</html>

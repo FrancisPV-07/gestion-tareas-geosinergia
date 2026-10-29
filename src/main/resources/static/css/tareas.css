@@ -1,0 +1,2372 @@
+/* Página de tareas */
+.tareas-page {
+    padding: 34px 42px 50px;
+}
+
+
+/* ==========================================
+   NAVEGACION - BREADCRUMB
+   ========================================== */
+
+.tareas-breadcrumb {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+
+    margin-bottom: 28px;
+
+    font-size: 12px;
+    color: #7c8da3;
+}
+
+/* Enlaces de navegacion */
+.tareas-breadcrumb a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    color: #73869d;
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+/* Efecto al pasar el mouse */
+.tareas-breadcrumb a:hover {
+    color: #0872db;
+}
+
+/* Accesibilidad con teclado */
+.tareas-breadcrumb a:focus-visible {
+    color: #0872db;
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+/* Icono de inicio */
+.tareas-breadcrumb a svg {
+    width: 15px;
+    height: 15px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Pagina actual */
+.tareas-breadcrumb strong {
+    color: #36536f;
+    font-weight: 600;
+}
+
+
+.tareas-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #7186a0;
+}
+
+.tareas-heading {
+    margin-bottom: 26px;
+}
+
+.tareas-heading h1 {
+    font-size: 32px;
+    color: #092454;
+}
+
+.tareas-heading p {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #71839a;
+    line-height: 1.5;
+}
+
+/* Distribución principal */
+.tareas-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 2.1fr) minmax(270px, 1fr);
+    align-items: start;
+    gap: 20px;
+}
+
+.tareas-card,
+.tareas-info {
+    background: #fff;
+    border: 1px solid #e1e8f0;
+    border-radius: 13px;
+    overflow: hidden;
+    box-shadow: 0 10px 28px rgba(31, 64, 99, 0.06);
+}
+
+/* Encabezado del formulario */
+.tareas-card-heading {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 23px 26px;
+    border-bottom: 1px solid #e6ecf2;
+}
+
+.tareas-card-icon,
+.tareas-info-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #e7f2ff;
+    color: #0872db;
+}
+
+.tareas-card-icon svg,
+.tareas-info-icon svg {
+    width: 27px;
+    height: 27px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.tareas-card-heading h2,
+.tareas-info h2 {
+    font-size: 17px;
+    color: #112d57;
+}
+
+.tareas-card-heading p {
+    margin-top: 5px;
+    color: #7b8da3;
+    font-size: 12px;
+}
+
+/* Campos del formulario */
+.tareas-form {
+    padding: 27px 26px;
+}
+
+.tareas-field {
+    margin-bottom: 24px;
+}
+
+.tareas-field label {
+    display: block;
+    margin-bottom: 9px;
+    color: #17355c;
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.required-mark {
+    color: #dc5757;
+}
+
+.tareas-field input,
+.tareas-field textarea {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid #d1dce8;
+    border-radius: 8px;
+    outline: none;
+    background: #fff;
+    color: #3b536d;
+    font: inherit;
+    font-size: 13px;
+}
+
+.tareas-field textarea {
+    min-height: 175px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.tareas-field input:focus,
+.tareas-field textarea:focus {
+    border-color: #3285d6;
+    box-shadow: 0 0 0 3px rgba(50, 133, 214, 0.09);
+}
+
+.tareas-field .input-invalid {
+    border-color: #dc5757;
+}
+
+.tareas-help {
+    display: block;
+    margin-top: 8px;
+    font-size: 11px;
+    color: #8393a7;
+}
+
+.tareas-error {
+    display: block;
+    margin-top: 6px;
+    font-size: 11px;
+    color: #d24e4e;
+}
+
+.tareas-error-summary {
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    background: #fff0f0;
+    color: #b43d3d;
+    font-size: 12px;
+}
+
+/* Botones */
+.tareas-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 24px;
+    border-top: 1px solid #e6ecf2;
+}
+
+.tareas-cancel,
+.tareas-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 43px;
+    padding: 0 22px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 650;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.tareas-cancel {
+    border: 1px solid #cbd7e4;
+    background: #fff;
+    color: #344f6d;
+}
+
+.tareas-submit {
+    border: none;
+    background: linear-gradient(90deg, #0874d8, #075ebf);
+    color: white;
+}
+
+/* Panel informativo */
+.tareas-info-top {
+    padding: 30px 22px 24px;
+    text-align: center;
+    background: #f2f8ff;
+}
+
+.tareas-info-icon {
+    margin: 0 auto 15px;
+    width: 65px;
+    height: 65px;
+}
+
+.tareas-info-top p {
+    margin-top: 9px;
+    color: #71839b;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.tareas-info-content {
+    padding: 23px 22px;
+}
+
+.tareas-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 22px;
+}
+
+.tareas-info-item>span {
+    color: #8190a3;
+    font-size: 11px;
+}
+
+.tareas-info-item strong {
+    font-size: 13px;
+    color: #17355c;
+}
+
+.tareas-pending {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.tareas-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #e8a23a;
+}
+
+.tareas-info-divider {
+    height: 1px;
+    margin-bottom: 22px;
+    background: #e5ebf1;
+}
+
+.tareas-info-note {
+    padding: 15px;
+    border-radius: 9px;
+    background: #f4f8fd;
+}
+
+.tareas-info-note strong {
+    font-size: 12px;
+    color: #194d83;
+}
+
+.tareas-info-note p {
+    margin-top: 7px;
+    font-size: 11px;
+    line-height: 1.7;
+    color: #71839b;
+}
+
+/* Mensaje de registro exitoso */
+.tareas-success {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 16px;
+    margin-bottom: 20px;
+    border: 1px solid #c4e6d2;
+    border-radius: 8px;
+    background: #effaf4;
+    color: #287648;
+    font-size: 13px;
+}
+
+.tareas-success-icon {
+    font-weight: 700;
+}
+
+/* Adaptación a pantallas pequeñas */
+@media (max-width: 1100px) {
+    .tareas-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    .tareas-page {
+        padding: 24px 18px;
+    }
+
+    .tareas-actions {
+        flex-direction: column-reverse;
+    }
+
+    .tareas-cancel,
+    .tareas-submit {
+        width: 100%;
+    }
+
+    .tareas-card-heading,
+    .tareas-form {
+        padding: 22px 18px;
+    }
+}
+
+/* ==========================================
+   AJUSTES VISUALES HU-04
+   ========================================== */
+
+/* Icono del breadcrumb */
+.tareas-breadcrumb a {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.tareas-breadcrumb a svg {
+    width: 15px;
+    height: 15px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Icono del botón de registro */
+.tareas-submit {
+    gap: 9px;
+}
+
+.tareas-submit svg {
+    width: 17px;
+    height: 17px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Ilustración superior derecha */
+.tareas-info-hero {
+    padding: 12px 12px 0;
+}
+
+.tareas-hero-art {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 135px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #e8f3ff;
+}
+
+.tareas-hero-art::before {
+    content: "";
+    position: absolute;
+    top: -135px;
+    right: -115px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: repeating-radial-gradient(circle,
+            transparent 0,
+            transparent 15px,
+            rgba(65, 133, 206, 0.11) 16px,
+            transparent 17px);
+}
+
+.tareas-hero-art>svg {
+    position: relative;
+    width: 85px;
+    height: 90px;
+    fill: none;
+    stroke: #075ebf;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.tareas-hero-plus {
+    position: absolute;
+    left: calc(50% + 25px);
+    top: calc(50% + 14px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border: 3px solid #e8f3ff;
+    border-radius: 50%;
+    background: #0874d8;
+    color: white;
+    font-size: 23px;
+    box-shadow: 0 5px 12px rgba(7, 94, 191, 0.25);
+}
+
+/* Introducción de la tarjeta */
+.tareas-info-intro {
+    margin: 0 22px;
+    padding: 18px 0 18px;
+    border-bottom: 1px solid #e5ebf1;
+}
+
+
+.tareas-info-intro h2 {
+    font-size: 17px;
+    color: #102d58;
+}
+
+.tareas-info-intro p {
+    margin-top: 8px;
+    color: #71839b;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* Características automáticas */
+.tareas-info-content {
+    padding: 20px 22px 24px;
+}
+
+.tareas-info-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.tareas-feature-icon {
+    flex: 0 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.tareas-feature-icon svg {
+    width: 21px;
+    height: 21px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.tareas-feature-icon.icon-green {
+    background: #e4f8ed;
+    color: #1da765;
+}
+
+.tareas-feature-icon.icon-blue {
+    background: #e8f3ff;
+    color: #0874d8;
+}
+
+.tareas-info-feature strong {
+    display: block;
+    margin: 2px 0 5px;
+    color: #17355c;
+    font-size: 12px;
+}
+
+.tareas-info-feature p {
+    color: #71839b;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.tareas-info-feature p b {
+    color: #17355c;
+    font-weight: 650;
+}
+
+.tareas-info-divider {
+    margin: 2px 0 17px;
+}
+
+.tareas-assignment-hint {
+    color: #71839b;
+    font-size: 11px;
+    line-height: 1.65;
+}
+
+
+/* Indicador de nuevo registro */
+.tareas-new-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin-left: auto;
+    padding: 7px 12px;
+    border: 1px solid #d3e7fc;
+    border-radius: 20px;
+    background: #eef6ff;
+    color: #0872db;
+    font-size: 11px;
+    font-weight: 650;
+    white-space: nowrap;
+}
+
+.tareas-new-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #0872db;
+}
+
+@media (max-width: 600px) {
+    .tareas-card-heading {
+        flex-wrap: wrap;
+    }
+
+    .tareas-new-badge {
+        margin-left: 63px;
+    }
+}
+
+/* ==========================================
+   EFECTOS HOVER - BOTONES REGISTRAR TAREA
+   ========================================== */
+
+/* Botón Registrar tarea */
+.tareas-submit {
+    box-shadow: 0 7px 17px rgba(7, 94, 191, 0.18);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+.tareas-submit:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.04);
+    box-shadow: 0 10px 22px rgba(7, 94, 191, 0.23);
+}
+
+/* Botón Cancelar */
+.tareas-cancel {
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.tareas-cancel:hover {
+    border-color: #acbfd1;
+    background: #f7f9fc;
+}
+
+/* ==========================================
+   HU-05: FORMULARIO DE ASIGNACIÓN
+   ========================================== */
+
+/* Campos desplegables */
+.tareas-select {
+    width: 100%;
+    min-height: 45px;
+    padding: 0 40px 0 15px;
+
+    border: 1px solid #d1dce8;
+    border-radius: 8px;
+
+    background-color: #ffffff;
+    color: #3b536d;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    cursor: pointer;
+    outline: none;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23758aa3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* Efecto al seleccionar un campo */
+.tareas-select:focus,
+.tareas-date:focus {
+    border-color: #3285d6;
+
+    box-shadow:
+        0 0 0 3px rgba(50, 133, 214, 0.09);
+}
+
+/* Campo de fecha */
+.tareas-date {
+    min-height: 45px;
+    cursor: pointer;
+    color-scheme: light;
+}
+
+.tareas-date::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+/* Errores de validación */
+.tareas-select.input-invalid,
+.tareas-date.input-invalid {
+    border-color: #dc5757;
+    background-color: #fffafa;
+}
+
+/* Aviso cuando no existen tareas disponibles */
+.tareas-empty-notice {
+    margin-bottom: 22px;
+    padding: 14px 16px;
+
+    border: 1px solid #f1dfb8;
+    border-radius: 8px;
+
+    background: #fff9eb;
+    color: #98701d;
+
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* Botón de asignación deshabilitado */
+.tareas-submit:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+    box-shadow: none;
+}
+
+/* Evitar efecto hover cuando está deshabilitado */
+.tareas-submit:disabled:hover {
+    transform: none;
+    filter: none;
+    box-shadow: none;
+}
+
+/* Ajustes para dispositivos pequeños */
+@media (max-width: 700px) {
+
+    .tareas-select,
+    .tareas-date {
+        width: 100%;
+        font-size: 13px;
+    }
+
+    .tareas-empty-notice {
+        padding: 12px 14px;
+    }
+}
+
+/* ==========================================
+   HU-05: CONTINUAR CON ASIGNACIÓN
+   ========================================== */
+
+.tareas-success {
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.tareas-success-content {
+    flex: 1;
+    min-width: 220px;
+}
+
+.tareas-success-content strong {
+    display: block;
+    font-size: 13px;
+    color: #287648;
+}
+
+.tareas-success-content p {
+    margin-top: 6px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #49765b;
+}
+
+.tareas-success-content p b {
+    font-weight: 650;
+}
+
+.tareas-success-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 39px;
+    padding: 0 15px;
+
+    border-radius: 7px;
+    background: linear-gradient(90deg, #0874d8, #075ebf);
+
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 650;
+    text-decoration: none;
+    white-space: nowrap;
+
+    box-shadow: 0 5px 12px rgba(7, 94, 191, 0.15);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+.tareas-success-action svg {
+    width: 17px;
+    height: 17px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.tareas-success-action:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.04);
+    box-shadow: 0 8px 18px rgba(7, 94, 191, 0.22);
+}
+
+@media (max-width: 700px) {
+    .tareas-success-action {
+        width: 100%;
+    }
+}
+
+/* ==========================================
+   VALIDACIONES - ESTILO SPRINT 1
+   ========================================== */
+
+/* Campos con errores */
+.tareas-field input.input-invalid,
+.tareas-field textarea.input-invalid,
+.tareas-field select.input-invalid {
+    border-color: #e26969;
+    background-color: #fffafa;
+}
+
+/* Efecto al seleccionar un campo con error */
+.tareas-field input.input-invalid:focus,
+.tareas-field textarea.input-invalid:focus,
+.tareas-field select.input-invalid:focus {
+    border-color: #dd5d5d;
+    box-shadow: 0 0 0 3px rgba(221, 93, 93, 0.09);
+}
+
+/* Mensajes de validación */
+.tareas-error {
+    display: block;
+    margin-top: 6px;
+    color: #d24e4e;
+    font-size: 10px;
+    line-height: 1.3;
+}
+
+/* ==========================================
+   CONFIRMACIONES - ESTILO SPRINT 1
+   ========================================== */
+
+.tareas-success-icon {
+    flex: 0 0 22px;
+
+    width: 22px;
+    height: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: #2e9a60;
+
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* ==========================================
+   HU-05: TAREA PRESELECCIONADA
+   ========================================== */
+
+.tareas-selected-task {
+    min-height: 45px;
+
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    padding: 12px 15px;
+
+    border: 1px solid #d7e1eb;
+    border-radius: 8px;
+
+    background: #f1f4f8;
+    color: #49627e;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.tareas-selected-task svg {
+    flex-shrink: 0;
+
+    width: 18px;
+    height: 18px;
+
+    fill: none;
+    stroke: #7188a3;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.tareas-selected-task span {
+    overflow-wrap: anywhere;
+}
+
+/* ==========================================
+   HU-05: DETALLE DE LA TAREA
+   ========================================== */
+
+/* Etiqueta de estado Pendiente */
+.tareas-status-pending {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 25px;
+    padding: 4px 11px;
+
+    border-radius: 6px;
+
+    background: #fff0ce;
+    color: #a36b12;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* Información de la tarea */
+.tareas-info-feature > div {
+    min-width: 0;
+    flex: 1;
+}
+
+.tareas-info-feature p {
+    overflow-wrap: anywhere;
+}
+
+/* Estado sin selección */
+.tareas-detail-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    padding: 23px 12px;
+    text-align: center;
+}
+
+.tareas-detail-placeholder .tareas-feature-icon {
+    width: 48px;
+    height: 48px;
+    flex-basis: 48px;
+}
+
+.tareas-detail-placeholder strong {
+    color: #17355c;
+    font-size: 13px;
+}
+
+.tareas-detail-placeholder p {
+    max-width: 255px;
+    color: #71839b;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+/* HU-05: Visibilidad del detalle dinámico */
+.tareas-detail-placeholder[hidden],
+#detalleTareaDinamico[hidden] {
+    display: none !important;
+}
+
+/* ==========================================
+   HU-05: ICONOS EN CAMPOS DEL FORMULARIO
+   ========================================== */
+
+.tareas-control-icon {
+    position: relative;
+    width: 100%;
+}
+
+.tareas-control-icon-left {
+    position: absolute;
+    top: 50%;
+    left: 14px;
+    transform: translateY(-50%);
+
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 19px;
+    height: 19px;
+
+    color: #7188a3;
+    pointer-events: none;
+}
+
+.tareas-control-icon-left svg {
+    width: 19px;
+    height: 19px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Espacio reservado para los iconos */
+.tareas-control-icon > select,
+.tareas-control-icon > input[type="date"] {
+    padding-left: 44px;
+}
+
+/* Resaltar ligeramente el icono al seleccionar */
+.tareas-control-icon:focus-within
+.tareas-control-icon-left {
+    color: #3285d6;
+}
+
+/* Mantener el color de los iconos en campos inválidos */
+.tareas-control-icon:has(.input-invalid)
+.tareas-control-icon-left {
+    color: #d24e4e;
+}
+
+/* ==========================================
+   HU-05: DESPLEGABLES PERSONALIZADOS
+   ========================================== */
+
+/* Contenedor general */
+.tareas-control-icon .ts-wrapper {
+    width: 100%;
+}
+
+/* Campo cerrado */
+.tareas-control-icon .ts-wrapper.single .ts-control {
+    min-height: 45px;
+    padding: 12px 38px 12px 44px;
+
+    display: flex;
+    align-items: center;
+
+    border: 1px solid #d1dce8;
+    border-radius: 8px;
+
+    background: #ffffff;
+    box-shadow: none;
+
+    color: #3b536d;
+    font-family: inherit;
+    font-size: 13px;
+}
+
+/* Buscador interno */
+.tareas-field .tareas-control-icon .ts-control input {
+    width: auto !important;
+    min-width: 1px;
+    height: auto;
+
+    margin: 0;
+    padding: 0 !important;
+
+    border: none !important;
+    outline: none;
+    background: transparent;
+
+    box-shadow: none !important;
+    font: inherit;
+}
+
+/* Campo enfocado */
+.tareas-control-icon .ts-wrapper.focus .ts-control {
+    border-color: #3285d6;
+    box-shadow: 0 0 0 3px rgba(50, 133, 214, 0.09);
+}
+
+/* Icono izquierdo */
+.tareas-control-icon .tareas-control-icon-left {
+    z-index: 3;
+}
+
+/* Flecha del desplegable */
+.tareas-control-icon .ts-wrapper.single .ts-control::after {
+    border-color: #8295aa transparent transparent;
+}
+
+/* Lista abierta */
+.tareas-control-icon .ts-dropdown {
+    margin-top: 5px;
+
+    border: 1px solid #dce5ee;
+    border-radius: 9px;
+
+    background: #ffffff;
+    box-shadow: 0 10px 25px rgba(20, 53, 92, 0.12);
+
+    overflow: hidden;
+}
+
+/* Cada opción */
+.tareas-control-icon .ts-dropdown .option {
+    padding: 11px 14px;
+
+    color: #3b536d;
+    font-size: 12px;
+    line-height: 1.5;
+
+    white-space: normal;
+    overflow-wrap: anywhere;
+
+    transition: background-color 0.15s ease;
+}
+
+/* Opción resaltada */
+.tareas-control-icon .ts-dropdown .option.active {
+    background: #edf5ff;
+    color: #1167c6;
+}
+
+/* Mensaje sin resultados */
+.tareas-control-icon .ts-dropdown .no-results {
+    padding: 12px 14px;
+
+    color: #8393a7;
+    font-size: 12px;
+}
+
+/* Conservar las validaciones del Sprint 1 */
+.tareas-control-icon:has(> select.input-invalid)
+.ts-control {
+    border-color: #e26969;
+    background: #fffafa;
+}
+
+/* Permitir que las listas se desplieguen fuera de la tarjeta */
+.tareas-card-asignacion {
+    position: relative;
+    z-index: 2;
+    overflow: visible;
+}
+
+/* ==========================================
+   HU-05: CORRECCIÓN DE BORDES DUPLICADOS
+   ========================================== */
+
+/* Eliminar los estilos heredados del select original */
+.tareas-control-icon > .ts-wrapper {
+    width: 100%;
+
+    padding: 0;
+    margin: 0;
+
+    border: none;
+    border-radius: 0;
+
+    background: transparent;
+    background-image: none;
+
+    box-shadow: none;
+
+    min-height: 0;
+    height: auto;
+
+    appearance: none;
+}
+
+/* Mantener un único borde en el control visible */
+.tareas-control-icon .ts-wrapper.single .ts-control {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ==========================================
+   HU-05: DESPLEGABLES SIN BÚSQUEDA
+   ========================================== */
+
+/* Mostrar el texto inicial mientras no haya selección */
+.tareas-control-icon
+.ts-wrapper.single:not(.has-items)
+.ts-control::before {
+    content: attr(data-placeholder);
+    color: #8393a7;
+    font-size: 13px;
+    pointer-events: none;
+}
+
+/* Mostrar el cursor de selección, no de escritura */
+.tareas-control-icon
+.ts-wrapper.single .ts-control {
+    cursor: pointer;
+}
+
+/* ==========================================
+   HU-05: INDICADORES DE PRIORIDAD
+   ========================================== */
+
+/* Colores corporativos de prioridad */
+.tareas-control-icon .ts-wrapper[data-prioridad="alta"] {
+    --color-prioridad: #e05252;
+}
+
+.tareas-control-icon .ts-wrapper[data-prioridad="media"] {
+    --color-prioridad: #e9ab36;
+}
+
+.tareas-control-icon .ts-wrapper[data-prioridad="baja"] {
+    --color-prioridad: #31a66a;
+}
+
+/* Círculo en el extremo derecho */
+.tareas-control-icon .ts-wrapper[data-prioridad]::after {
+    content: "";
+
+    position: absolute;
+    top: 50%;
+    right: 36px;
+
+    width: 11px;
+    height: 11px;
+
+    border-radius: 50%;
+    background: var(--color-prioridad);
+
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 4;
+}
+
+/* Reservar espacio para el círculo */
+.tareas-control-icon
+.ts-wrapper[data-prioridad] .ts-control {
+    padding-right: 63px;
+}
+
+/* ==========================================
+   HU-05: CALENDARIO PERSONALIZADO
+   ========================================== */
+
+/* Campo de fecha visible */
+.tareas-control-icon .flatpickr-input:not([type="hidden"]) {
+    width: 100%;
+    min-height: 45px;
+
+    padding-left: 44px !important;
+    padding-right: 48px !important;
+
+    cursor: pointer;
+}
+
+/* Botón derecho del calendario */
+.tareas-calendar-button {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 32px;
+    height: 32px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: transparent;
+    color: #7188a3;
+    cursor: pointer;
+}
+
+.tareas-calendar-button:hover {
+    background: #edf5ff;
+    color: #1167c6;
+}
+
+.tareas-calendar-button svg {
+    width: 19px;
+    height: 19px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Ventana del calendario */
+.flatpickr-calendar {
+    border: 1px solid #dce5ee;
+    border-radius: 12px;
+
+    background: #ffffff;
+    box-shadow: 0 12px 30px rgba(20, 53, 92, 0.14);
+
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Encabezado */
+.flatpickr-months {
+    padding-top: 5px;
+}
+
+.flatpickr-current-month {
+    color: #17355c;
+    font-weight: 600;
+}
+
+/* Días */
+.flatpickr-day {
+    border-radius: 50%;
+    color: #3b536d;
+}
+
+.flatpickr-day:hover {
+    background: #edf5ff;
+    border-color: #edf5ff;
+    color: #1167c6;
+}
+
+/* Día seleccionado */
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover {
+    background: #1167c6;
+    border-color: #1167c6;
+    color: #ffffff;
+}
+
+/* Día actual */
+.flatpickr-day.today {
+    border-color: #3285d6;
+}
+
+/* Fechas deshabilitadas */
+.flatpickr-day.flatpickr-disabled {
+    color: #c3cedb;
+    cursor: not-allowed;
+}
+
+/* Error de validación */
+.tareas-control-icon
+.flatpickr-input:not([type="hidden"]).input-invalid {
+    border-color: #e26969;
+    background: #fffafa;
+}
+
+#fechaLimiteErrorCliente[hidden] {
+    display: none;
+}
+
+/* ==========================================
+   HU-05: ALINEACIÓN DEL CAMPO DE FECHA
+   ========================================== */
+
+/* Campo visible generado por Flatpickr */
+.tareas-control-icon #fechaLimiteVisible {
+    width: 100%;
+
+    /* Espacio para el icono izquierdo */
+    padding-left: 44px !important;
+
+    /* Espacio para el botón derecho */
+    padding-right: 48px !important;
+
+    min-height: 45px;
+    box-sizing: border-box;
+}
+
+/* ==========================================
+   HU-05: ENCABEZADO DEL CALENDARIO
+   ========================================== */
+
+/* Mes y año */
+.flatpickr-current-month {
+    color: #17355c;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* Nombre del mes sin desplegable */
+.flatpickr-current-month .cur-month {
+    font-weight: 600;
+    color: #17355c;
+}
+
+/* Año */
+.flatpickr-current-month input.cur-year {
+    color: #17355c;
+    font-weight: 600;
+}
+
+/* Flechas de navegación */
+.flatpickr-months .flatpickr-prev-month,
+.flatpickr-months .flatpickr-next-month {
+    fill: #7188a3;
+    color: #7188a3;
+}
+
+.flatpickr-months .flatpickr-prev-month:hover svg,
+.flatpickr-months .flatpickr-next-month:hover svg {
+    fill: #1167c6;
+}
+
+/* ==========================================
+   HU-05: AÑO DEL CALENDARIO SIN FLECHAS
+   ========================================== */
+
+/* Ocultar las flechas internas de Flatpickr */
+.flatpickr-current-month .numInputWrapper span.arrowUp,
+.flatpickr-current-month .numInputWrapper span.arrowDown {
+    display: none !important;
+}
+
+/* Eliminar el fondo al pasar el cursor */
+.flatpickr-current-month .numInputWrapper:hover {
+    background: transparent;
+}
+
+/* Estilizar el año */
+.flatpickr-current-month input.cur-year {
+    color: #17355c;
+    font-weight: 600;
+    text-align: center;
+
+    padding: 0;
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+/* Ocultar también las flechas nativas del navegador */
+.flatpickr-current-month input.cur-year::-webkit-inner-spin-button,
+.flatpickr-current-month input.cur-year::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* ==========================================
+   HU-05: SELECTOR DE AÑOS PERSONALIZADO
+   ========================================== */
+
+/* Ocultar únicamente el control numérico original */
+.flatpickr-calendar.geo-year-calendar
+.flatpickr-current-month .numInputWrapper {
+    display: none !important;
+}
+
+/* Botón que muestra el año */
+.geo-year-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    margin-left: 5px;
+    padding: 5px 8px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: transparent;
+    color: #17355c;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.geo-year-trigger:hover,
+.geo-year-trigger[aria-expanded="true"] {
+    background: #edf5ff;
+    color: #1167c6;
+}
+
+/* Flecha del nuevo selector */
+.geo-year-trigger::after {
+    content: "";
+
+    width: 6px;
+    height: 6px;
+
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+
+    transform: rotate(45deg) translateY(-2px);
+}
+
+/* Menú flotante */
+.geo-year-menu {
+    position: absolute;
+    top: 39px;
+    right: 47px;
+
+    z-index: 100;
+
+    width: 100px;
+    max-height: 190px;
+
+    overflow-y: auto;
+
+    padding: 5px;
+
+    border: 1px solid #dce5ee;
+    border-radius: 9px;
+
+    background: #ffffff;
+    box-shadow: 0 10px 25px rgba(20, 53, 92, 0.15);
+}
+
+.geo-year-menu[hidden] {
+    display: none !important;
+}
+
+/* Opciones de años */
+.geo-year-option {
+    display: block;
+    width: 100%;
+
+    padding: 9px 12px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: transparent;
+    color: #3b536d;
+
+    font-family: inherit;
+    font-size: 13px;
+    text-align: center;
+
+    cursor: pointer;
+}
+
+.geo-year-option:hover,
+.geo-year-option:focus-visible {
+    outline: none;
+    background: #edf5ff;
+    color: #1167c6;
+}
+
+/* Año actualmente visualizado */
+.geo-year-option.is-selected {
+    background: #1167c6;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* ==========================================
+   HU-05: SELECTOR PERSONALIZADO DE MESES
+   ========================================== */
+
+/* Ocultar el mes original */
+.geo-month-calendar
+.flatpickr-current-month .cur-month {
+    display: none !important;
+}
+
+/* Alinear los dos selectores */
+.geo-month-calendar .flatpickr-current-month {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding-top: 0;
+}
+
+/* Botón del mes */
+.geo-month-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    padding: 5px 8px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: transparent;
+    color: #17355c;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.geo-month-trigger:hover,
+.geo-month-trigger[aria-expanded="true"] {
+    background: #edf5ff;
+    color: #1167c6;
+}
+
+/* Flecha del selector */
+.geo-month-trigger::after {
+    content: "";
+
+    width: 6px;
+    height: 6px;
+
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+
+    transform: rotate(45deg) translateY(-2px);
+}
+
+/* Menú de meses */
+.geo-month-menu {
+    position: absolute;
+    top: 39px;
+    left: 45px;
+
+    z-index: 101;
+
+    width: 150px;
+    max-height: 215px;
+    overflow-y: auto;
+
+    padding: 5px;
+
+    border: 1px solid #dce5ee;
+    border-radius: 9px;
+
+    background: #ffffff;
+    box-shadow: 0 10px 25px rgba(20, 53, 92, 0.15);
+}
+
+.geo-month-menu[hidden] {
+    display: none !important;
+}
+
+/* Opciones */
+.geo-month-option {
+    display: block;
+    width: 100%;
+
+    padding: 9px 12px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: transparent;
+    color: #3b536d;
+
+    font-family: inherit;
+    font-size: 13px;
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.geo-month-option:hover,
+.geo-month-option:focus-visible {
+    outline: none;
+    background: #edf5ff;
+    color: #1167c6;
+}
+
+/* Mes seleccionado */
+.geo-month-option.is-selected {
+    background: #1167c6;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Mes no disponible */
+.geo-month-option:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* ==========================================
+   HU-05: AVISO DE ASIGNACIÓN OPCIONAL
+   ========================================== */
+
+.tareas-asignacion-aviso {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+
+    margin-top: 16px;
+    padding: 13px 15px;
+
+    border: 1px solid #cfe3f8;
+    border-left: 3px solid #3285d6;
+    border-radius: 8px;
+
+    background: #f0f7ff;
+    color: #426786;
+
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.tareas-asignacion-aviso-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 20px;
+    height: 20px;
+    margin-top: 1px;
+
+    border-radius: 50%;
+    background: #3285d6;
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.tareas-asignacion-aviso p {
+    margin: 0;
+}
+
+/* ==========================================
+   HU-07: ENCABEZADO DE MIS TAREAS
+   ========================================== */
+
+.mis-tareas-card-heading {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 22px;
+    border-bottom: 1px solid #e8edf4;
+}
+
+/* Contenedor circular del icono */
+.mis-tareas-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 58px;
+    height: 58px;
+
+    border-radius: 50%;
+    background: #e7f2ff;
+    color: #1674dc;
+}
+
+/* Icono SVG */
+.mis-tareas-card-icon svg {
+    width: 29px;
+    height: 29px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Textos */
+.mis-tareas-card-heading-text {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.mis-tareas-card-heading-text h2 {
+    margin: 0;
+    color: #092454;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.mis-tareas-card-heading-text p {
+    margin: 0;
+    color: #7185a3;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* Pantallas pequeñas */
+@media (max-width: 600px) {
+    .mis-tareas-card-heading {
+        padding: 18px 16px;
+        gap: 12px;
+    }
+
+    .mis-tareas-card-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .mis-tareas-card-icon svg {
+        width: 25px;
+        height: 25px;
+    }
+
+    .mis-tareas-card-heading-text h2 {
+        font-size: 15px;
+    }
+}
+
+/* ==========================================
+   HU-07: ETIQUETAS DE PRIORIDAD
+   ========================================== */
+
+.mis-tareas-prioridad {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 65px;
+    padding: 5px 12px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/* Prioridad alta */
+.prioridad-alta {
+    color: #c83d3d;
+    background: #ffe5e5;
+    border-color: #ffdddd;
+}
+
+/* Prioridad media */
+.prioridad-media {
+    color: #996417;
+    background: #fff0ca;
+    border-color: #ffe9ad;
+}
+
+/* Prioridad baja */
+.prioridad-baja {
+    color: #268257;
+    background: #e0f6e8;
+    border-color: #d1eddb;
+}
+
+/* Sin prioridad */
+.prioridad-sin-definir {
+    color: #66788c;
+    background: #f1f4f7;
+    border-color: #e0e6ec;
+}
+
+/* ==========================================
+   HU-07: ETIQUETAS DE ESTADO
+   ========================================== */
+
+.mis-tareas-estado {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 105px;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+/* Indicador circular */
+.mis-tareas-estado::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+/* Pendiente */
+.estado-pendiente {
+    color: #a66c08;
+    background: #fff0c8;
+}
+
+/* En proceso */
+.estado-proceso {
+    color: #286eb7;
+    background: #e5f2ff;
+}
+
+/* Completada */
+.estado-completada {
+    color: #248253;
+    background: #e1f5e9;
+}
+
+/* Cancelada */
+.estado-cancelada {
+    color: #b64b4b;
+    background: #ffebeb;
+}
+
+/* ==========================================
+   HU-07: CONTADOR INFERIOR DE TAREAS
+   ========================================== */
+
+.mis-tareas-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 22px;
+    border-top: 1px solid #e8edf4;
+    background: #ffffff;
+    border-radius: 0 0 10px 10px;
+}
+
+.mis-tareas-footer p {
+    margin: 0;
+    color: #6680a7;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+    .mis-tareas-footer {
+        padding: 17px 16px;
+    }
+}
+
+/* ==========================================
+   HU-07: ESTADO VACIO DE MIS TAREAS
+   ========================================== */
+
+.mis-tareas-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 270px;
+    padding: 40px 24px;
+    text-align: center;
+}
+
+.mis-tareas-empty-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 68px;
+    height: 68px;
+    margin-bottom: 5px;
+    border-radius: 50%;
+    background: #eaf4ff;
+    color: #2179db;
+}
+
+.mis-tareas-empty-icon svg {
+    width: 32px;
+    height: 32px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.mis-tareas-empty strong {
+    color: #102b58;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.mis-tareas-empty p {
+    max-width: 350px;
+    margin: 0;
+    color: #7185a3;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* ==========================================
+   HU-07: ENCABEZADO DE LA TABLA
+   ========================================== */
+
+.tareas-page .mis-tareas-table thead th {
+    background-color: #eaf3ff;
+    color: #244f89;
+    border-bottom: 1px solid #d5e5f7;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* ==========================================
+   HU-07: POSICION DEL CONTADOR INFERIOR
+   ========================================== */
+
+.mis-tareas-footer p {
+    transform: translateY(10px);
+}
+
+/* ==========================================
+   HU-07: DISTRIBUCION INTERNA DEL LISTADO
+   ========================================== */
+
+/* Separar la tabla de los bordes de la tarjeta */
+.tareas-page .content-card > .table-container {
+    width: auto;
+    margin: 16px 24px 0;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+/* Mantener la tabla dentro del contenedor */
+.tareas-page .mis-tareas-table {
+    width: 100%;
+}
+
+/* Separar el contador sin modificar las filas */
+.tareas-page .content-card > .mis-tareas-footer {
+    margin: 0;
+    padding: 26px 24px 22px;
+    border-top: none;
+    background: transparent;
+}
+
+/* Mantener el texto en su posicion natural */
+.tareas-page .mis-tareas-footer p {
+    margin: 0;
+    transform: none;
+}
+
+/* Adaptacion para pantallas pequeñas */
+@media (max-width: 600px) {
+
+    .tareas-page .content-card > .table-container {
+        margin: 12px 14px 0;
+    }
+
+    .tareas-page .content-card > .mis-tareas-footer {
+        padding: 22px 14px 20px;
+    }
+}
+
+/* ==========================================
+   HU-08: DETALLE DE TAREA
+   ========================================== */
+
+/* Distribucion principal */
+.detalle-page .detalle-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(270px, 1fr);
+    gap: 18px;
+    align-items: stretch;
+}
+
+/* Tarjetas */
+.detalle-page .detalle-card {
+    min-width: 0;
+    height: 100%;
+}
+
+/* Encabezados */
+.detalle-page .detalle-card .tareas-card-heading {
+    padding: 22px 24px 16px;
+    border-bottom: none;
+}
+
+.detalle-page .detalle-card .tareas-card-icon {
+    width: 50px;
+    height: 50px;
+}
+
+.detalle-page .detalle-card .tareas-card-heading h2 {
+    font-size: 16px;
+}
+
+.detalle-page .detalle-card .tareas-card-heading p {
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* ==========================================
+   TARJETA IZQUIERDA
+   ========================================== */
+
+.detalle-info-content {
+    padding: 10px 26px 28px;
+}
+
+.detalle-field {
+    min-width: 0;
+}
+
+.detalle-label {
+    display: block;
+    margin-bottom: 9px;
+    color: #6882aa;
+    font-size: 11px;
+    font-weight: 650;
+}
+
+.detalle-field p {
+    margin: 0;
+    color: #183869;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+/* Descripcion completa */
+.detalle-field .detalle-descripcion {
+    white-space: pre-line;
+    line-height: 1.8;
+}
+
+/* Separadores */
+.detalle-divider {
+    height: 1px;
+    margin: 21px 0;
+    background: #e4ebf4;
+}
+
+/* Registrado por y fecha de creacion */
+.detalle-metadata {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+}
+
+.detalle-metadata .detalle-field:first-child {
+    padding-right: 20px;
+}
+
+.detalle-metadata .detalle-field + .detalle-field {
+    padding-left: 20px;
+    border-left: 1px solid #e4ebf4;
+}
+
+/* ==========================================
+   TARJETA DERECHA: RESUMEN
+   ========================================== */
+
+.detalle-resumen-content {
+    padding: 4px 20px 22px;
+}
+
+.detalle-resumen-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    min-height: 67px;
+    padding: 13px 4px;
+    border-bottom: 1px solid #e4ebf4;
+}
+
+.detalle-resumen-item:last-child {
+    border-bottom: none;
+}
+
+/* Icono y nombre del dato */
+.detalle-resumen-label {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-width: 0;
+    color: #17396d;
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.detalle-resumen-label svg {
+    width: 21px;
+    height: 21px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: #1174df;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Valor del dato */
+.detalle-resumen-item > strong {
+    color: #244477;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.detalle-resumen-item > .mis-tareas-estado,
+.detalle-resumen-item > .mis-tareas-prioridad {
+    justify-self: end;
+}
+
+/* ==========================================
+   BOTON VOLVER
+   ========================================== */
+
+.detalle-acciones {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.detalle-volver {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    min-height: 43px;
+    padding: 0 20px;
+    border: 1px solid #cedff5;
+    border-radius: 7px;
+    background: #f6faff;
+    color: #124d98;
+    font-size: 12px;
+    font-weight: 650;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.detalle-volver:hover {
+    background: #eaf4ff;
+    border-color: #a9cbed;
+}
+
+
+/* HU-08: Icono del botón Volver */
+.detalle-volver svg {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+
+/* ==========================================
+   ADAPTACION A PANTALLAS PEQUEÑAS
+   ========================================== */
+
+@media (max-width: 900px) {
+    .detalle-page .detalle-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .detalle-page .detalle-card .tareas-card-heading {
+        padding: 20px 18px 14px;
+    }
+
+    .detalle-info-content {
+        padding: 10px 18px 24px;
+    }
+
+    .detalle-resumen-content {
+        padding: 4px 15px 18px;
+    }
+
+    .detalle-metadata {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .detalle-metadata .detalle-field + .detalle-field {
+        padding-left: 0;
+        border-left: none;
+    }
+
+    .detalle-acciones {
+        justify-content: stretch;
+    }
+
+    .detalle-volver {
+        width: 100%;
+    }
+}
+
+/* ==========================================
+   HU-08: BOTON VER DETALLE EN MIS TAREAS
+   ========================================== */
+
+.tareas-page .mis-tareas-ver-detalle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    min-height: 34px;
+    padding: 7px 13px;
+
+    border: 1px solid #d4e2f4;
+    border-radius: 6px;
+
+    background: #f6faff;
+    color: #1655a4;
+
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.tareas-page .mis-tareas-ver-detalle svg {
+    width: 16px;
+    height: 16px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.tareas-page .mis-tareas-ver-detalle:hover {
+    background: #eaf4ff;
+    border-color: #a9cbed;
+}
+
+.tareas-page .mis-tareas-ver-detalle:focus-visible {
+    outline: 2px solid #1674dc;
+    outline-offset: 2px;
+}
+
+/* ==========================================
+   HU-08: CORREGIR SUPERPOSICION DEL FONDO
+   ========================================== */
+
+.detalle-page .detalle-layout,
+.detalle-page .detalle-acciones {
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 600px) {
+    .detalle-page .detalle-metadata {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .detalle-page .detalle-metadata .detalle-field:first-child {
+        padding-right: 0;
+    }
+
+    .detalle-page .detalle-metadata .detalle-field + .detalle-field {
+        padding-left: 0;
+        border-left: none;
+    }
+}
