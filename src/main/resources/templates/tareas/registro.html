@@ -15,7 +15,7 @@
     <div class="app-layout">
 
         <!-- Menú lateral -->
-        <div th:replace="~{fragments/sidebar :: sidebar('tareas')}"></div>
+        <div th:replace="~{fragments/sidebar :: sidebar('tareas-registro')}"></div>
 
         <div class="main-area">
 
@@ -49,12 +49,39 @@
                     </p>
                 </section>
 
-                <!-- Mensaje de éxito -->
+                <!-- MENSAJE DE REGISTRO EXITOSO -->
                 <div class="tareas-success" th:if="${exito != null}" role="status">
+
                     <span class="tareas-success-icon">✓</span>
-                    <span th:text="${exito}">
-                        Tarea registrada correctamente.
-                    </span>
+
+                    <div class="tareas-success-content">
+
+                        <strong th:text="${exito}">
+                            Tarea registrada correctamente.
+                        </strong>
+
+                        <p th:if="${tituloTareaRegistrada != null}">
+                            La tarea
+                            <b th:text="${tituloTareaRegistrada}">
+                                Nueva tarea
+                            </b>
+                            se guardó con estado Pendiente.
+                            Puedes asignarla ahora o hacerlo más adelante.
+                        </p>
+                    </div>
+
+                    <!-- Acción opcional de asignación -->
+                    <a th:if="${idTareaRegistrada != null}" th:href="@{/tareas/asignar(idTarea=${idTareaRegistrada})}"
+                        class="tareas-success-action">
+
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="9" cy="8" r="3" />
+                            <path d="M3 20v-2a6 6 0 0 1 12 0v2" />
+                            <path d="M18 8v8M14 12h8" />
+                        </svg>
+
+                        Asignar esta tarea
+                    </a>
                 </div>
 
                 <div class="tareas-layout">

@@ -591,3 +591,1099 @@
     border-color: #acbfd1;
     background: #f7f9fc;
 }
+
+/* ==========================================
+   HU-05: FORMULARIO DE ASIGNACIÓN
+   ========================================== */
+
+/* Campos desplegables */
+.tareas-select {
+    width: 100%;
+    min-height: 45px;
+    padding: 0 40px 0 15px;
+
+    border: 1px solid #d1dce8;
+    border-radius: 8px;
+
+    background-color: #ffffff;
+    color: #3b536d;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    cursor: pointer;
+    outline: none;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23758aa3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* Efecto al seleccionar un campo */
+.tareas-select:focus,
+.tareas-date:focus {
+    border-color: #3285d6;
+
+    box-shadow:
+        0 0 0 3px rgba(50, 133, 214, 0.09);
+}
+
+/* Campo de fecha */
+.tareas-date {
+    min-height: 45px;
+    cursor: pointer;
+    color-scheme: light;
+}
+
+.tareas-date::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+/* Errores de validación */
+.tareas-select.input-invalid,
+.tareas-date.input-invalid {
+    border-color: #dc5757;
+    background-color: #fffafa;
+}
+
+/* Aviso cuando no existen tareas disponibles */
+.tareas-empty-notice {
+    margin-bottom: 22px;
+    padding: 14px 16px;
+
+    border: 1px solid #f1dfb8;
+    border-radius: 8px;
+
+    background: #fff9eb;
+    color: #98701d;
+
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* Botón de asignación deshabilitado */
+.tareas-submit:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+    box-shadow: none;
+}
+
+/* Evitar efecto hover cuando está deshabilitado */
+.tareas-submit:disabled:hover {
+    transform: none;
+    filter: none;
+    box-shadow: none;
+}
+
+/* Ajustes para dispositivos pequeños */
+@media (max-width: 700px) {
+
+    .tareas-select,
+    .tareas-date {
+        width: 100%;
+        font-size: 13px;
+    }
+
+    .tareas-empty-notice {
+        padding: 12px 14px;
+    }
+}
+
+/* ==========================================
+   HU-05: CONTINUAR CON ASIGNACIÓN
+   ========================================== */
+
+.tareas-success {
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.tareas-success-content {
+    flex: 1;
+    min-width: 220px;
+}
+
+.tareas-success-content strong {
+    display: block;
+    font-size: 13px;
+    color: #287648;
+}
+
+.tareas-success-content p {
+    margin-top: 6px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #49765b;
+}
+
+.tareas-success-content p b {
+    font-weight: 650;
+}
+
+.tareas-success-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 39px;
+    padding: 0 15px;
+
+    border-radius: 7px;
+    background: linear-gradient(90deg, #0874d8, #075ebf);
+
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 650;
+    text-decoration: none;
+    white-space: nowrap;
+
+    box-shadow: 0 5px 12px rgba(7, 94, 191, 0.15);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+.tareas-success-action svg {
+    width: 17px;
+    height: 17px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.tareas-success-action:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.04);
+    box-shadow: 0 8px 18px rgba(7, 94, 191, 0.22);
+}
+
+@media (max-width: 700px) {
+    .tareas-success-action {
+        width: 100%;
+    }
+}
+
+/* ==========================================
+   VALIDACIONES - ESTILO SPRINT 1
+   ========================================== */
+
+/* Campos con errores */
+.tareas-field input.input-invalid,
+.tareas-field textarea.input-invalid,
+.tareas-field select.input-invalid {
+    border-color: #e26969;
+    background-color: #fffafa;
+}
+
+/* Efecto al seleccionar un campo con error */
+.tareas-field input.input-invalid:focus,
+.tareas-field textarea.input-invalid:focus,
+.tareas-field select.input-invalid:focus {
+    border-color: #dd5d5d;
+    box-shadow: 0 0 0 3px rgba(221, 93, 93, 0.09);
+}
+
+/* Mensajes de validación */
+.tareas-error {
+    display: block;
+    margin-top: 6px;
+    color: #d24e4e;
+    font-size: 10px;
+    line-height: 1.3;
+}
+
+/* ==========================================
+   CONFIRMACIONES - ESTILO SPRINT 1
+   ========================================== */
+
+.tareas-success-icon {
+    flex: 0 0 22px;
+
+    width: 22px;
+    height: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: #2e9a60;
+
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* ==========================================
+   HU-05: TAREA PRESELECCIONADA
+   ========================================== */
+
+.tareas-selected-task {
+    min-height: 45px;
+
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    padding: 12px 15px;
+
+    border: 1px solid #d7e1eb;
+    border-radius: 8px;
+
+    background: #f1f4f8;
+    color: #49627e;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.tareas-selected-task svg {
+    flex-shrink: 0;
+
+    width: 18px;
+    height: 18px;
+
+    fill: none;
+    stroke: #7188a3;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.tareas-selected-task span {
+    overflow-wrap: anywhere;
+}
+
+/* ==========================================
+   HU-05: DETALLE DE LA TAREA
+   ========================================== */
+
+/* Etiqueta de estado Pendiente */
+.tareas-status-pending {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 25px;
+    padding: 4px 11px;
+
+    border-radius: 6px;
+
+    background: #fff0ce;
+    color: #a36b12;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* Información de la tarea */
+.tareas-info-feature > div {
+    min-width: 0;
+    flex: 1;
+}
+
+.tareas-info-feature p {
+    overflow-wrap: anywhere;
+}
+
+/* Estado sin selección */
+.tareas-detail-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    padding: 23px 12px;
+    text-align: center;
+}
+
+.tareas-detail-placeholder .tareas-feature-icon {
+    width: 48px;
+    height: 48px;
+    flex-basis: 48px;
+}
+
+.tareas-detail-placeholder strong {
+    color: #17355c;
+    font-size: 13px;
+}
+
+.tareas-detail-placeholder p {
+    max-width: 255px;
+    color: #71839b;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+/* HU-05: Visibilidad del detalle dinámico */
+.tareas-detail-placeholder[hidden],
+#detalleTareaDinamico[hidden] {
+    display: none !important;
+}
+
+/* ==========================================
+   HU-05: ICONOS EN CAMPOS DEL FORMULARIO
+   ========================================== */
+
+.tareas-control-icon {
+    position: relative;
+    width: 100%;
+}
+
+.tareas-control-icon-left {
+    position: absolute;
+    top: 50%;
+    left: 14px;
+    transform: translateY(-50%);
+
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 19px;
+    height: 19px;
+
+    color: #7188a3;
+    pointer-events: none;
+}
+
+.tareas-control-icon-left svg {
+    width: 19px;
+    height: 19px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Espacio reservado para los iconos */
+.tareas-control-icon > select,
+.tareas-control-icon > input[type="date"] {
+    padding-left: 44px;
+}
+
+/* Resaltar ligeramente el icono al seleccionar */
+.tareas-control-icon:focus-within
+.tareas-control-icon-left {
+    color: #3285d6;
+}
+
+/* Mantener el color de los iconos en campos inválidos */
+.tareas-control-icon:has(.input-invalid)
+.tareas-control-icon-left {
+    color: #d24e4e;
+}
+
+/* ==========================================
+   HU-05: DESPLEGABLES PERSONALIZADOS
+   ========================================== */
+
+/* Contenedor general */
+.tareas-control-icon .ts-wrapper {
+    width: 100%;
+}
+
+/* Campo cerrado */
+.tareas-control-icon .ts-wrapper.single .ts-control {
+    min-height: 45px;
+    padding: 12px 38px 12px 44px;
+
+    display: flex;
+    align-items: center;
+
+    border: 1px solid #d1dce8;
+    border-radius: 8px;
+
+    background: #ffffff;
+    box-shadow: none;
+
+    color: #3b536d;
+    font-family: inherit;
+    font-size: 13px;
+}
+
+/* Buscador interno */
+.tareas-field .tareas-control-icon .ts-control input {
+    width: auto !important;
+    min-width: 1px;
+    height: auto;
+
+    margin: 0;
+    padding: 0 !important;
+
+    border: none !important;
+    outline: none;
+    background: transparent;
+
+    box-shadow: none !important;
+    font: inherit;
+}
+
+/* Campo enfocado */
+.tareas-control-icon .ts-wrapper.focus .ts-control {
+    border-color: #3285d6;
+    box-shadow: 0 0 0 3px rgba(50, 133, 214, 0.09);
+}
+
+/* Icono izquierdo */
+.tareas-control-icon .tareas-control-icon-left {
+    z-index: 3;
+}
+
+/* Flecha del desplegable */
+.tareas-control-icon .ts-wrapper.single .ts-control::after {
+    border-color: #8295aa transparent transparent;
+}
+
+/* Lista abierta */
+.tareas-control-icon .ts-dropdown {
+    margin-top: 5px;
+
+    border: 1px solid #dce5ee;
+    border-radius: 9px;
+
+    background: #ffffff;
+    box-shadow: 0 10px 25px rgba(20, 53, 92, 0.12);
+
+    overflow: hidden;
+}
+
+/* Cada opción */
+.tareas-control-icon .ts-dropdown .option {
+    padding: 11px 14px;
+
+    color: #3b536d;
+    font-size: 12px;
+    line-height: 1.5;
+
+    white-space: normal;
+    overflow-wrap: anywhere;
+
+    transition: background-color 0.15s ease;
+}
+
+/* Opción resaltada */
+.tareas-control-icon .ts-dropdown .option.active {
+    background: #edf5ff;
+    color: #1167c6;
+}
+
+/* Mensaje sin resultados */
+.tareas-control-icon .ts-dropdown .no-results {
+    padding: 12px 14px;
+
+    color: #8393a7;
+    font-size: 12px;
+}
+
+/* Conservar las validaciones del Sprint 1 */
+.tareas-control-icon:has(> select.input-invalid)
+.ts-control {
+    border-color: #e26969;
+    background: #fffafa;
+}
+
+/* Permitir que las listas se desplieguen fuera de la tarjeta */
+.tareas-card-asignacion {
+    position: relative;
+    z-index: 2;
+    overflow: visible;
+}
+
+/* ==========================================
+   HU-05: CORRECCIÓN DE BORDES DUPLICADOS
+   ========================================== */
+
+/* Eliminar los estilos heredados del select original */
+.tareas-control-icon > .ts-wrapper {
+    width: 100%;
+
+    padding: 0;
+    margin: 0;
+
+    border: none;
+    border-radius: 0;
+
+    background: transparent;
+    background-image: none;
+
+    box-shadow: none;
+
+    min-height: 0;
+    height: auto;
+
+    appearance: none;
+}
+
+/* Mantener un único borde en el control visible */
+.tareas-control-icon .ts-wrapper.single .ts-control {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ==========================================
+   HU-05: DESPLEGABLES SIN BÚSQUEDA
+   ========================================== */
+
+/* Mostrar el texto inicial mientras no haya selección */
+.tareas-control-icon
+.ts-wrapper.single:not(.has-items)
+.ts-control::before {
+    content: attr(data-placeholder);
+    color: #8393a7;
+    font-size: 13px;
+    pointer-events: none;
+}
+
+/* Mostrar el cursor de selección, no de escritura */
+.tareas-control-icon
+.ts-wrapper.single .ts-control {
+    cursor: pointer;
+}
+
+/* ==========================================
+   HU-05: INDICADORES DE PRIORIDAD
+   ========================================== */
+
+/* Colores corporativos de prioridad */
+.tareas-control-icon .ts-wrapper[data-prioridad="alta"] {
+    --color-prioridad: #e05252;
+}
+
+.tareas-control-icon .ts-wrapper[data-prioridad="media"] {
+    --color-prioridad: #e9ab36;
+}
+
+.tareas-control-icon .ts-wrapper[data-prioridad="baja"] {
+    --color-prioridad: #31a66a;
+}
+
+/* Círculo en el extremo derecho */
+.tareas-control-icon .ts-wrapper[data-prioridad]::after {
+    content: "";
+
+    position: absolute;
+    top: 50%;
+    right: 36px;
+
+    width: 11px;
+    height: 11px;
+
+    border-radius: 50%;
+    background: var(--color-prioridad);
+
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 4;
+}
+
+/* Reservar espacio para el círculo */
+.tareas-control-icon
+.ts-wrapper[data-prioridad] .ts-control {
+    padding-right: 63px;
+}
+
+/* ==========================================
+   HU-05: CALENDARIO PERSONALIZADO
+   ========================================== */
+
+/* Campo de fecha visible */
+.tareas-control-icon .flatpickr-input:not([type="hidden"]) {
+    width: 100%;
+    min-height: 45px;
+
+    padding-left: 44px !important;
+    padding-right: 48px !important;
+
+    cursor: pointer;
+}
+
+/* Botón derecho del calendario */
+.tareas-calendar-button {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 32px;
+    height: 32px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: transparent;
+    color: #7188a3;
+    cursor: pointer;
+}
+
+.tareas-calendar-button:hover {
+    background: #edf5ff;
+    color: #1167c6;
+}
+
+.tareas-calendar-button svg {
+    width: 19px;
+    height: 19px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Ventana del calendario */
+.flatpickr-calendar {
+    border: 1px solid #dce5ee;
+    border-radius: 12px;
+
+    background: #ffffff;
+    box-shadow: 0 12px 30px rgba(20, 53, 92, 0.14);
+
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Encabezado */
+.flatpickr-months {
+    padding-top: 5px;
+}
+
+.flatpickr-current-month {
+    color: #17355c;
+    font-weight: 600;
+}
+
+/* Días */
+.flatpickr-day {
+    border-radius: 50%;
+    color: #3b536d;
+}
+
+.flatpickr-day:hover {
+    background: #edf5ff;
+    border-color: #edf5ff;
+    color: #1167c6;
+}
+
+/* Día seleccionado */
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover {
+    background: #1167c6;
+    border-color: #1167c6;
+    color: #ffffff;
+}
+
+/* Día actual */
+.flatpickr-day.today {
+    border-color: #3285d6;
+}
+
+/* Fechas deshabilitadas */
+.flatpickr-day.flatpickr-disabled {
+    color: #c3cedb;
+    cursor: not-allowed;
+}
+
+/* Error de validación */
+.tareas-control-icon
+.flatpickr-input:not([type="hidden"]).input-invalid {
+    border-color: #e26969;
+    background: #fffafa;
+}
+
+#fechaLimiteErrorCliente[hidden] {
+    display: none;
+}
+
+/* ==========================================
+   HU-05: ALINEACIÓN DEL CAMPO DE FECHA
+   ========================================== */
+
+/* Campo visible generado por Flatpickr */
+.tareas-control-icon #fechaLimiteVisible {
+    width: 100%;
+
+    /* Espacio para el icono izquierdo */
+    padding-left: 44px !important;
+
+    /* Espacio para el botón derecho */
+    padding-right: 48px !important;
+
+    min-height: 45px;
+    box-sizing: border-box;
+}
+
+/* ==========================================
+   HU-05: ENCABEZADO DEL CALENDARIO
+   ========================================== */
+
+/* Mes y año */
+.flatpickr-current-month {
+    color: #17355c;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* Nombre del mes sin desplegable */
+.flatpickr-current-month .cur-month {
+    font-weight: 600;
+    color: #17355c;
+}
+
+/* Año */
+.flatpickr-current-month input.cur-year {
+    color: #17355c;
+    font-weight: 600;
+}
+
+/* Flechas de navegación */
+.flatpickr-months .flatpickr-prev-month,
+.flatpickr-months .flatpickr-next-month {
+    fill: #7188a3;
+    color: #7188a3;
+}
+
+.flatpickr-months .flatpickr-prev-month:hover svg,
+.flatpickr-months .flatpickr-next-month:hover svg {
+    fill: #1167c6;
+}
+
+/* ==========================================
+   HU-05: AÑO DEL CALENDARIO SIN FLECHAS
+   ========================================== */
+
+/* Ocultar las flechas internas de Flatpickr */
+.flatpickr-current-month .numInputWrapper span.arrowUp,
+.flatpickr-current-month .numInputWrapper span.arrowDown {
+    display: none !important;
+}
+
+/* Eliminar el fondo al pasar el cursor */
+.flatpickr-current-month .numInputWrapper:hover {
+    background: transparent;
+}
+
+/* Estilizar el año */
+.flatpickr-current-month input.cur-year {
+    color: #17355c;
+    font-weight: 600;
+    text-align: center;
+
+    padding: 0;
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+/* Ocultar también las flechas nativas del navegador */
+.flatpickr-current-month input.cur-year::-webkit-inner-spin-button,
+.flatpickr-current-month input.cur-year::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* ==========================================
+   HU-05: SELECTOR DE AÑOS PERSONALIZADO
+   ========================================== */
+
+/* Ocultar únicamente el control numérico original */
+.flatpickr-calendar.geo-year-calendar
+.flatpickr-current-month .numInputWrapper {
+    display: none !important;
+}
+
+/* Botón que muestra el año */
+.geo-year-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    margin-left: 5px;
+    padding: 5px 8px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: transparent;
+    color: #17355c;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.geo-year-trigger:hover,
+.geo-year-trigger[aria-expanded="true"] {
+    background: #edf5ff;
+    color: #1167c6;
+}
+
+/* Flecha del nuevo selector */
+.geo-year-trigger::after {
+    content: "";
+
+    width: 6px;
+    height: 6px;
+
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+
+    transform: rotate(45deg) translateY(-2px);
+}
+
+/* Menú flotante */
+.geo-year-menu {
+    position: absolute;
+    top: 39px;
+    right: 47px;
+
+    z-index: 100;
+
+    width: 100px;
+    max-height: 190px;
+
+    overflow-y: auto;
+
+    padding: 5px;
+
+    border: 1px solid #dce5ee;
+    border-radius: 9px;
+
+    background: #ffffff;
+    box-shadow: 0 10px 25px rgba(20, 53, 92, 0.15);
+}
+
+.geo-year-menu[hidden] {
+    display: none !important;
+}
+
+/* Opciones de años */
+.geo-year-option {
+    display: block;
+    width: 100%;
+
+    padding: 9px 12px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: transparent;
+    color: #3b536d;
+
+    font-family: inherit;
+    font-size: 13px;
+    text-align: center;
+
+    cursor: pointer;
+}
+
+.geo-year-option:hover,
+.geo-year-option:focus-visible {
+    outline: none;
+    background: #edf5ff;
+    color: #1167c6;
+}
+
+/* Año actualmente visualizado */
+.geo-year-option.is-selected {
+    background: #1167c6;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* ==========================================
+   HU-05: SELECTOR PERSONALIZADO DE MESES
+   ========================================== */
+
+/* Ocultar el mes original */
+.geo-month-calendar
+.flatpickr-current-month .cur-month {
+    display: none !important;
+}
+
+/* Alinear los dos selectores */
+.geo-month-calendar .flatpickr-current-month {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding-top: 0;
+}
+
+/* Botón del mes */
+.geo-month-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    padding: 5px 8px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: transparent;
+    color: #17355c;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.geo-month-trigger:hover,
+.geo-month-trigger[aria-expanded="true"] {
+    background: #edf5ff;
+    color: #1167c6;
+}
+
+/* Flecha del selector */
+.geo-month-trigger::after {
+    content: "";
+
+    width: 6px;
+    height: 6px;
+
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+
+    transform: rotate(45deg) translateY(-2px);
+}
+
+/* Menú de meses */
+.geo-month-menu {
+    position: absolute;
+    top: 39px;
+    left: 45px;
+
+    z-index: 101;
+
+    width: 150px;
+    max-height: 215px;
+    overflow-y: auto;
+
+    padding: 5px;
+
+    border: 1px solid #dce5ee;
+    border-radius: 9px;
+
+    background: #ffffff;
+    box-shadow: 0 10px 25px rgba(20, 53, 92, 0.15);
+}
+
+.geo-month-menu[hidden] {
+    display: none !important;
+}
+
+/* Opciones */
+.geo-month-option {
+    display: block;
+    width: 100%;
+
+    padding: 9px 12px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: transparent;
+    color: #3b536d;
+
+    font-family: inherit;
+    font-size: 13px;
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.geo-month-option:hover,
+.geo-month-option:focus-visible {
+    outline: none;
+    background: #edf5ff;
+    color: #1167c6;
+}
+
+/* Mes seleccionado */
+.geo-month-option.is-selected {
+    background: #1167c6;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Mes no disponible */
+.geo-month-option:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* ==========================================
+   HU-05: AVISO DE ASIGNACIÓN OPCIONAL
+   ========================================== */
+
+.tareas-asignacion-aviso {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+
+    margin-top: 16px;
+    padding: 13px 15px;
+
+    border: 1px solid #cfe3f8;
+    border-left: 3px solid #3285d6;
+    border-radius: 8px;
+
+    background: #f0f7ff;
+    color: #426786;
+
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.tareas-asignacion-aviso-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 20px;
+    height: 20px;
+    margin-top: 1px;
+
+    border-radius: 50%;
+    background: #3285d6;
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.tareas-asignacion-aviso p {
+    margin: 0;
+}

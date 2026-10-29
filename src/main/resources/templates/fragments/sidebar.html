@@ -42,20 +42,36 @@
              MENÚ DEL COORDINADOR
              ================================================== -->
         <!-- TAREAS -->
+        <!-- REGISTRAR TAREA -->
         <a th:if="${rolUsuario == 'COORDINADOR'}" th:href="@{/tareas/nueva}" class="nav-item"
-            th:classappend="${activeSection == 'tareas'} ? ' active' : ''">
+            th:classappend="${activeSection == 'tareas-registro'} ? ' active' : ''" title="Registrar tarea">
+
+            <span class="nav-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="5" y="3" width="14" height="18" rx="2" />
+                    <path d="M9 8h6M9 12h3M9 16h3" />
+                    <path d="M17 15v6M14 18h6" />
+                </svg>
+            </span>
+
+            <span>Registrar tarea</span>
+        </a>
+
+        <!-- ASIGNAR TAREAS PENDIENTES -->
+        <a th:if="${rolUsuario == 'COORDINADOR'}" th:href="@{/tareas/asignar}" class="nav-item"
+            th:classappend="${activeSection == 'tareas-asignacion'} ? ' active' : ''" title="Asignar pendientes">
 
             <span class="nav-icon">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                     <rect x="4" y="3" width="16" height="18" rx="2" />
-                    <path d="m8 12 2 2 5-5" />
+                    <path d="M8 9h8M8 13h8M8 17h4" />
+                    <path d="m15 17 2 2 4-4" />
                 </svg>
             </span>
 
-            <span>
-                Tareas
-            </span>
+            <span>Asignar pendientes</span>
         </a>
+
 
         <!-- COLABORADORES -->
         <a th:if="${rolUsuario == 'COORDINADOR'}" th:href="@{/colaboradores}" class="nav-item"
