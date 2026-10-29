@@ -3,7 +3,9 @@ package com.geosinergia.gestiontareas.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.NoSuchElementException;
 
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -242,6 +244,66 @@ public class TareaService {
                 return tareaRepository
                                 .findByResponsable_CorreoOrderByFechaCreacionDesc(
                                                 colaborador.getCorreo());
+        }
+
+
+
+        // ==========================================
+        // HU-08: CONSULTAR DETALLE DE TAREA
+        // ==========================================
+
+        @Transactional(readOnly = true)
+        public Tarea obtenerDetalleTarea(
+                Long idTarea,
+                String correoUsuario) {
+
+                // Validar identificador y usuario autenticado
+                if (idTarea == null || idTarea <= 0) {
+                throw new IllegalArgumentException(
+                        "El identificador de la tarea no es valido.");
+                }
+
+                if (correoUsuario == null || correoUsuario.isBlank()) {
+                throw new AccessDeniedException(
+                        "No se pudo identificar al usuario autenticado.");
+                }
+
+                // Obtener al usuario autenticado
+                Usuario usuario = usuarioRepository
+                        .findByCorreo(correoUsuario)
+                        .orElseThrow(() -> new AccessDeniedException(
+                                "El usuario autenticado no existe."));
+
+                if (!Boolean.TRUE.equals(usuario.getActivo())) {
+                throw new AccessDeniedException(
+                        "El usuario no tiene acceso a esta funcion.");
+                }
+
+                // Buscar la tarea
+                Tarea tarea = tareaRepository
+                        .findByIdTarea(idTarea)
+                        .orElseThrow(() -> new NoSuchElementException(
+                                "La tarea solicitada no existe."));
+
+                String rol = usuario.getRol().getNombre();
+
+                // El coordinador puede consultar cualquier tarea
+                if ("COORDINADOR".equals(rol)) {
+                return tarea;
+                }
+
+                // El colaborador solo puede consultar sus tareas
+                if ("COLABORADOR".equals(rol)
+                        && tarea.getResponsable() != null
+                        && usuario.getIdUsuario().equals(
+                                tarea.getResponsable().getIdUsuario())) {
+
+                return tarea;
+                }
+
+                // Denegar cualquier otro acceso
+                throw new AccessDeniedException(
+                        "No tiene permisos para consultar esta tarea.");
         }
 
 }

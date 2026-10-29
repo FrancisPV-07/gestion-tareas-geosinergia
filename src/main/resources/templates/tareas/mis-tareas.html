@@ -116,6 +116,7 @@
                                     <th>Prioridad</th>
                                     <th>Fecha límite</th>
                                     <th>Estado</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
 
@@ -168,6 +169,21 @@
                                             th:text="${tarea.estado.nombre}">
                                             Pendiente
                                         </span>
+                                    </td>
+
+                                    <!-- HU-08: VER DETALLE -->
+                                    <td>
+                                        <a class="mis-tareas-ver-detalle"
+                                        th:href="@{/tareas/{id}/detalle(id=${tarea.idTarea})}">
+
+                                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                <path d="M2 12s4-7 10-7 10 7 10 7
+                                                        -4 7-10 7S2 12 2 12Z"/>
+                                                <circle cx="12" cy="12" r="3"/>
+                                            </svg>
+
+                                            <span>Ver detalle</span>
+                                        </a>
                                     </td>
                                 </tr>
                             </tbody>

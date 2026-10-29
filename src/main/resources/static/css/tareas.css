@@ -3,23 +3,69 @@
     padding: 34px 42px 50px;
 }
 
+
+/* ==========================================
+   NAVEGACION - BREADCRUMB
+   ========================================== */
+
 .tareas-breadcrumb {
+    position: relative;
+    z-index: 2;
+
     display: flex;
     align-items: center;
-    gap: 10px;
+    flex-wrap: wrap;
+    gap: 9px;
+
     margin-bottom: 28px;
+
     font-size: 12px;
-    color: #8493a7;
+    color: #7c8da3;
 }
 
+/* Enlaces de navegacion */
 .tareas-breadcrumb a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
     color: #73869d;
     text-decoration: none;
+
+    transition: color 0.2s ease;
 }
 
+/* Efecto al pasar el mouse */
+.tareas-breadcrumb a:hover {
+    color: #0872db;
+}
+
+/* Accesibilidad con teclado */
+.tareas-breadcrumb a:focus-visible {
+    color: #0872db;
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+/* Icono de inicio */
+.tareas-breadcrumb a svg {
+    width: 15px;
+    height: 15px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Pagina actual */
 .tareas-breadcrumb strong {
     color: #36536f;
+    font-weight: 600;
 }
+
 
 .tareas-label {
     display: block;
@@ -2006,5 +2052,321 @@
 
     .tareas-page .content-card > .mis-tareas-footer {
         padding: 22px 14px 20px;
+    }
+}
+
+/* ==========================================
+   HU-08: DETALLE DE TAREA
+   ========================================== */
+
+/* Distribucion principal */
+.detalle-page .detalle-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(270px, 1fr);
+    gap: 18px;
+    align-items: stretch;
+}
+
+/* Tarjetas */
+.detalle-page .detalle-card {
+    min-width: 0;
+    height: 100%;
+}
+
+/* Encabezados */
+.detalle-page .detalle-card .tareas-card-heading {
+    padding: 22px 24px 16px;
+    border-bottom: none;
+}
+
+.detalle-page .detalle-card .tareas-card-icon {
+    width: 50px;
+    height: 50px;
+}
+
+.detalle-page .detalle-card .tareas-card-heading h2 {
+    font-size: 16px;
+}
+
+.detalle-page .detalle-card .tareas-card-heading p {
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* ==========================================
+   TARJETA IZQUIERDA
+   ========================================== */
+
+.detalle-info-content {
+    padding: 10px 26px 28px;
+}
+
+.detalle-field {
+    min-width: 0;
+}
+
+.detalle-label {
+    display: block;
+    margin-bottom: 9px;
+    color: #6882aa;
+    font-size: 11px;
+    font-weight: 650;
+}
+
+.detalle-field p {
+    margin: 0;
+    color: #183869;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+/* Descripcion completa */
+.detalle-field .detalle-descripcion {
+    white-space: pre-line;
+    line-height: 1.8;
+}
+
+/* Separadores */
+.detalle-divider {
+    height: 1px;
+    margin: 21px 0;
+    background: #e4ebf4;
+}
+
+/* Registrado por y fecha de creacion */
+.detalle-metadata {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+}
+
+.detalle-metadata .detalle-field:first-child {
+    padding-right: 20px;
+}
+
+.detalle-metadata .detalle-field + .detalle-field {
+    padding-left: 20px;
+    border-left: 1px solid #e4ebf4;
+}
+
+/* ==========================================
+   TARJETA DERECHA: RESUMEN
+   ========================================== */
+
+.detalle-resumen-content {
+    padding: 4px 20px 22px;
+}
+
+.detalle-resumen-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    min-height: 67px;
+    padding: 13px 4px;
+    border-bottom: 1px solid #e4ebf4;
+}
+
+.detalle-resumen-item:last-child {
+    border-bottom: none;
+}
+
+/* Icono y nombre del dato */
+.detalle-resumen-label {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-width: 0;
+    color: #17396d;
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.detalle-resumen-label svg {
+    width: 21px;
+    height: 21px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: #1174df;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Valor del dato */
+.detalle-resumen-item > strong {
+    color: #244477;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.detalle-resumen-item > .mis-tareas-estado,
+.detalle-resumen-item > .mis-tareas-prioridad {
+    justify-self: end;
+}
+
+/* ==========================================
+   BOTON VOLVER
+   ========================================== */
+
+.detalle-acciones {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.detalle-volver {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    min-height: 43px;
+    padding: 0 20px;
+    border: 1px solid #cedff5;
+    border-radius: 7px;
+    background: #f6faff;
+    color: #124d98;
+    font-size: 12px;
+    font-weight: 650;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.detalle-volver:hover {
+    background: #eaf4ff;
+    border-color: #a9cbed;
+}
+
+
+/* HU-08: Icono del botón Volver */
+.detalle-volver svg {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+
+/* ==========================================
+   ADAPTACION A PANTALLAS PEQUEÑAS
+   ========================================== */
+
+@media (max-width: 900px) {
+    .detalle-page .detalle-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .detalle-page .detalle-card .tareas-card-heading {
+        padding: 20px 18px 14px;
+    }
+
+    .detalle-info-content {
+        padding: 10px 18px 24px;
+    }
+
+    .detalle-resumen-content {
+        padding: 4px 15px 18px;
+    }
+
+    .detalle-metadata {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .detalle-metadata .detalle-field + .detalle-field {
+        padding-left: 0;
+        border-left: none;
+    }
+
+    .detalle-acciones {
+        justify-content: stretch;
+    }
+
+    .detalle-volver {
+        width: 100%;
+    }
+}
+
+/* ==========================================
+   HU-08: BOTON VER DETALLE EN MIS TAREAS
+   ========================================== */
+
+.tareas-page .mis-tareas-ver-detalle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    min-height: 34px;
+    padding: 7px 13px;
+
+    border: 1px solid #d4e2f4;
+    border-radius: 6px;
+
+    background: #f6faff;
+    color: #1655a4;
+
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.tareas-page .mis-tareas-ver-detalle svg {
+    width: 16px;
+    height: 16px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.tareas-page .mis-tareas-ver-detalle:hover {
+    background: #eaf4ff;
+    border-color: #a9cbed;
+}
+
+.tareas-page .mis-tareas-ver-detalle:focus-visible {
+    outline: 2px solid #1674dc;
+    outline-offset: 2px;
+}
+
+/* ==========================================
+   HU-08: CORREGIR SUPERPOSICION DEL FONDO
+   ========================================== */
+
+.detalle-page .detalle-layout,
+.detalle-page .detalle-acciones {
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 600px) {
+    .detalle-page .detalle-metadata {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .detalle-page .detalle-metadata .detalle-field:first-child {
+        padding-right: 0;
+    }
+
+    .detalle-page .detalle-metadata .detalle-field + .detalle-field {
+        padding-left: 0;
+        border-left: none;
     }
 }

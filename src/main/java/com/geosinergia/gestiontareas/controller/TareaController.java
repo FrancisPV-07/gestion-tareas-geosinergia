@@ -1,6 +1,11 @@
 
 package com.geosinergia.gestiontareas.controller;
 
+import java.util.NoSuchElementException;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -273,4 +278,48 @@ public class TareaController {
                 // Mostrar la pantalla Mis tareas
                 return "tareas/mis-tareas";
         }
+
+
+        // ==========================================
+        // HU-08: VER DETALLE DE TAREA
+        // ==========================================
+
+        @GetMapping("/{idTarea}/detalle")
+        public String mostrarDetalleTarea(
+                @PathVariable Long idTarea,
+                Authentication authentication,
+                Model model) {
+
+                Tarea tarea;
+
+                try {
+
+                // Consultar el detalle de la tarea
+                // y verificar los permisos del usuario
+                tarea = tareaService.obtenerDetalleTarea(
+                        idTarea,
+                        authentication.getName());
+
+                } catch (NoSuchElementException e) {
+
+                // La tarea solicitada no existe
+                throw new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "La tarea solicitada no existe.");
+
+                } catch (IllegalArgumentException e) {
+
+                // Identificador de tarea no valido
+                throw new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "La tarea solicitada no existe.");
+                }
+
+                // Enviar la informacion a la vista
+                model.addAttribute("tarea", tarea);
+
+                // Mostrar la pantalla de detalle
+                return "tareas/detalle";
+        }
+
 }
