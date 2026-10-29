@@ -206,4 +206,42 @@ public class TareaService {
                 // Conservar el estado Pendiente
                 return tareaRepository.save(tarea);
         }
+
+        // ==========================================
+        // HU-07: CONSULTAR TAREAS ASIGNADAS
+        // ==========================================
+
+        @Transactional(readOnly = true)
+        public List<Tarea> consultarTareasAsignadas(
+                        String correoColaborador) {
+
+                // Verificar el correo del usuario autenticado
+                if (correoColaborador == null
+                                || correoColaborador.isBlank()) {
+
+                        throw new IllegalArgumentException(
+                                        "No se pudo identificar al usuario autenticado.");
+                }
+
+                // Buscar al usuario en la base de datos
+                Usuario colaborador = usuarioRepository
+                                .findByCorreo(correoColaborador)
+                                .orElseThrow(() -> new IllegalArgumentException(
+                                                "El usuario autenticado no existe."));
+
+                // Verificar que sea un colaborador activo
+                if (!Boolean.TRUE.equals(colaborador.getActivo())
+                                || !"COLABORADOR".equals(
+                                                colaborador.getRol().getNombre())) {
+
+                        throw new IllegalArgumentException(
+                                        "No tiene permisos para consultar tareas asignadas.");
+                }
+
+                // Consultar únicamente sus tareas
+                return tareaRepository
+                                .findByResponsable_CorreoOrderByFechaCreacionDesc(
+                                                colaborador.getCorreo());
+        }
+
 }

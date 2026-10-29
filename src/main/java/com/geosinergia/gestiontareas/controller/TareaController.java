@@ -25,231 +25,252 @@ import java.util.List;
 @RequestMapping("/tareas")
 public class TareaController {
 
-    private final TareaService tareaService;
+        private final TareaService tareaService;
 
-    public TareaController(TareaService tareaService) {
-        this.tareaService = tareaService;
-    }
-
-    // ==========================================
-    // HU-04: MOSTRAR REGISTRO DE TAREA
-    // ==========================================
-
-    @GetMapping("/nueva")
-    public String mostrarFormulario(Model model) {
-
-        if (!model.containsAttribute("tareaForm")) {
-            model.addAttribute("tareaForm", new TareaForm());
+        public TareaController(TareaService tareaService) {
+                this.tareaService = tareaService;
         }
 
-        return "tareas/registro";
-    }
+        // ==========================================
+        // HU-04: MOSTRAR REGISTRO DE TAREA
+        // ==========================================
 
-    // ==========================================
-    // HU-04: REGISTRAR TAREA
-    // ==========================================
+        @GetMapping("/nueva")
+        public String mostrarFormulario(Model model) {
 
-    @PostMapping("/nueva")
-    public String registrarTarea(
-            @Valid @ModelAttribute("tareaForm") TareaForm formulario,
-            BindingResult resultado,
-            Authentication authentication,
-            RedirectAttributes redirectAttributes) {
+                if (!model.containsAttribute("tareaForm")) {
+                        model.addAttribute("tareaForm", new TareaForm());
+                }
 
-        if (resultado.hasErrors()) {
-            return "tareas/registro";
+                return "tareas/registro";
         }
 
-        Tarea tareaRegistrada;
+        // ==========================================
+        // HU-04: REGISTRAR TAREA
+        // ==========================================
 
-        try {
+        @PostMapping("/nueva")
+        public String registrarTarea(
+                        @Valid @ModelAttribute("tareaForm") TareaForm formulario,
+                        BindingResult resultado,
+                        Authentication authentication,
+                        RedirectAttributes redirectAttributes) {
 
-            tareaRegistrada = tareaService.registrarTarea(
-                    formulario.getTitulo(),
-                    formulario.getDescripcion(),
-                    authentication.getName());
+                if (resultado.hasErrors()) {
+                        return "tareas/registro";
+                }
 
-        } catch (IllegalArgumentException e) {
+                Tarea tareaRegistrada;
 
-            resultado.reject(
-                    "tarea.registro.error",
-                    e.getMessage());
+                try {
 
-            return "tareas/registro";
+                        tareaRegistrada = tareaService.registrarTarea(
+                                        formulario.getTitulo(),
+                                        formulario.getDescripcion(),
+                                        authentication.getName());
 
-        } catch (IllegalStateException e) {
+                } catch (IllegalArgumentException e) {
 
-            resultado.reject(
-                    "tarea.estado.error",
-                    "No se pudo registrar la tarea. "
-                            + "Verifica la configuracion de los estados.");
+                        resultado.reject(
+                                        "tarea.registro.error",
+                                        e.getMessage());
 
-            return "tareas/registro";
+                        return "tareas/registro";
+
+                } catch (IllegalStateException e) {
+
+                        resultado.reject(
+                                        "tarea.estado.error",
+                                        "No se pudo registrar la tarea. "
+                                                        + "Verifica la configuracion de los estados.");
+
+                        return "tareas/registro";
+                }
+
+                // Mensaje de confirmacion
+                redirectAttributes.addFlashAttribute(
+                                "exito",
+                                "Tarea registrada correctamente.");
+
+                // Datos para ofrecer la asignacion inmediata
+                redirectAttributes.addFlashAttribute(
+                                "idTareaRegistrada",
+                                tareaRegistrada.getIdTarea());
+
+                redirectAttributes.addFlashAttribute(
+                                "tituloTareaRegistrada",
+                                tareaRegistrada.getTitulo());
+
+                return "redirect:/tareas/nueva";
         }
 
-        // Mensaje de confirmacion
-        redirectAttributes.addFlashAttribute(
-                "exito",
-                "Tarea registrada correctamente.");
+        // ==========================================
+        // HU-05: MOSTRAR FORMULARIO DE ASIGNACION
+        // ==========================================
 
-        // Datos para ofrecer la asignacion inmediata
-        redirectAttributes.addFlashAttribute(
-                "idTareaRegistrada",
-                tareaRegistrada.getIdTarea());
+        @GetMapping("/asignar")
+        public String mostrarFormularioAsignacion(
+                        @RequestParam(name = "idTarea", required = false) Long idTarea,
+                        Model model) {
 
-        redirectAttributes.addFlashAttribute(
-                "tituloTareaRegistrada",
-                tareaRegistrada.getTitulo());
-
-        return "redirect:/tareas/nueva";
-    }
-
-    // ==========================================
-    // HU-05: MOSTRAR FORMULARIO DE ASIGNACION
-    // ==========================================
-
-    @GetMapping("/asignar")
-    public String mostrarFormularioAsignacion(
-            @RequestParam(name = "idTarea", required = false) Long idTarea,
-            Model model) {
-
-        // Preparar el formulario
-        AsignacionTareaForm formulario = new AsignacionTareaForm();
-
-        model.addAttribute(
-                "asignacionTareaForm",
-                formulario);
-
-        // Cargar tareas, colaboradores y prioridades
-        List<Tarea> tareasDisponibles = cargarOpcionesAsignacion(model);
-
-        // Verificar si se recibio una tarea preseleccionada
-        if (idTarea != null) {
-
-            Tarea tareaSeleccionada = tareasDisponibles
-                    .stream()
-                    .filter(tarea -> idTarea.equals(tarea.getIdTarea()))
-                    .findFirst()
-                    .orElse(null);
-
-            if (tareaSeleccionada != null) {
-
-                // Preseleccionar la tarea en el formulario
-                formulario.setIdTarea(
-                        tareaSeleccionada.getIdTarea());
-
-                // Enviar sus datos a la vista
-                model.addAttribute(
-                        "tareaPreseleccionada",
-                        tareaSeleccionada);
-
-            } else {
+                // Preparar el formulario
+                AsignacionTareaForm formulario = new AsignacionTareaForm();
 
                 model.addAttribute(
-                        "avisoAsignacion",
-                        "La tarea indicada no esta disponible "
-                                + "para asignacion.");
-            }
+                                "asignacionTareaForm",
+                                formulario);
+
+                // Cargar tareas, colaboradores y prioridades
+                List<Tarea> tareasDisponibles = cargarOpcionesAsignacion(model);
+
+                // Verificar si se recibio una tarea preseleccionada
+                if (idTarea != null) {
+
+                        Tarea tareaSeleccionada = tareasDisponibles
+                                        .stream()
+                                        .filter(tarea -> idTarea.equals(tarea.getIdTarea()))
+                                        .findFirst()
+                                        .orElse(null);
+
+                        if (tareaSeleccionada != null) {
+
+                                // Preseleccionar la tarea en el formulario
+                                formulario.setIdTarea(
+                                                tareaSeleccionada.getIdTarea());
+
+                                // Enviar sus datos a la vista
+                                model.addAttribute(
+                                                "tareaPreseleccionada",
+                                                tareaSeleccionada);
+
+                        } else {
+
+                                model.addAttribute(
+                                                "avisoAsignacion",
+                                                "La tarea indicada no esta disponible "
+                                                                + "para asignacion.");
+                        }
+                }
+
+                return "tareas/asignacion";
         }
 
-        return "tareas/asignacion";
-    }
+        // ==========================================
+        // HU-05: PROCESAR ASIGNACION
+        // ==========================================
 
-    // ==========================================
-    // HU-05: PROCESAR ASIGNACION
-    // ==========================================
+        @PostMapping("/asignar")
+        public String asignarTarea(
+                        @Valid @ModelAttribute("asignacionTareaForm") AsignacionTareaForm formulario,
+                        BindingResult resultado,
+                        @RequestParam(name = "tareaFijada", defaultValue = "false") boolean tareaFijada,
+                        Model model,
+                        RedirectAttributes redirectAttributes) {
 
-    @PostMapping("/asignar")
-    public String asignarTarea(
-            @Valid @ModelAttribute("asignacionTareaForm") AsignacionTareaForm formulario,
-            BindingResult resultado,
-            @RequestParam(name = "tareaFijada", defaultValue = "false") boolean tareaFijada,
-            Model model,
-            RedirectAttributes redirectAttributes) {
+                // Verificar las validaciones del formulario
+                if (resultado.hasErrors()) {
 
-        // Verificar las validaciones del formulario
-        if (resultado.hasErrors()) {
+                        return mostrarAsignacionConErrores(
+                                        model, formulario, tareaFijada);
+                }
 
-            return mostrarAsignacionConErrores(
-                    model, formulario, tareaFijada);
+                try {
+
+                        tareaService.asignarTarea(
+                                        formulario.getIdTarea(),
+                                        formulario.getIdResponsable(),
+                                        formulario.getIdPrioridad(),
+                                        formulario.getFechaLimite());
+
+                } catch (IllegalArgumentException e) {
+
+                        resultado.reject(
+                                        "tarea.asignacion.error",
+                                        e.getMessage());
+
+                        return mostrarAsignacionConErrores(
+                                        model, formulario, tareaFijada);
+                }
+
+                redirectAttributes.addFlashAttribute(
+                                "exito",
+                                "Tarea asignada correctamente.");
+
+                return "redirect:/tareas/asignar";
         }
 
-        try {
+        // ==========================================
+        // HU-05: CONSERVAR DATOS ANTE ERRORES
+        // ==========================================
 
-            tareaService.asignarTarea(
-                    formulario.getIdTarea(),
-                    formulario.getIdResponsable(),
-                    formulario.getIdPrioridad(),
-                    formulario.getFechaLimite());
+        private String mostrarAsignacionConErrores(
+                        Model model,
+                        AsignacionTareaForm formulario,
+                        boolean tareaFijada) {
 
-        } catch (IllegalArgumentException e) {
+                // Recuperar opciones del formulario
+                List<Tarea> tareasDisponibles = cargarOpcionesAsignacion(model);
 
-            resultado.reject(
-                    "tarea.asignacion.error",
-                    e.getMessage());
+                // Restaurar la tarea preseleccionada
+                if (tareaFijada && formulario.getIdTarea() != null) {
 
-            return mostrarAsignacionConErrores(
-                    model, formulario, tareaFijada);
+                        tareasDisponibles.stream()
+                                        .filter(tarea -> formulario.getIdTarea()
+                                                        .equals(tarea.getIdTarea()))
+                                        .findFirst()
+                                        .ifPresent(tarea -> model.addAttribute(
+                                                        "tareaPreseleccionada",
+                                                        tarea));
+                }
+
+                return "tareas/asignacion";
         }
 
-        redirectAttributes.addFlashAttribute(
-                "exito",
-                "Tarea asignada correctamente.");
+        // ==========================================
+        // HU-05: CARGAR OPCIONES DEL FORMULARIO
+        // ==========================================
 
-        return "redirect:/tareas/asignar";
-    }
+        private List<Tarea> cargarOpcionesAsignacion(Model model) {
 
-    // ==========================================
-    // HU-05: CONSERVAR DATOS ANTE ERRORES
-    // ==========================================
+                // Consultar tareas disponibles
+                List<Tarea> tareasDisponibles = tareaService.listarTareasPendientesAsignacion();
 
-    private String mostrarAsignacionConErrores(
-            Model model,
-            AsignacionTareaForm formulario,
-            boolean tareaFijada) {
+                model.addAttribute(
+                                "tareasDisponibles",
+                                tareasDisponibles);
 
-        // Recuperar opciones del formulario
-        List<Tarea> tareasDisponibles = cargarOpcionesAsignacion(model);
+                // Consultar colaboradores activos
+                model.addAttribute(
+                                "colaboradores",
+                                tareaService.listarColaboradoresActivos());
 
-        // Restaurar la tarea preseleccionada
-        if (tareaFijada && formulario.getIdTarea() != null) {
+                // Consultar prioridades
+                model.addAttribute(
+                                "prioridades",
+                                tareaService.listarPrioridades());
 
-            tareasDisponibles.stream()
-                    .filter(tarea -> formulario.getIdTarea()
-                            .equals(tarea.getIdTarea()))
-                    .findFirst()
-                    .ifPresent(tarea -> model.addAttribute(
-                            "tareaPreseleccionada",
-                            tarea));
+                return tareasDisponibles;
         }
 
-        return "tareas/asignacion";
-    }
+        // ==========================================
+        // HU-07: CONSULTAR MIS TAREAS
+        // ==========================================
 
-    // ==========================================
-    // HU-05: CARGAR OPCIONES DEL FORMULARIO
-    // ==========================================
+        @GetMapping("/mis-tareas")
+        public String mostrarMisTareas(
+                        Model model,
+                        Authentication authentication) {
 
-    private List<Tarea> cargarOpcionesAsignacion(Model model) {
+                // Obtener las tareas del usuario autenticado
+                List<Tarea> tareasAsignadas = tareaService.consultarTareasAsignadas(
+                                authentication.getName());
 
-        // Consultar tareas disponibles
-        List<Tarea> tareasDisponibles = tareaService.listarTareasPendientesAsignacion();
+                // Enviar las tareas a la vista
+                model.addAttribute(
+                                "tareasAsignadas",
+                                tareasAsignadas);
 
-        model.addAttribute(
-                "tareasDisponibles",
-                tareasDisponibles);
-
-        // Consultar colaboradores activos
-        model.addAttribute(
-                "colaboradores",
-                tareaService.listarColaboradoresActivos());
-
-        // Consultar prioridades
-        model.addAttribute(
-                "prioridades",
-                tareaService.listarPrioridades());
-
-        return tareasDisponibles;
-    }
-
+                // Mostrar la pantalla Mis tareas
+                return "tareas/mis-tareas";
+        }
 }

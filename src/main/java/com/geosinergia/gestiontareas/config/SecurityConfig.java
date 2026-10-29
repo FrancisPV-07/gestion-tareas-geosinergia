@@ -40,6 +40,9 @@ public class SecurityConfig {
                                 "/tareas/asignar"
                         ).hasRole("COORDINADOR")
 
+                        .requestMatchers("/tareas/mis-tareas")
+                        .hasRole("COLABORADOR")
+
                         .anyRequest()
                         .authenticated()
                 )

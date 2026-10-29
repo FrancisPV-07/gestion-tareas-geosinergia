@@ -1687,3 +1687,324 @@
 .tareas-asignacion-aviso p {
     margin: 0;
 }
+
+/* ==========================================
+   HU-07: ENCABEZADO DE MIS TAREAS
+   ========================================== */
+
+.mis-tareas-card-heading {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 22px;
+    border-bottom: 1px solid #e8edf4;
+}
+
+/* Contenedor circular del icono */
+.mis-tareas-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 58px;
+    height: 58px;
+
+    border-radius: 50%;
+    background: #e7f2ff;
+    color: #1674dc;
+}
+
+/* Icono SVG */
+.mis-tareas-card-icon svg {
+    width: 29px;
+    height: 29px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Textos */
+.mis-tareas-card-heading-text {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.mis-tareas-card-heading-text h2 {
+    margin: 0;
+    color: #092454;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.mis-tareas-card-heading-text p {
+    margin: 0;
+    color: #7185a3;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* Pantallas pequeñas */
+@media (max-width: 600px) {
+    .mis-tareas-card-heading {
+        padding: 18px 16px;
+        gap: 12px;
+    }
+
+    .mis-tareas-card-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .mis-tareas-card-icon svg {
+        width: 25px;
+        height: 25px;
+    }
+
+    .mis-tareas-card-heading-text h2 {
+        font-size: 15px;
+    }
+}
+
+/* ==========================================
+   HU-07: ETIQUETAS DE PRIORIDAD
+   ========================================== */
+
+.mis-tareas-prioridad {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 65px;
+    padding: 5px 12px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/* Prioridad alta */
+.prioridad-alta {
+    color: #c83d3d;
+    background: #ffe5e5;
+    border-color: #ffdddd;
+}
+
+/* Prioridad media */
+.prioridad-media {
+    color: #996417;
+    background: #fff0ca;
+    border-color: #ffe9ad;
+}
+
+/* Prioridad baja */
+.prioridad-baja {
+    color: #268257;
+    background: #e0f6e8;
+    border-color: #d1eddb;
+}
+
+/* Sin prioridad */
+.prioridad-sin-definir {
+    color: #66788c;
+    background: #f1f4f7;
+    border-color: #e0e6ec;
+}
+
+/* ==========================================
+   HU-07: ETIQUETAS DE ESTADO
+   ========================================== */
+
+.mis-tareas-estado {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 105px;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+/* Indicador circular */
+.mis-tareas-estado::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+/* Pendiente */
+.estado-pendiente {
+    color: #a66c08;
+    background: #fff0c8;
+}
+
+/* En proceso */
+.estado-proceso {
+    color: #286eb7;
+    background: #e5f2ff;
+}
+
+/* Completada */
+.estado-completada {
+    color: #248253;
+    background: #e1f5e9;
+}
+
+/* Cancelada */
+.estado-cancelada {
+    color: #b64b4b;
+    background: #ffebeb;
+}
+
+/* ==========================================
+   HU-07: CONTADOR INFERIOR DE TAREAS
+   ========================================== */
+
+.mis-tareas-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 22px;
+    border-top: 1px solid #e8edf4;
+    background: #ffffff;
+    border-radius: 0 0 10px 10px;
+}
+
+.mis-tareas-footer p {
+    margin: 0;
+    color: #6680a7;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+    .mis-tareas-footer {
+        padding: 17px 16px;
+    }
+}
+
+/* ==========================================
+   HU-07: ESTADO VACIO DE MIS TAREAS
+   ========================================== */
+
+.mis-tareas-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 270px;
+    padding: 40px 24px;
+    text-align: center;
+}
+
+.mis-tareas-empty-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 68px;
+    height: 68px;
+    margin-bottom: 5px;
+    border-radius: 50%;
+    background: #eaf4ff;
+    color: #2179db;
+}
+
+.mis-tareas-empty-icon svg {
+    width: 32px;
+    height: 32px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.mis-tareas-empty strong {
+    color: #102b58;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.mis-tareas-empty p {
+    max-width: 350px;
+    margin: 0;
+    color: #7185a3;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* ==========================================
+   HU-07: ENCABEZADO DE LA TABLA
+   ========================================== */
+
+.tareas-page .mis-tareas-table thead th {
+    background-color: #eaf3ff;
+    color: #244f89;
+    border-bottom: 1px solid #d5e5f7;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* ==========================================
+   HU-07: POSICION DEL CONTADOR INFERIOR
+   ========================================== */
+
+.mis-tareas-footer p {
+    transform: translateY(10px);
+}
+
+/* ==========================================
+   HU-07: DISTRIBUCION INTERNA DEL LISTADO
+   ========================================== */
+
+/* Separar la tabla de los bordes de la tarjeta */
+.tareas-page .content-card > .table-container {
+    width: auto;
+    margin: 16px 24px 0;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+/* Mantener la tabla dentro del contenedor */
+.tareas-page .mis-tareas-table {
+    width: 100%;
+}
+
+/* Separar el contador sin modificar las filas */
+.tareas-page .content-card > .mis-tareas-footer {
+    margin: 0;
+    padding: 26px 24px 22px;
+    border-top: none;
+    background: transparent;
+}
+
+/* Mantener el texto en su posicion natural */
+.tareas-page .mis-tareas-footer p {
+    margin: 0;
+    transform: none;
+}
+
+/* Adaptacion para pantallas pequeñas */
+@media (max-width: 600px) {
+
+    .tareas-page .content-card > .table-container {
+        margin: 12px 14px 0;
+    }
+
+    .tareas-page .content-card > .mis-tareas-footer {
+        padding: 22px 14px 20px;
+    }
+}

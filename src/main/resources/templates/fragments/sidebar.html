@@ -117,24 +117,19 @@
         <!-- ==================================================
              MENÚ DEL COLABORADOR
              ================================================== -->
-        <div th:if="${rolUsuario == 'COLABORADOR'}" class="nav-item nav-disabled">
+        <!-- HU-07: CONSULTAR MIS TAREAS -->
+        <a th:if="${rolUsuario == 'COLABORADOR'}" th:href="@{/tareas/mis-tareas}" class="nav-item"
+            th:classappend="${activeSection == 'mis-tareas'} ? ' active' : ''" title="Mis tareas">
+
             <span class="nav-icon">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
-
                     <rect x="4" y="3" width="16" height="18" rx="2" />
-
                     <path d="m8 12 2 2 5-5" />
                 </svg>
             </span>
 
-            <span>
-                Mis tareas
-            </span>
-
-            <small>
-                Próximamente
-            </small>
-        </div>
+            <span>Mis tareas</span>
+        </a>
     </nav>
 
     <!-- ==================================================

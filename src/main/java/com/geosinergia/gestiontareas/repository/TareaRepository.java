@@ -11,10 +11,24 @@ import com.geosinergia.gestiontareas.entity.Tarea;
 public interface TareaRepository
                 extends JpaRepository<Tarea, Long> {
 
-        // Consultar tareas pendientes sin responsable,
-        // incluyendo el estado y el usuario creador.
+        // ==========================================
+        // HU-05: TAREAS PENDIENTES DE ASIGNACION
+        // ==========================================
+
         @EntityGraph(attributePaths = { "estado", "creador" })
         List<Tarea> findByResponsableIsNullAndEstado_NombreOrderByFechaCreacionDesc(
                         String nombreEstado);
+
+        // ==========================================
+        // HU-07: CONSULTAR MIS TAREAS
+        // ==========================================
+
+        @EntityGraph(attributePaths = {
+                        "estado",
+                        "prioridad",
+                        "creador"
+        })
+        List<Tarea> findByResponsable_CorreoOrderByFechaCreacionDesc(
+                        String correo);
 
 }
