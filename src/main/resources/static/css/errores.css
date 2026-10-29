@@ -1,0 +1,161 @@
+/* ==========================================
+   PÁGINAS DE ERROR - GEOSINERGIA
+   Diseño compartido: 400, 403, 404 y 500
+   ========================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body.error-page {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #edf3fa, #f8fafc);
+    color: #1b324a;
+}
+
+.error-card {
+    width: 100%;
+    max-width: 560px;
+    overflow: hidden;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 18px 55px rgba(14, 43, 78, 0.12);
+    text-align: center;
+}
+
+.error-header {
+    padding: 23px 30px;
+    background: #062a59;
+}
+
+.error-logo {
+    display: block;
+    width: 300px;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    mix-blend-mode: screen;
+}
+
+.error-content {
+    padding: 46px 38px 48px;
+}
+
+.error-icon {
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 23px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #fff0f0;
+    color: #d64545;
+}
+
+.error-icon svg {
+    width: 39px;
+    height: 39px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.error-code {
+    margin: 0 0 9px;
+    color: #d64545;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.error-content h1 {
+    margin: 0 0 14px;
+    color: #09274b;
+    font-size: clamp(25px, 5vw, 31px);
+}
+
+.error-description {
+    max-width: 390px;
+    margin: 0 auto 29px;
+    color: #718198;
+    font-size: 15px;
+    line-height: 1.65;
+}
+
+.error-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 12px 29px;
+    border-radius: 9px;
+    background: #1167c6;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.2s ease;
+}
+
+.error-button:hover {
+    background: #094f9c;
+}
+
+.error-button:focus-visible {
+    outline: 3px solid #80b9fa;
+    outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+    .error-content {
+        padding: 37px 24px 42px;
+    }
+}
+
+/* ==========================================
+   ERROR 400 - SOLICITUD INCORRECTA
+   ========================================== */
+
+.error-400 .error-icon {
+    background: #fff4e8;
+    color: #d98224;
+}
+
+.error-400 .error-code {
+    color: #d98224;
+}
+
+/* ==========================================
+   ERROR 404 - PÁGINA NO ENCONTRADA
+   ========================================== */
+
+.error-404 .error-icon {
+    background: #edf5ff;
+    color: #1768b1;
+}
+
+.error-404 .error-code {
+    color: #1768b1;
+}
+
+/* ==========================================
+   ERROR 500 - ERROR INTERNO DEL SERVIDOR
+   ========================================== */
+
+.error-500 .error-icon {
+    background: #fff0f0;
+    color: #d64545;
+}
+
+.error-500 .error-code {
+    color: #d64545;
+}

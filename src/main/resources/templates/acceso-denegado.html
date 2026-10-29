@@ -3,19 +3,48 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceso restringido | Geosinergia</title>
+    <link rel="stylesheet" th:href="@{/css/errores.css}">
 </head>
 
-<body>
-    <h1>Acceso restringido</h1>
+<body class="error-page">
 
-    <p>
-        No tienes permisos para acceder a esta sección.
-    </p>
+    <main class="error-card">
 
-    <a th:href="@{/}">
-        Volver al inicio
-    </a>
+        <!-- Encabezado corporativo -->
+        <header class="error-header">
+            <img th:src="@{/img/login/geosinergia-logo.png}" alt="Geosinergia" class="error-logo">
+        </header>
+
+        <!-- Contenido del error -->
+        <section class="error-content">
+
+            <div class="error-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+                    <path d="M12 8v5" />
+                    <path d="M12 17h.01" />
+                </svg>
+            </div>
+
+            <p class="error-code">ERROR 403</p>
+
+            <h1>Acceso restringido</h1>
+
+            <p class="error-description">
+                No tienes permisos para acceder a esta sección.
+                Si necesitas ingresar, comunícate con el coordinador.
+            </p>
+
+            <a th:href="@{/}" class="error-button">
+                Volver al inicio
+            </a>
+
+        </section>
+
+    </main>
+
 </body>
 
 </html>
