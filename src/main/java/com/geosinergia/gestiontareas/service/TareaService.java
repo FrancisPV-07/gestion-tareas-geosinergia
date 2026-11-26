@@ -4,6 +4,7 @@ package com.geosinergia.gestiontareas.service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Map;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
@@ -26,17 +27,20 @@ public class TareaService {
         private final EstadoTareaRepository estadoTareaRepository;
         private final UsuarioRepository usuarioRepository;
         private final PrioridadRepository prioridadRepository;
+        private final HistorialTareaService historialTareaService;
 
         public TareaService(
                         TareaRepository tareaRepository,
                         EstadoTareaRepository estadoTareaRepository,
                         UsuarioRepository usuarioRepository,
-                        PrioridadRepository prioridadRepository) {
+                        PrioridadRepository prioridadRepository,
+                        HistorialTareaService historialTareaService) {
 
                 this.tareaRepository = tareaRepository;
                 this.estadoTareaRepository = estadoTareaRepository;
                 this.usuarioRepository = usuarioRepository;
                 this.prioridadRepository = prioridadRepository;
+                this.historialTareaService = historialTareaService;
         }
 
         // ==========================================
@@ -304,6 +308,77 @@ public class TareaService {
                 // Denegar cualquier otro acceso
                 throw new AccessDeniedException(
                         "No tiene permisos para consultar esta tarea.");
+        }
+
+
+        // ==========================================
+        // HU-06: CANCELAR TAREA
+        // ==========================================
+
+        @Transactional
+        public Tarea cancelarTarea(
+                Long idTarea,
+                String motivo,
+                String correoCoordinador) {
+
+                if (idTarea == null || idTarea <= 0) {
+                throw new IllegalArgumentException(
+                        "El identificador de la tarea no es valido.");
+                }
+
+                if (correoCoordinador == null
+                        || correoCoordinador.isBlank()) {
+                throw new AccessDeniedException(
+                        "No se pudo identificar al usuario.");
+                }
+
+                Usuario actor = usuarioRepository
+                        .findByCorreo(correoCoordinador)
+                        .orElseThrow(() -> new AccessDeniedException(
+                                "El usuario autenticado no existe."));
+
+                if (!Boolean.TRUE.equals(actor.getActivo())
+                        || !"COORDINADOR".equals(
+                                actor.getRol().getNombre())) {
+                throw new AccessDeniedException(
+                        "No tiene permisos para cancelar tareas.");
+                }
+
+                if (motivo == null || motivo.isBlank()) {
+                throw new IllegalArgumentException(
+                        "El motivo de cancelacion es obligatorio.");
+                }
+
+                Tarea tarea = tareaRepository
+                        .findByIdTarea(idTarea)
+                        .orElseThrow(() -> new IllegalArgumentException(
+                                "La tarea seleccionada no existe."));
+
+                String estadoAnterior = tarea.getEstado().getNombre();
+
+                if (!"Pendiente".equals(estadoAnterior)
+                        && !"En proceso".equals(estadoAnterior)) {
+                throw new IllegalArgumentException(
+                        "El estado actual no permite cancelar la tarea.");
+                }
+
+                EstadoTarea estadoCancelada = estadoTareaRepository
+                        .findByNombre("Cancelada")
+                        .orElseThrow(() -> new IllegalStateException(
+                                "No existe el estado Cancelada."));
+
+                tarea.setEstado(estadoCancelada);
+                tareaRepository.save(tarea);
+
+                historialTareaService.registrarEvento(
+                        tarea,
+                        actor,
+                        "CANCELACION",
+                        Map.of("estado", estadoAnterior),
+                        Map.of("estado", "Cancelada"),
+                        motivo.trim());
+
+                return tarea;
         }
 
 }

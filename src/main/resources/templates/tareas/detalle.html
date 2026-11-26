@@ -55,13 +55,70 @@
                      TITULO DE PAGINA
                      ===================================== -->
 
-                <section class="tareas-heading">
+                <!-- HU-06: Encabezado y acciones del coordinador -->
+                <section class="tareas-heading geo-detalle-heading">
 
                     <span class="tareas-label">
                         GESTIÓN DE TAREAS
                     </span>
 
-                    <h1>Detalle de tarea</h1>
+                    <div class="geo-detalle-titulo-fila">
+
+                        <h1>Detalle de tarea</h1>
+
+                        <div
+                            th:if="${rolUsuario == 'COORDINADOR'
+                                and (tarea.estado.nombre == 'Pendiente'
+                                or tarea.estado.nombre == 'En proceso')}"
+                            class="geo-detalle-heading-acciones">
+
+                            <details class="geo-opciones-tarea">
+
+                                <summary>
+                                    <svg viewBox="0 0 24 24"
+                                        aria-hidden="true">
+                                        <circle cx="12" cy="5" r="1.6"/>
+                                        <circle cx="12" cy="12" r="1.6"/>
+                                        <circle cx="12" cy="19" r="1.6"/>
+                                    </svg>
+
+                                    <span>Más opciones</span>
+
+                                    <svg class="geo-opciones-flecha"
+                                        viewBox="0 0 24 24"
+                                        aria-hidden="true">
+                                        <path d="m6 9 6 6 6-6"/>
+                                    </svg>
+                                </summary>
+
+                                <div class="geo-opciones-menu">
+
+                                    <button
+                                        type="button"
+                                        class="geo-opcion-cancelar"
+                                        onclick="
+                                            this.closest('details').open = false;
+                                            document.getElementById(
+                                                'modalCancelarTarea'
+                                            ).showModal();
+                                        ">
+
+                                        <svg viewBox="0 0 24 24"
+                                            aria-hidden="true">
+                                            <circle cx="12" cy="12" r="9"/>
+                                            <path d="M5.6 5.6 18.4 18.4"/>
+                                        </svg>
+
+                                        Cancelar tarea
+                                    </button>
+
+                                </div>
+
+                            </details>
+
+                        </div>
+
+                    </div>
 
                     <p>
                         Consulta la información de la
@@ -69,6 +126,19 @@
                     </p>
 
                 </section>
+
+                <!-- HU-06: Mensajes de cancelación -->
+                <div th:if="${exito != null}"
+                    class="geo-cancel-mensaje geo-cancel-mensaje-exito"
+                    role="status"
+                    th:text="${exito}">
+                </div>
+
+                <div th:if="${error != null}"
+                    class="geo-cancel-mensaje geo-cancel-mensaje-error"
+                    role="alert"
+                    th:text="${error}">
+                </div>
 
                 <!-- =====================================
                      CONTENEDOR DE LAS DOS TARJETAS
@@ -332,6 +402,147 @@
                     </a>
 
                 </div>
+
+                <!-- ==========================================
+                    HU-06: MODAL CANCELAR TAREA
+                    ========================================== -->
+
+                <dialog id="modalCancelarTarea"
+                        class="geo-cancel-dialog"
+                        aria-labelledby="tituloModalCancelar"
+                        aria-describedby="descripcionModalCancelar">
+
+                    <form method="post"
+                        th:action="@{/tareas/{idTarea}/cancelar(
+                            idTarea=${tarea.idTarea})}">
+
+                        <!-- ENCABEZADO -->
+                        <div class="geo-cancel-header">
+
+                            <div class="geo-cancel-icono">
+                                <svg viewBox="0 0 24 24"
+                                    aria-hidden="true">
+                                    <path d="M10.3 3.9 1.9 18.4
+                                            A2 2 0 0 0 3.6 21h16.8
+                                            a2 2 0 0 0 1.7-2.6
+                                            L13.7 3.9a2 2 0 0 0-3.4 0Z"/>
+                                    <path d="M12 9v4M12 17h.01"/>
+                                </svg>
+                            </div>
+
+                            <div class="geo-cancel-header-texto">
+                                <h2 id="tituloModalCancelar">
+                                    Cancelar tarea
+                                </h2>
+
+                                <p id="descripcionModalCancelar">
+                                    Confirma la cancelación de la
+                                    actividad seleccionada.
+                                </p>
+                            </div>
+
+                            <button type="button"
+                                    class="geo-cancel-cerrar"
+                                    aria-label="Cerrar ventana"
+                                    onclick="document.getElementById(
+                                        'modalCancelarTarea'
+                                    ).close()">
+                                &times;
+                            </button>
+
+                        </div>
+
+                        <!-- INFORMACIÓN DE LA TAREA -->
+                        <div class="geo-cancel-tarea">
+
+                            <span class="geo-cancel-etiqueta">
+                                Tarea seleccionada
+                            </span>
+
+                            <strong th:text="${tarea.titulo}">
+                                Nombre de la tarea
+                            </strong>
+
+                            <div class="geo-cancel-estado-fila">
+                                <span>Estado actual:</span>
+
+                                <span class="mis-tareas-estado"
+                                    th:classappend="${tarea.estado.nombre
+                                        == 'Pendiente'
+                                        ? ' estado-pendiente'
+                                        : ' estado-proceso'}"
+                                    th:text="${tarea.estado.nombre}">
+                                    Pendiente
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <!-- MOTIVO -->
+                        <div class="geo-cancel-campo">
+
+                            <label for="motivoCancelacion">
+                                Motivo de cancelación
+                                <span class="geo-cancel-obligatorio">*</span>
+                            </label>
+
+                            <textarea id="motivoCancelacion"
+                                    name="motivo"
+                                    rows="3"
+                                    maxlength="500"
+                                    required
+                                    placeholder="Ingrese la justificación de la cancelación..."></textarea>
+
+                            <small>Campo obligatorio.</small>
+
+                        </div>
+
+                        <!-- AVISO -->
+                        <div class="geo-cancel-aviso">
+
+                            <svg viewBox="0 0 24 24"
+                                aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 11v6M12 7h.01"/>
+                            </svg>
+
+                            <p>
+                                La tarea cambiará al estado
+                                <strong>Cancelada</strong>.
+                                No se eliminará su información y
+                                la operación quedará registrada
+                                en el historial.
+                            </p>
+
+                        </div>
+
+                        <!-- BOTONES -->
+                        <div class="geo-cancel-modal-acciones">
+
+                            <button type="button"
+                                    class="geo-cancel-volver"
+                                    onclick="document.getElementById(
+                                        'modalCancelarTarea'
+                                    ).close()">
+                                Volver
+                            </button>
+
+                            <button type="submit"
+                                    class="geo-cancel-confirmar">
+
+                                <svg viewBox="0 0 24 24"
+                                    aria-hidden="true">
+                                    <path d="m5 12 4 4L19 6"/>
+                                </svg>
+
+                                Confirmar cancelación
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </dialog>
 
             </main>
 

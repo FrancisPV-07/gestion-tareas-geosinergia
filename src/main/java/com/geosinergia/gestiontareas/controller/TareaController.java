@@ -322,4 +322,37 @@ public class TareaController {
                 return "tareas/detalle";
         }
 
+        // ==========================================
+        // HU-06: CANCELAR TAREA
+        // ==========================================
+
+        @PostMapping("/{idTarea}/cancelar")
+        public String cancelarTarea(
+                @PathVariable Long idTarea,
+                @RequestParam(name = "motivo", required = false)
+                String motivo,
+                Authentication authentication,
+                RedirectAttributes redirectAttributes) {
+
+                try {
+                tareaService.cancelarTarea(
+                        idTarea,
+                        motivo,
+                        authentication.getName());
+
+                redirectAttributes.addFlashAttribute(
+                        "exito",
+                        "Tarea cancelada correctamente.");
+
+                } catch (IllegalArgumentException e) {
+
+                redirectAttributes.addFlashAttribute(
+                        "error",
+                        e.getMessage());
+                }
+
+                return "redirect:/tareas/"
+                        + idTarea + "/detalle";
+        }
+
 }
