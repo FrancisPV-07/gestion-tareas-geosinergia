@@ -8,6 +8,7 @@
     <title>Detalle de tarea | Geosinergia</title>
 
     <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <link rel="stylesheet" th:href="@{/vendor/tom-select/tom-select.css}">
     <link rel="stylesheet" th:href="@{/css/tareas.css}">
 </head>
 
@@ -92,6 +93,57 @@
                                 </summary>
 
                                 <div class="geo-opciones-menu">
+                                    <!-- HU-06: Reasignar responsable -->
+                                    <button
+                                        th:if="${tarea.responsable != null}"
+                                        type="button"
+                                        class="geo-opcion-reasignar"
+                                        onclick="
+                                            this.closest('details').open = false;
+                                            document.getElementById(
+                                                'modalReasignarTarea'
+                                            ).showModal();
+                                        ">
+
+                                        <svg viewBox="0 0 24 24"
+                                            aria-hidden="true">
+                                            <circle cx="9" cy="7" r="3"/>
+                                            <path d="M3 19v-1a6 6 0 0 1 12 0v1"/>
+                                            <path d="M16 8h6M19 5l3 3-3 3"/>
+                                        </svg>
+
+                                        Reasignar responsable
+                                    </button>
+
+                                    <div th:if="${tarea.responsable != null}"
+                                        class="geo-opciones-separador">
+                                    </div>
+
+                                    <!-- HU-06: Desasignar responsable -->
+                                    <button
+                                        th:if="${tarea.responsable != null}"
+                                        type="button"
+                                        class="geo-opcion-desasignar"
+                                        onclick="
+                                            this.closest('details').open = false;
+                                            document.getElementById(
+                                                'modalDesasignarTarea'
+                                            ).showModal();
+                                        ">
+
+                                        <svg viewBox="0 0 24 24"
+                                            aria-hidden="true">
+                                            <circle cx="9" cy="7" r="3"/>
+                                            <path d="M3 20v-1a6 6 0 0 1 12 0v1"/>
+                                            <path d="M17 9h5"/>
+                                        </svg>
+
+                                        Desasignar responsable
+                                    </button>
+
+                                    <div th:if="${tarea.responsable != null}"
+                                        class="geo-opciones-separador">
+                                    </div>
 
                                     <button
                                         type="button"
@@ -544,12 +596,398 @@
 
                 </dialog>
 
+                <!-- ==========================================
+                    HU-06: MODAL REASIGNAR RESPONSABLE
+                    ========================================== -->
+
+                <dialog
+                    th:if="${colaboradoresReasignacion != null}"
+                    id="modalReasignarTarea"
+                    class="geo-cancel-dialog geo-reasignar-dialog"
+                    aria-labelledby="tituloModalReasignar"
+                    aria-describedby="descripcionModalReasignar">
+
+                    <form method="post"
+                        th:action="@{/tareas/{idTarea}/reasignar(
+                            idTarea=${tarea.idTarea})}">
+
+                        <!-- ENCABEZADO -->
+                        <div class="geo-cancel-header">
+
+                            <div class="geo-cancel-icono">
+                                <svg viewBox="0 0 24 24"
+                                    aria-hidden="true">
+                                    <circle cx="9" cy="7" r="3"/>
+                                    <path d="M3 20v-1a6 6 0 0 1 12 0v1"/>
+                                    <path d="M16 8h6M19 5l3 3-3 3"/>
+                                </svg>
+                            </div>
+
+                            <div class="geo-cancel-header-texto">
+
+                                <h2 id="tituloModalReasignar">
+                                    Reasignar responsable
+                                </h2>
+
+                                <p id="descripcionModalReasignar">
+                                    Selecciona otro colaborador para
+                                    continuar con la actividad.
+                                </p>
+
+                            </div>
+
+                            <button
+                                type="button"
+                                class="geo-cancel-cerrar"
+                                aria-label="Cerrar ventana"
+                                onclick="document.getElementById(
+                                    'modalReasignarTarea'
+                                ).close()">
+                                &times;
+                            </button>
+
+                        </div>
+
+                        <!-- INFORMACIÓN DE LA TAREA -->
+                        <div class="geo-cancel-tarea">
+
+                            <span class="geo-cancel-etiqueta">
+                                Tarea seleccionada
+                            </span>
+
+                            <strong th:text="${tarea.titulo}">
+                                Nombre de la tarea
+                            </strong>
+
+                            <div class="geo-cancel-estado-fila">
+                                <span>Responsable actual:</span>
+
+                                <strong th:text="${tarea.responsable.nombres
+                                    + ' ' + tarea.responsable.apellidos}">
+                                    Responsable actual
+                                </strong>
+                            </div>
+
+                        </div>
+
+                        <!-- NUEVO RESPONSABLE -->
+                        <div class="geo-cancel-campo geo-reasignar-campo">
+
+                            <label for="nuevoResponsable">
+                                Nuevo responsable
+                                <span class="geo-cancel-obligatorio">*</span>
+                            </label>
+
+                            <div class="tareas-control-icon">
+
+                                <span class="tareas-control-icon-left"
+                                    aria-hidden="true">
+
+                                    <svg viewBox="0 0 24 24">
+                                        <circle cx="12" cy="8" r="3.5"/>
+                                        <path d="M5 21v-2a7 7 0 0 1 14 0v2"/>
+                                    </svg>
+
+                                </span>
+
+                                <select
+                                    id="nuevoResponsable"
+                                    name="idNuevoResponsable"
+                                    class="tareas-select"
+                                    required>
+
+                                    <option value="">
+                                        Selecciona un colaborador
+                                    </option>
+
+                                    <option
+                                        th:each="colaborador : ${colaboradoresReasignacion}"
+                                        th:value="${colaborador.idUsuario}"
+                                        th:text="${colaborador.nombres
+                                            + ' ' + colaborador.apellidos}">
+                                        Colaborador
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <small>
+                                Solo se muestran colaboradores
+                                activos distintos del responsable actual.
+                            </small>
+
+                            <p class="geo-reasignar-sin-candidatos"
+                            th:if="${#lists.isEmpty(
+                                colaboradoresReasignacion)}">
+                                No existen otros colaboradores activos
+                                disponibles para esta tarea.
+                            </p>
+
+                        </div>
+
+                        <!-- MOTIVO OBLIGATORIO -->
+                        <div class="geo-cancel-campo geo-reasignar-campo">
+
+                            <label for="motivoReasignacion">
+                                Motivo de reasignación
+                                <span class="geo-cancel-obligatorio">*</span>
+                            </label>
+
+                            <textarea
+                                id="motivoReasignacion"
+                                name="motivo"
+                                rows="3"
+                                maxlength="500"
+                                required
+                                placeholder="Ingrese el motivo del cambio de responsable..."></textarea>
+
+                            <small>
+                                Este motivo quedará registrado
+                                en el historial de la tarea.
+                            </small>
+
+                        </div>
+
+                        <!-- AVISO INFORMATIVO -->
+                        <div class="geo-cancel-aviso">
+
+                            <svg viewBox="0 0 24 24"
+                                aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 11v6M12 7h.01"/>
+                            </svg>
+
+                            <p>
+                                Al reasignar, la tarea volverá
+                                al estado <strong>Pendiente</strong>.
+                                Se conservarán su prioridad y fecha
+                                límite, y el cambio quedará registrado
+                                en el historial.
+                            </p>
+
+                        </div>
+
+                        <!-- BOTONES -->
+                        <div class="geo-cancel-modal-acciones">
+
+                            <button
+                                type="button"
+                                class="geo-cancel-volver"
+                                onclick="document.getElementById(
+                                    'modalReasignarTarea'
+                                ).close()">
+                                Volver
+                            </button>
+
+                            <button
+                                type="submit"
+                                class="geo-cancel-confirmar"
+                                th:disabled="${#lists.isEmpty(
+                                    colaboradoresReasignacion)}">
+
+                                <svg viewBox="0 0 24 24"
+                                    aria-hidden="true">
+                                    <path d="m5 12 4 4L19 6"/>
+                                </svg>
+
+                                Confirmar reasignación
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </dialog>
+
+                <!-- ==========================================
+                    HU-06: MODAL DESASIGNAR RESPONSABLE
+                    ========================================== -->
+
+                <dialog
+                    th:if="${rolUsuario == 'COORDINADOR'
+                        and tarea.responsable != null
+                        and (tarea.estado.nombre == 'Pendiente'
+                        or tarea.estado.nombre == 'En proceso')}"
+                    id="modalDesasignarTarea"
+                    class="geo-cancel-dialog geo-desasignar-dialog"
+                    aria-labelledby="tituloModalDesasignar"
+                    aria-describedby="descripcionModalDesasignar">
+
+                    <form
+                        method="post"
+                        th:action="@{/tareas/{idTarea}/desasignar(
+                            idTarea=${tarea.idTarea})}">
+
+                        <!-- ENCABEZADO -->
+                        <div class="geo-cancel-header">
+
+                            <div class="geo-cancel-icono">
+                                <svg viewBox="0 0 24 24"
+                                    aria-hidden="true">
+                                    <circle cx="9" cy="7" r="3"/>
+                                    <path d="M3 20v-1a6 6 0 0 1 12 0v1"/>
+                                    <path d="M17 9h5"/>
+                                </svg>
+                            </div>
+
+                            <div class="geo-cancel-header-texto">
+
+                                <h2 id="tituloModalDesasignar">
+                                    Desasignar responsable
+                                </h2>
+
+                                <p id="descripcionModalDesasignar">
+                                    Confirma que deseas retirar al
+                                    responsable de esta tarea.
+                                </p>
+
+                            </div>
+
+                            <button
+                                type="button"
+                                class="geo-cancel-cerrar"
+                                aria-label="Cerrar ventana"
+                                onclick="document.getElementById(
+                                    'modalDesasignarTarea'
+                                ).close()">
+                                &times;
+                            </button>
+
+                        </div>
+
+                        <!-- INFORMACIÓN ACTUAL -->
+                        <div class="geo-cancel-tarea">
+
+                            <span class="geo-cancel-etiqueta">
+                                Tarea seleccionada
+                            </span>
+
+                            <strong th:text="${tarea.titulo}">
+                                Nombre de la tarea
+                            </strong>
+
+                            <div class="geo-desasignar-dato">
+
+                                <span>Responsable actual:</span>
+
+                                <strong th:text="${tarea.responsable.nombres
+                                    + ' ' + tarea.responsable.apellidos}">
+                                    Nombre del colaborador
+                                </strong>
+
+                            </div>
+
+                            <div class="geo-desasignar-dato">
+
+                                <span>Prioridad actual:</span>
+
+                                <strong th:text="${tarea.prioridad != null
+                                    ? tarea.prioridad.nombre
+                                    : 'Sin prioridad'}">
+                                    Prioridad
+                                </strong>
+
+                            </div>
+
+                            <div class="geo-desasignar-dato">
+
+                                <span>Fecha límite actual:</span>
+
+                                <strong th:text="${tarea.fechaLimite != null
+                                    ? #temporals.format(
+                                        tarea.fechaLimite, 'dd/MM/yyyy')
+                                    : 'Sin fecha'}">
+                                    Fecha límite
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                        <!-- MOTIVO OBLIGATORIO -->
+                        <div class="geo-cancel-campo">
+
+                            <label for="motivoDesasignacion">
+                                Motivo de desasignación
+                                <span class="geo-cancel-obligatorio">*</span>
+                            </label>
+
+                            <textarea
+                                id="motivoDesasignacion"
+                                name="motivo"
+                                rows="3"
+                                maxlength="500"
+                                required
+                                placeholder="Ingrese el motivo para retirar al responsable..."></textarea>
+
+                            <small>
+                                El motivo quedará registrado
+                                en el historial de la tarea.
+                            </small>
+
+                        </div>
+
+                        <!-- AVISO -->
+                        <div class="geo-cancel-aviso">
+
+                            <svg viewBox="0 0 24 24"
+                                aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 11v6M12 7h.01"/>
+                            </svg>
+
+                            <p>
+                                La tarea quedará
+                                <strong>sin responsable, sin prioridad
+                                y sin fecha límite</strong>.
+                                Su estado volverá a
+                                <strong>Pendiente</strong> y podrá
+                                asignarse nuevamente.
+                                El cambio quedará registrado
+                                en el historial.
+                            </p>
+
+                        </div>
+
+                        <!-- ACCIONES -->
+                        <div class="geo-cancel-modal-acciones">
+
+                            <button
+                                type="button"
+                                class="geo-cancel-volver"
+                                onclick="document.getElementById(
+                                    'modalDesasignarTarea'
+                                ).close()">
+                                Volver
+                            </button>
+
+                            <button
+                                type="submit"
+                                class="geo-cancel-confirmar">
+
+                                <svg viewBox="0 0 24 24"
+                                    aria-hidden="true">
+                                    <path d="m5 12 4 4L19 6"/>
+                                </svg>
+
+                                Confirmar desasignación
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </dialog>
+
             </main>
 
         </div>
     </div>
 
     <script th:src="@{/js/layout.js}"></script>
+    <script th:src="@{/vendor/tom-select/tom-select.complete.min.js}"></script>
+    <script th:src="@{/js/tareas-selects.js}"></script>
 
 </body>
 

@@ -50,6 +50,14 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/tareas/*/cancelar")
                         .hasRole("COORDINADOR")
 
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/tareas/*/reasignar")
+                        .hasRole("COORDINADOR")
+
+                        .requestMatchers(HttpMethod.POST, "/tareas/*/desasignar")
+                        .hasRole("COORDINADOR")
+
                         .anyRequest()
                         .authenticated()
                 )

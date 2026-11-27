@@ -2617,6 +2617,27 @@
     border: 1px solid #cbd7e4;
     background: #fff;
     color: #344f6d;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+/* Mismo efecto visual que Volver al inicio */
+.geo-cancel-volver:hover {
+    background: #eaf4ff;
+    border-color: #a9cbed;
+    color: #124d98;
+}
+
+/* Accesibilidad con teclado */
+.geo-cancel-volver:focus-visible {
+    outline: 2px solid #1674dc;
+    outline-offset: 2px;
+
+    background: #eaf4ff;
+    border-color: #a9cbed;
 }
 
 .geo-cancel-confirmar {
@@ -2845,4 +2866,215 @@
     .geo-opciones-menu {
         width: min(205px, 100%);
     }
+}
+
+
+/* ==========================================
+   HU-06: REASIGNAR RESPONSABLE
+   ========================================== */
+
+/* Menú: permitir textos más largos */
+.geo-opciones-menu {
+    width: 245px;
+}
+
+/* Opción de reasignación */
+.geo-opcion-reasignar {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    width: 100%;
+    padding: 11px 12px;
+
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+
+    color: #174a87;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+}
+
+.geo-opcion-reasignar:hover,
+.geo-opcion-reasignar:focus-visible {
+    background: #eaf4ff;
+}
+
+.geo-opcion-reasignar svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Separador antes de Cancelar tarea */
+.geo-opciones-separador {
+    height: 1px;
+    margin: 5px 8px;
+    background: #dde6f0;
+}
+
+/* Icono azul del modal */
+.geo-reasignar-dialog .geo-cancel-icono {
+    background: #eaf3ff;
+    color: #2474c5;
+}
+
+/* Separación de campos */
+.geo-reasignar-campo {
+    margin-bottom: 16px;
+}
+
+/* Selector de colaboradores */
+.geo-reasignar-campo select {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 41px;
+    padding: 10px 12px;
+
+    border: 1px solid #cbd7e4;
+    border-radius: 8px;
+    background: #fff;
+
+    color: #17355c;
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.geo-reasignar-campo select:focus {
+    outline: none;
+    border-color: #3285d6;
+    box-shadow: 0 0 0 3px
+        rgba(50, 133, 214, 0.10);
+}
+
+/* Sin colaboradores disponibles */
+.geo-reasignar-sin-candidatos {
+    margin: 9px 0 0;
+    font-size: 11px;
+    line-height: 1.5;
+    color: #b64b4b;
+}
+
+/* Botón principal azul */
+.geo-reasignar-dialog .geo-cancel-confirmar {
+    border-color: #1769bf;
+    background: #1769bf;
+}
+
+.geo-reasignar-dialog .geo-cancel-confirmar:hover {
+    background: #12579f;
+}
+
+.geo-reasignar-dialog .geo-cancel-confirmar:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Pantallas pequeñas */
+@media (max-width: 650px) {
+    .geo-opciones-menu {
+        box-sizing: border-box;
+        width: min(245px, 100%);
+    }
+}
+
+
+/* ==========================================
+   HU-06: DESASIGNAR RESPONSABLE
+   ========================================== */
+
+/* Opción del menú */
+.geo-opcion-desasignar {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    width: 100%;
+    padding: 11px 12px;
+
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+
+    color: #95641e;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+}
+
+.geo-opcion-desasignar:hover,
+.geo-opcion-desasignar:focus-visible {
+    background: #fff3df;
+}
+
+.geo-opcion-desasignar svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Información del responsable y su asignación */
+.geo-desasignar-dato {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.geo-desasignar-dato span {
+    font-size: 10px;
+    color: #7185a0;
+}
+
+.geo-desasignar-dato strong {
+    font-size: 11px;
+    color: #17355c;
+}
+
+/* Icono del modal en tono ámbar */
+.geo-desasignar-dialog .geo-cancel-icono {
+    background: #fff3df;
+    color: #ae751e;
+}
+
+/* Aviso de consecuencias */
+.geo-desasignar-dialog .geo-cancel-aviso {
+    background: #fff8eb;
+    color: #92621e;
+}
+
+/* Botón de confirmación */
+.geo-desasignar-dialog .geo-cancel-confirmar {
+    border-color: #ae751e;
+    background: #ae751e;
+}
+
+.geo-desasignar-dialog .geo-cancel-confirmar:hover {
+    background: #8f5c15;
+    border-color: #8f5c15;
+}
+
+/* Color gris azulado del menú de acciones */
+.geo-opciones-menu {
+    background: #f3f7fc;
 }

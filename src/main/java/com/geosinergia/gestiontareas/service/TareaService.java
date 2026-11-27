@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Map;
+import java.util.LinkedHashMap;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
@@ -376,6 +377,255 @@ public class TareaService {
                         "CANCELACION",
                         Map.of("estado", estadoAnterior),
                         Map.of("estado", "Cancelada"),
+                        motivo.trim());
+
+                return tarea;
+        }
+
+        // ==========================================
+        // HU-06: REASIGNAR RESPONSABLE
+        // ==========================================
+
+        @Transactional
+        public Tarea reasignarTarea(
+                Long idTarea,
+                Long idNuevoResponsable,
+                String motivo,
+                String correoCoordinador) {
+
+                // 1. Validar identificadores
+                if (idTarea == null || idTarea <= 0
+                        || idNuevoResponsable == null
+                        || idNuevoResponsable <= 0) {
+                throw new IllegalArgumentException(
+                        "Los identificadores no son validos.");
+                }
+
+                // 2. Identificar al usuario autenticado
+                if (correoCoordinador == null
+                        || correoCoordinador.isBlank()) {
+                throw new AccessDeniedException(
+                        "No se pudo identificar al usuario.");
+                }
+
+                Usuario coordinador = usuarioRepository
+                        .findByCorreo(correoCoordinador)
+                        .orElseThrow(() -> new AccessDeniedException(
+                                "El usuario autenticado no existe."));
+
+                // 3. Verificar permisos
+                if (!Boolean.TRUE.equals(coordinador.getActivo())
+                        || !"COORDINADOR".equals(
+                                coordinador.getRol().getNombre())) {
+                throw new AccessDeniedException(
+                        "No tiene permisos para reasignar tareas.");
+                }
+
+                // 4. Validar motivo obligatorio
+                if (motivo == null || motivo.isBlank()) {
+                throw new IllegalArgumentException(
+                        "El motivo de reasignacion es obligatorio.");
+                }
+
+                // 5. Consultar la tarea
+                Tarea tarea = tareaRepository
+                        .findByIdTarea(idTarea)
+                        .orElseThrow(() -> new IllegalArgumentException(
+                                "La tarea seleccionada no existe."));
+
+                String estadoAnterior = tarea.getEstado().getNombre();
+
+                // 6. Validar el estado actual
+                if (!"Pendiente".equals(estadoAnterior)
+                        && !"En proceso".equals(estadoAnterior)) {
+                throw new IllegalArgumentException(
+                        "El estado actual no permite reasignar la tarea.");
+                }
+
+                // 7. Verificar el responsable actual
+                Usuario responsableAnterior = tarea.getResponsable();
+
+                if (responsableAnterior == null) {
+                throw new IllegalArgumentException(
+                        "La tarea no tiene un responsable para reasignar.");
+                }
+
+                // 8. Consultar el nuevo responsable
+                Usuario nuevoResponsable = usuarioRepository
+                        .findById(idNuevoResponsable)
+                        .orElseThrow(() -> new IllegalArgumentException(
+                                "El colaborador seleccionado no existe."));
+
+                // 9. Validar colaborador activo
+                if (!Boolean.TRUE.equals(nuevoResponsable.getActivo())
+                        || !"COLABORADOR".equals(
+                                nuevoResponsable.getRol().getNombre())) {
+                throw new IllegalArgumentException(
+                        "Debe seleccionar un colaborador activo.");
+                }
+
+                // 10. Impedir reasignacion al mismo responsable
+                if (responsableAnterior.getIdUsuario()
+                        .equals(nuevoResponsable.getIdUsuario())) {
+                throw new IllegalArgumentException(
+                        "Seleccione un colaborador diferente al actual.");
+                }
+
+                // 11. Obtener el estado Pendiente
+                EstadoTarea estadoPendiente = estadoTareaRepository
+                        .findByNombre("Pendiente")
+                        .orElseThrow(() -> new IllegalStateException(
+                                "No existe el estado Pendiente."));
+
+                // 12. Aplicar reasignacion
+                tarea.setResponsable(nuevoResponsable);
+                tarea.setEstado(estadoPendiente);
+
+                // Se mantienen prioridad y fecha limite
+                tareaRepository.save(tarea);
+
+                // 13. Registrar el evento de auditoria
+                historialTareaService.registrarEvento(
+                        tarea,
+                        coordinador,
+                        "REASIGNACION",
+                        Map.of(
+                                "responsableId",
+                                responsableAnterior.getIdUsuario(),
+                                "estado",
+                                estadoAnterior
+                        ),
+                        Map.of(
+                                "responsableId",
+                                nuevoResponsable.getIdUsuario(),
+                                "estado",
+                                "Pendiente"
+                        ),
+                        motivo.trim()
+                );
+
+                return tarea;
+        }
+
+        // ==========================================
+        // HU-06: DESASIGNAR RESPONSABLE
+        // ==========================================
+
+        @Transactional
+        public Tarea desasignarTarea(
+                Long idTarea,
+                String motivo,
+                String correoCoordinador) {
+
+                // 1. Validar identificador
+                if (idTarea == null || idTarea <= 0) {
+                throw new IllegalArgumentException(
+                        "El identificador de la tarea no es valido.");
+                }
+
+                // 2. Validar usuario autenticado
+                if (correoCoordinador == null
+                        || correoCoordinador.isBlank()) {
+                throw new AccessDeniedException(
+                        "No se pudo identificar al usuario.");
+                }
+
+                // 3. Buscar al coordinador
+                Usuario coordinador = usuarioRepository
+                        .findByCorreo(correoCoordinador)
+                        .orElseThrow(() -> new AccessDeniedException(
+                                "El usuario autenticado no existe."));
+
+                // 4. Verificar permisos
+                if (!Boolean.TRUE.equals(coordinador.getActivo())
+                        || !"COORDINADOR".equals(
+                                coordinador.getRol().getNombre())) {
+                throw new AccessDeniedException(
+                        "No tiene permisos para desasignar tareas.");
+                }
+
+                // 5. Validar motivo obligatorio
+                if (motivo == null || motivo.isBlank()) {
+                throw new IllegalArgumentException(
+                        "El motivo de desasignacion es obligatorio.");
+                }
+
+                // 6. Consultar la tarea
+                Tarea tarea = tareaRepository
+                        .findByIdTarea(idTarea)
+                        .orElseThrow(() -> new IllegalArgumentException(
+                                "La tarea seleccionada no existe."));
+
+                String estadoAnterior = tarea.getEstado().getNombre();
+
+                // 7. Validar estado permitido
+                if (!"Pendiente".equals(estadoAnterior)
+                        && !"En proceso".equals(estadoAnterior)) {
+                throw new IllegalArgumentException(
+                        "El estado actual no permite desasignar la tarea.");
+                }
+
+                // 8. Comprobar que tenga responsable
+                if (tarea.getResponsable() == null) {
+                throw new IllegalArgumentException(
+                        "La tarea ya se encuentra sin responsable.");
+                }
+
+                // 9. Guardar valores anteriores
+                Map<String, Object> valoresAnteriores =
+                        new LinkedHashMap<>();
+
+                valoresAnteriores.put(
+                        "responsableId",
+                        tarea.getResponsable().getIdUsuario());
+
+                valoresAnteriores.put(
+                        "prioridadId",
+                        tarea.getPrioridad() != null
+                                ? tarea.getPrioridad().getIdPrioridad()
+                                : null);
+
+                valoresAnteriores.put(
+                        "fechaLimite",
+                        tarea.getFechaLimite() != null
+                                ? tarea.getFechaLimite().toString()
+                                : null);
+
+                valoresAnteriores.put(
+                        "estado",
+                        estadoAnterior);
+
+                // 10. Obtener estado Pendiente
+                EstadoTarea estadoPendiente = estadoTareaRepository
+                        .findByNombre("Pendiente")
+                        .orElseThrow(() -> new IllegalStateException(
+                                "No existe el estado Pendiente."));
+
+                // 11. Quitar datos de asignacion
+                tarea.setResponsable(null);
+                tarea.setPrioridad(null);
+                tarea.setFechaLimite(null);
+                tarea.setEstado(estadoPendiente);
+
+                // 12. Guardar tarea
+                tareaRepository.save(tarea);
+
+                // 13. Preparar valores nuevos del historial
+                Map<String, Object> valoresNuevos =
+                        new LinkedHashMap<>();
+
+                valoresNuevos.put("responsableId", null);
+                valoresNuevos.put("prioridadId", null);
+                valoresNuevos.put("fechaLimite", null);
+                valoresNuevos.put("estado", "Pendiente");
+
+                // 14. Registrar evento de auditoria
+                historialTareaService.registrarEvento(
+                        tarea,
+                        coordinador,
+                        "DESASIGNACION",
+                        valoresAnteriores,
+                        valoresNuevos,
                         motivo.trim());
 
                 return tarea;

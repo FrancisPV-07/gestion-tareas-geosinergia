@@ -10,7 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const campos = [
         "idTarea",
         "idResponsable",
-        "idPrioridad"
+        "idPrioridad",
+        "nuevoResponsable"
     ];
 
     campos.forEach((id) => {

@@ -318,6 +318,35 @@ public class TareaController {
                 // Enviar la informacion a la vista
                 model.addAttribute("tarea", tarea);
 
+                // ==========================================
+                // HU-06: OPCIONES PARA REASIGNAR RESPONSABLE
+                // ==========================================
+
+                boolean puedeReasignar = authentication
+                        .getAuthorities()
+                        .stream()
+                        .anyMatch(autoridad ->
+                                "ROLE_COORDINADOR".equals(
+                                        autoridad.getAuthority()))
+                        && tarea.getResponsable() != null
+                        && ("Pendiente".equals(
+                                tarea.getEstado().getNombre())
+                        || "En proceso".equals(
+                                tarea.getEstado().getNombre()));
+
+                if (puedeReasignar) {
+
+                        model.addAttribute(
+                                "colaboradoresReasignacion",
+                                tareaService.listarColaboradoresActivos()
+                                        .stream()
+                                        .filter(colaborador ->
+                                                !colaborador.getIdUsuario()
+                                                        .equals(tarea.getResponsable()
+                                                                .getIdUsuario()))
+                                        .toList());
+                }
+
                 // Mostrar la pantalla de detalle
                 return "tareas/detalle";
         }
@@ -343,6 +372,81 @@ public class TareaController {
                 redirectAttributes.addFlashAttribute(
                         "exito",
                         "Tarea cancelada correctamente.");
+
+                } catch (IllegalArgumentException e) {
+
+                redirectAttributes.addFlashAttribute(
+                        "error",
+                        e.getMessage());
+                }
+
+                return "redirect:/tareas/"
+                        + idTarea + "/detalle";
+        }
+
+        // ==========================================
+        // HU-06: REASIGNAR RESPONSABLE
+        // ==========================================
+
+        @PostMapping("/{idTarea}/reasignar")
+        public String reasignarResponsable(
+                @PathVariable Long idTarea,
+                @RequestParam(
+                        name = "idNuevoResponsable",
+                        required = false)
+                Long idNuevoResponsable,
+                @RequestParam(
+                        name = "motivo",
+                        required = false)
+                String motivo,
+                Authentication authentication,
+                RedirectAttributes redirectAttributes) {
+
+                try {
+
+                tareaService.reasignarTarea(
+                        idTarea,
+                        idNuevoResponsable,
+                        motivo,
+                        authentication.getName());
+
+                redirectAttributes.addFlashAttribute(
+                        "exito",
+                        "Responsable reasignado correctamente.");
+
+                } catch (IllegalArgumentException e) {
+
+                redirectAttributes.addFlashAttribute(
+                        "error",
+                        e.getMessage());
+                }
+
+                return "redirect:/tareas/"
+                        + idTarea + "/detalle";
+        }
+
+        // ==========================================
+        // HU-06: DESASIGNAR RESPONSABLE
+        // ==========================================
+
+        @PostMapping("/{idTarea}/desasignar")
+        public String desasignarTarea(
+                @PathVariable Long idTarea,
+                @RequestParam(name = "motivo", required = false)
+                String motivo,
+                Authentication authentication,
+                RedirectAttributes redirectAttributes) {
+
+                try {
+
+                tareaService.desasignarTarea(
+                        idTarea,
+                        motivo,
+                        authentication.getName());
+
+                redirectAttributes.addFlashAttribute(
+                        "exito",
+                        "Responsable desasignado correctamente.");
 
                 } catch (IllegalArgumentException e) {
 
