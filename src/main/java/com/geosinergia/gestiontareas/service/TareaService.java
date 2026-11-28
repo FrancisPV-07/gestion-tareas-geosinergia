@@ -145,73 +145,166 @@ public class TareaService {
         }
 
         // ==========================================
-        // HU-05: ASIGNAR TAREA
+        // HU-05: ASIGNAR TAREA CON AUDITORIA
         // ==========================================
 
         @Transactional
         public Tarea asignarTarea(
-                        Long idTarea,
-                        Long idResponsable,
-                        Long idPrioridad,
-                        LocalDate fechaLimite) {
+                Long idTarea,
+                Long idResponsable,
+                Long idPrioridad,
+                LocalDate fechaLimite,
+                String correoCoordinador) {
 
-                // Validar los datos de asignacion
+                // 1. Validar datos de asignacion
                 if (idTarea == null
-                                || idResponsable == null
-                                || idPrioridad == null
-                                || fechaLimite == null) {
+                        || idResponsable == null
+                        || idPrioridad == null
+                        || fechaLimite == null) {
 
-                        throw new IllegalArgumentException(
-                                        "Todos los datos de asignacion son obligatorios.");
+                throw new IllegalArgumentException(
+                        "Todos los datos de asignacion son obligatorios.");
                 }
 
                 if (fechaLimite.isBefore(LocalDate.now())) {
-                        throw new IllegalArgumentException(
-                                        "La fecha limite no puede ser anterior a hoy.");
+                throw new IllegalArgumentException(
+                        "La fecha limite no puede ser anterior a hoy.");
                 }
 
-                // Buscar la tarea existente
+                // 2. Identificar al coordinador
+                if (correoCoordinador == null
+                        || correoCoordinador.isBlank()) {
+
+                throw new AccessDeniedException(
+                        "No se pudo identificar al usuario.");
+                }
+
+                Usuario coordinador = usuarioRepository
+                        .findByCorreo(correoCoordinador)
+                        .orElseThrow(() -> new AccessDeniedException(
+                                "El usuario autenticado no existe."));
+
+                if (!Boolean.TRUE.equals(coordinador.getActivo())
+                        || !"COORDINADOR".equals(
+                                coordinador.getRol().getNombre())) {
+
+                throw new AccessDeniedException(
+                        "No tiene permisos para asignar tareas.");
+                }
+
+                // 3. Buscar tarea
                 Tarea tarea = tareaRepository
-                                .findById(idTarea)
-                                .orElseThrow(() -> new IllegalArgumentException(
-                                                "La tarea seleccionada no existe."));
+                        .findById(idTarea)
+                        .orElseThrow(() -> new IllegalArgumentException(
+                                "La tarea seleccionada no existe."));
 
-                // Verificar que este pendiente y sin asignar
-                if (!"Pendiente".equals(tarea.getEstado().getNombre())
-                                || tarea.getResponsable() != null) {
+                // 4. Validar que este disponible
+                if (!"Pendiente".equals(
+                        tarea.getEstado().getNombre())
+                        || tarea.getResponsable() != null) {
 
-                        throw new IllegalArgumentException(
-                                        "La tarea no esta disponible para asignacion.");
+                throw new IllegalArgumentException(
+                        "La tarea no esta disponible para asignacion.");
                 }
 
-                // Buscar al colaborador responsable
+                // 5. Buscar colaborador
                 Usuario responsable = usuarioRepository
-                                .findById(idResponsable)
-                                .orElseThrow(() -> new IllegalArgumentException(
-                                                "El colaborador seleccionado no existe."));
+                        .findById(idResponsable)
+                        .orElseThrow(() -> new IllegalArgumentException(
+                                "El colaborador seleccionado no existe."));
 
-                // Verificar el rol y estado del colaborador
                 if (!Boolean.TRUE.equals(responsable.getActivo())
-                                || !"COLABORADOR".equals(
-                                                responsable.getRol().getNombre())) {
+                        || !"COLABORADOR".equals(
+                                responsable.getRol().getNombre())) {
 
-                        throw new IllegalArgumentException(
-                                        "Debe seleccionar un colaborador activo.");
+                throw new IllegalArgumentException(
+                        "Debe seleccionar un colaborador activo.");
                 }
 
-                // Buscar la prioridad seleccionada
+                // 6. Buscar prioridad
                 Prioridad prioridad = prioridadRepository
-                                .findById(idPrioridad)
-                                .orElseThrow(() -> new IllegalArgumentException(
-                                                "La prioridad seleccionada no existe."));
+                        .findById(idPrioridad)
+                        .orElseThrow(() -> new IllegalArgumentException(
+                                "La prioridad seleccionada no existe."));
 
-                // Actualizar los datos de asignacion
+                // ==========================================
+                // 7. CAPTURAR VALORES ANTERIORES
+                // ANTES DE MODIFICAR LA TAREA
+                // ==========================================
+
+                Map<String, Object> valoresAnteriores =
+                        new LinkedHashMap<>();
+
+                valoresAnteriores.put(
+                        "responsableId",
+                        tarea.getResponsable() != null
+                                ? tarea.getResponsable().getIdUsuario()
+                                : null);
+
+                valoresAnteriores.put(
+                        "prioridadId",
+                        tarea.getPrioridad() != null
+                                ? tarea.getPrioridad().getIdPrioridad()
+                                : null);
+
+                valoresAnteriores.put(
+                        "fechaLimite",
+                        tarea.getFechaLimite() != null
+                                ? tarea.getFechaLimite().toString()
+                                : null);
+
+                valoresAnteriores.put(
+                        "estado",
+                        tarea.getEstado().getNombre());
+
+                // ==========================================
+                // 8. ACTUALIZAR LA TAREA
+                // ==========================================
+
                 tarea.setResponsable(responsable);
                 tarea.setPrioridad(prioridad);
                 tarea.setFechaLimite(fechaLimite);
 
-                // Conservar el estado Pendiente
-                return tareaRepository.save(tarea);
+                // El estado permanece Pendiente
+                Tarea tareaAsignada =
+                        tareaRepository.save(tarea);
+
+                // ==========================================
+                // 9. CAPTURAR VALORES NUEVOS
+                // ==========================================
+
+                Map<String, Object> valoresNuevos =
+                        new LinkedHashMap<>();
+
+                valoresNuevos.put(
+                        "responsableId",
+                        tareaAsignada.getResponsable().getIdUsuario());
+
+                valoresNuevos.put(
+                        "prioridadId",
+                        tareaAsignada.getPrioridad().getIdPrioridad());
+
+                valoresNuevos.put(
+                        "fechaLimite",
+                        tareaAsignada.getFechaLimite().toString());
+
+                valoresNuevos.put(
+                        "estado",
+                        tareaAsignada.getEstado().getNombre());
+
+                // ==========================================
+                // 10. REGISTRAR EVENTO ASIGNACION
+                // ==========================================
+
+                historialTareaService.registrarEvento(
+                        tareaAsignada,
+                        coordinador,
+                        "ASIGNACION",
+                        valoresAnteriores,
+                        valoresNuevos,
+                        null);
+
+                return tareaAsignada;
         }
 
         // ==========================================

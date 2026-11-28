@@ -170,6 +170,7 @@ public class TareaController {
                         BindingResult resultado,
                         @RequestParam(name = "tareaFijada", defaultValue = "false") boolean tareaFijada,
                         Model model,
+                        Authentication authentication,
                         RedirectAttributes redirectAttributes) {
 
                 // Verificar las validaciones del formulario
@@ -185,7 +186,8 @@ public class TareaController {
                                         formulario.getIdTarea(),
                                         formulario.getIdResponsable(),
                                         formulario.getIdPrioridad(),
-                                        formulario.getFechaLimite());
+                                        formulario.getFechaLimite(),
+                                        authentication.getName());
 
                 } catch (IllegalArgumentException e) {
 

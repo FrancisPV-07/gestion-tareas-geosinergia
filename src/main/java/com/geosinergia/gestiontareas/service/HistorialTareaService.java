@@ -16,6 +16,7 @@ import com.geosinergia.gestiontareas.repository.HistorialTareaRepository;
 public class HistorialTareaService {
 
     private static final Set<String> TIPOS_VALIDOS = Set.of(
+            "ASIGNACION",
             "EDICION",
             "REASIGNACION",
             "DESASIGNACION",
